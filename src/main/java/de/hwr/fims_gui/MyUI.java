@@ -1,4 +1,4 @@
-package de.hwr.fims2_0;
+package de.hwr.fims_gui;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -32,7 +32,7 @@ public class MyUI extends UI {
         Button button = new Button("Click Me");
         button.addClickListener(e -> {
             layout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
+                    + ", Test12345!"));
         });
         
         layout.addComponents(name, button);
