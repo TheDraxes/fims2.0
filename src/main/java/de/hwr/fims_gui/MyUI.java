@@ -1,12 +1,18 @@
 package de.hwr.fims_gui;
 
+import java.io.File;
+
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.FileResource;
+import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
@@ -34,8 +40,15 @@ public class MyUI extends UI {
             layout.addComponent(new Label("Thanks " + name.getValue() 
                     + ", Test12345!"));
         });
+
+        String basepath = VaadinService.getCurrent()
+                .getBaseDirectory().getAbsolutePath();
         
-        layout.addComponents(name, button);
+        FileResource res = new FileResource(new File(basepath + "/WEB-INF/res/LOGO FIMS.png"));
+        
+        Image logo = new Image("", res);
+        
+        layout.addComponents(name, button, logo);
         
         setContent(layout);
     }
