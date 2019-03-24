@@ -15205,7 +15205,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .headbar {
-	background-color: #842f0f;
+	background-color: #8d6452;
 }
 
 .mytheme .mainarea {
@@ -15213,5 +15213,11 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .footer {
-	background-color: #842f0f;
+	background-color: #8d6452;
+}
+
+.mytheme .v-textfield {
+	border-top: none;
+	border-left: none;
+	border-right: none;
 }

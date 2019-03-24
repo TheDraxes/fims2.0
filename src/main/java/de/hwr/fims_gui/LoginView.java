@@ -3,6 +3,7 @@ package de.hwr.fims_gui;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -13,10 +14,10 @@ import de.hwr.fims_gui.login.FooterLayout;
 import de.hwr.fims_gui.login.HeadBarLayout;
 import de.hwr.fims_gui.login.MainArea;
 
-
+@Title("FIMS: Login")
 @Theme("mytheme")
 public class LoginView extends UI{
-
+	
 	@Override
 	protected void init(VaadinRequest request) {
 		
@@ -24,9 +25,7 @@ public class LoginView extends UI{
 		layout.setHeight("100%");
 		layout.setMargin(false);
 		layout.setSpacing(false);
-		
-		
-		
+
 		HeadBarLayout headbar = new HeadBarLayout();
 		layout.addComponent(headbar);
 		layout.setExpandRatio(headbar, 1);
@@ -40,7 +39,6 @@ public class LoginView extends UI{
 		layout.setExpandRatio(footerLayout, 2);
 		
 		setContent(layout);
-		
 	}
 	
 	

@@ -35,12 +35,18 @@
   @include valo;
 
 	.headbar {
-		background-color:#842f0f;
+		background-color:#8d6452;
 	}
 	.mainarea {
 		background-color:#ffe9e0;
 	}
 	.footer {
-		background-color:#842f0f;
+		background-color:#8d6452;
+	}
+	.v-textfield {
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		//background-color: #8d6452;
 	}
 }
