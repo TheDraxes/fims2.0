@@ -34,5 +34,13 @@
 @mixin mytheme {
   @include valo;
 
-  // Insert your own theme rules here
+	.headbar {
+		background-color:#842f0f;
+	}
+	.mainarea {
+		background-color:#ffe9e0;
+	}
+	.footer {
+		background-color:#842f0f;
+	}
 }

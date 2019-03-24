@@ -15203,3 +15203,15 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme .headbar {
+	background-color: #842f0f;
+}
+
+.mytheme .mainarea {
+	background-color: #ffe9e0;
+}
+
+.mytheme .footer {
+	background-color: #842f0f;
+}
