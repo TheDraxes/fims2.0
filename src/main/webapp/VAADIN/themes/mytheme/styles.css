@@ -15217,7 +15217,15 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .v-textfield {
-	border-top: none;
-	border-left: none;
-	border-right: none;
+	border-color: #ffe9e0 #ffe9e0 #8d6452 #ffe9e0;
+	background-color: #ffe9e0;
+	width: 300px;
+}
+
+.mytheme .loginButton {
+	background-color: #8d6452;
+}
+
+.mytheme .warning {
+	font-size: 1.4em;
 }

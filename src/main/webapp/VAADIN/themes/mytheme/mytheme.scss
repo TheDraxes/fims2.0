@@ -44,9 +44,14 @@
 		background-color:#8d6452;
 	}
 	.v-textfield {
-		border-top: none;
-		border-left: none;
-		border-right: none;
-		//background-color: #8d6452;
+		border-color: #ffe9e0 #ffe9e0 #8d6452 #ffe9e0;
+		background-color: #ffe9e0;
+		width:300px;
+	}
+	.loginButton {
+		background-color: #8d6452;
+	}
+	.warning {
+		font-size:1.4em;
 	}
 }

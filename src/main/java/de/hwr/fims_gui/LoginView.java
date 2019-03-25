@@ -32,7 +32,7 @@ public class LoginView extends UI{
 		
 		MainArea mainArea = new MainArea();
 		layout.addComponent(mainArea);
-		layout.setExpandRatio(mainArea, 6);
+		layout.setExpandRatio(mainArea, 8);
 		
 		FooterLayout footerLayout = new FooterLayout();
 		layout.addComponent(footerLayout);
