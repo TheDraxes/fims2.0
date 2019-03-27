@@ -7,10 +7,12 @@ import javax.swing.GroupLayout.Alignment;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -19,24 +21,30 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
+
+import de.hwr.fims_gui.FimsUI;
 
 public class MainArea extends VerticalLayout {
 	
-	TextField username = new TextField();
-	PasswordField password = new PasswordField();
+	Navigator navigator;
 	
+	TextField usernameField = new TextField();
+	PasswordField passwordField = new PasswordField();
 	VerticalLayout loginForm = new VerticalLayout();
-	
 	Button loginButton = new Button("Anmelden");
 	
 	String basepath = VaadinService.getCurrent()
             .getBaseDirectory().getAbsolutePath();
 	
-	public MainArea() {
+	public MainArea(Navigator navigator) {
+		
+		this.navigator = navigator;
+		
 		this.setSizeFull();
 		this.addStyleName("mainarea");
-		this.setSpacing(false);
-		this.setMargin(false);
+		this.setSpacing(true);
+		this.setMargin(true);
 		
 		FileResource fimsLogoRessource = new FileResource(new File(basepath + "/WEB-INF/res/LOGO FIMS.png"));
         Image fimsLogoImage = new Image("", fimsLogoRessource);
@@ -59,30 +67,35 @@ public class MainArea extends VerticalLayout {
         logoHeader.setMargin(false);
         Responsive.makeResponsive(logoHeader);
         
-		username.setPlaceholder("Nutzername");
-		username.setWidth(400, Unit.PIXELS);
+		usernameField.setPlaceholder("Nutzername");
+		usernameField.setWidth(400, Unit.PIXELS);
+		usernameField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+		usernameField.addStyleName("loginTextField");
 		
-		password.setPlaceholder("Passwort");
-		password.setWidth(400, Unit.PIXELS);
+		passwordField.setPlaceholder("Passwort");
+		passwordField.setWidth(400, Unit.PIXELS);
+		passwordField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+		passwordField.addStyleName("loginTextField");
 		
 		loginButton.addClickListener(e -> {
-			authorize(username.getValue(), password.getValue());
+			authorize(usernameField.getValue(), passwordField.getValue());
 		});
 		
 		loginButton.addShortcutListener(new ShortcutListener("Shortcut Name", ShortcutAction.KeyCode.ENTER, null) {
 			@Override
 			public void handleAction(Object sender, Object target) {
-				authorize(username.getValue(), password.getValue());
+				authorize(usernameField.getValue(), passwordField.getValue());
 			}
 		});
 		
-		loginButton.setIcon(VaadinIcons.FORWARD);
-		loginButton.setStyleName("loginButton");
+		loginButton.setIcon(VaadinIcons.PAPERPLANE);
+		loginButton.setStyleName(ValoTheme.BUTTON_LINK);
+		loginButton.addStyleName("loginButton");
 	
-		loginForm.addComponents(logoHeader, username, password, loginButton);
+		loginForm.addComponents(logoHeader, usernameField, passwordField, loginButton);
 		loginForm.setComponentAlignment(logoHeader,  com.vaadin.ui.Alignment.MIDDLE_CENTER);
-		loginForm.setComponentAlignment(username,    com.vaadin.ui.Alignment.MIDDLE_CENTER);
-		loginForm.setComponentAlignment(password,    com.vaadin.ui.Alignment.MIDDLE_CENTER);
+		loginForm.setComponentAlignment(usernameField,    com.vaadin.ui.Alignment.MIDDLE_CENTER);
+		loginForm.setComponentAlignment(passwordField,    com.vaadin.ui.Alignment.MIDDLE_CENTER);
 		loginForm.setComponentAlignment(loginButton, com.vaadin.ui.Alignment.MIDDLE_CENTER);
 		
 		Responsive.makeResponsive(loginForm);
@@ -97,19 +110,21 @@ public class MainArea extends VerticalLayout {
 		
 		if(username.equals("") || password.equals("")) {
 			error = "Username und Passwort müssen eingegeben werden";
+			Notification notif = new Notification(
+				    "Warnung",
+				    error,
+				    Notification.TYPE_WARNING_MESSAGE);
+
+				// Customize it
+				notif.setDelayMsec(3000);
+				notif.setPosition(Position.TOP_LEFT);
+				notif.setStyleName("warning");
+
+				// Show it in the page
+				notif.show(Page.getCurrent());
+		} else {
+			VaadinSession.getCurrent().getSession().setAttribute("user", username);
+			navigator.navigateTo(FimsUI.MAIN_VIEW);
 		}
-		
-		Notification notif = new Notification(
-			    "Warnung",
-			    error,
-			    Notification.TYPE_WARNING_MESSAGE);
-
-			// Customize it
-			notif.setDelayMsec(3000);
-			notif.setPosition(Position.BOTTOM_RIGHT);
-			notif.setStyleName("warning");
-
-			// Show it in the page
-			notif.show(Page.getCurrent());
 	}
 }
