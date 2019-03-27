@@ -1,7 +1,9 @@
 fims2_0
 ==============
 
-Template for a simple Vaadin application that only requires a Servlet 3.0 container to run.
+Only requires a Servlet 3.0 container to run.
+
+Projektplan: https://cloud.factro.com/Project/6baca329-0c65-478a-afde-02cdf8e2fb41/psb
 
 
 Workflow
