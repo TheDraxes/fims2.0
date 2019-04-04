@@ -1,4 +1,4 @@
-package de.hwr.fims_gui.login;
+package de.hwr.fims_gui;
 
 import com.vaadin.server.Responsive;
 import com.vaadin.ui.VerticalLayout;

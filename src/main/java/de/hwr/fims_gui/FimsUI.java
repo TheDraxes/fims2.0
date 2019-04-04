@@ -12,7 +12,7 @@ import com.vaadin.ui.UI;
 
 import de.hwr.fims_gui.listener.ViewChangedListener;
 import de.hwr.fims_gui.login.LoginView;
-import de.hwr.fims_gui.main.MainView;
+import de.hwr.fims_gui.main.StartPageView;
 
 @Theme("mytheme")
 public class FimsUI extends UI {
@@ -30,8 +30,8 @@ public class FimsUI extends UI {
         navigator = new Navigator(this, this);
 
         // Create and register the views
-        navigator.addView(LOGIN_VIEW, new LoginView(navigator));
-        navigator.addView(MAIN_VIEW, new MainView(navigator));
+        navigator.addView(LOGIN_VIEW, new CompleteUI(new LoginView(navigator)));
+        navigator.addView(MAIN_VIEW, new CompleteUI(new StartPageView(navigator)));
         navigator.navigateTo(LOGIN_VIEW);
         navigator.addViewChangeListener(new ViewChangedListener());
 		

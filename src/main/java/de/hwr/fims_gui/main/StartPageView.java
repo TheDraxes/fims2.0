@@ -9,11 +9,11 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 @Theme("mytheme")
-public class MainView extends VerticalLayout implements View {
+public class StartPageView extends VerticalLayout implements View {
 
 	private Navigator navigator;
 	
-	public MainView(Navigator navigator) {
+	public StartPageView(Navigator navigator) {
 		this.navigator = navigator;
 		
 		Button a = new Button("test");

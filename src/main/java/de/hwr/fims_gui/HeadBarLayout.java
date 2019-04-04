@@ -1,4 +1,4 @@
-package de.hwr.fims_gui.login;
+package de.hwr.fims_gui;
 
 import java.io.File;
 
@@ -22,7 +22,6 @@ public class HeadBarLayout extends VerticalLayout {
 	public HeadBarLayout() {
 		this.setSizeFull();
 		this.addStyleName("headbar");
-		//this.setSpacing(false);
 		this.setMargin(new MarginInfo(false, true, false, true));
 		
 		FileResource helpIconRessource = new FileResource(new File(basepath + "/WEB-INF/res/baseline_help_black.png"));
