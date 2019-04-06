@@ -27,9 +27,10 @@ import com.vaadin.ui.themes.ValoTheme;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.FooterLayout;
 import de.hwr.fims_gui.HeadBarLayout;
+import de.hwr.fims_gui.interfaces.HasName;
 
 @Theme("mytheme")
-public class LoginView extends VerticalLayout implements View {
+public class LoginView extends VerticalLayout implements View, HasName {
 	
 	Navigator navigator;
 	
@@ -44,6 +45,8 @@ public class LoginView extends VerticalLayout implements View {
 	public LoginView(Navigator navigator) {
 		
 		this.navigator = navigator;
+		this.setMargin(false);
+		this.setSpacing(false);
 		
 		FileResource fimsLogoRessource = new FileResource(new File(basepath + "/WEB-INF/res/LOGO FIMS.png"));
         Image fimsLogoImage = new Image("", fimsLogoRessource);
@@ -56,6 +59,8 @@ public class LoginView extends VerticalLayout implements View {
         textLogoImage.setHeight(150, Unit.PIXELS);
         textLogoImage.setResponsive(true);
         Responsive.makeResponsive(textLogoImage);
+        
+        
         
         HorizontalLayout logoHeader = new HorizontalLayout();
         logoHeader.addComponents(textLogoImage, fimsLogoImage);
@@ -89,7 +94,7 @@ public class LoginView extends VerticalLayout implements View {
 		
 		loginButton.setIcon(VaadinIcons.PAPERPLANE);
 		loginButton.setStyleName(ValoTheme.BUTTON_LINK);
-		loginButton.addStyleName("loginButton");
+		loginButton.addStyleName("Button");
 	
 		loginForm.addComponents(logoHeader, usernameField, passwordField, loginButton);
 		loginForm.setComponentAlignment(logoHeader,  com.vaadin.ui.Alignment.MIDDLE_CENTER);
@@ -103,6 +108,7 @@ public class LoginView extends VerticalLayout implements View {
 		Responsive.makeResponsive(this);
 
 	}
+	
 	private void authorize(String username, String password) {
 		
 		String error = "Loginsystem außer Betrieb";
@@ -125,5 +131,11 @@ public class LoginView extends VerticalLayout implements View {
 			VaadinSession.getCurrent().getSession().setAttribute("user", username);
 			navigator.navigateTo(FimsUI.MAIN_VIEW);
 		}
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

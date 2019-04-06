@@ -48,12 +48,39 @@ $v-font-size: 18px;
 		border-color: black;
 		border-width: 1px;
 	}
-	.loginButton {
+	.Button {
 		background-color: #8d6452;
 		color: white;
 		text-decoration:none !important;
 		margin-top:60px;
 	}
+	.bigButton {
+		width:320px;
+		height: 220px;
+		text-decoration:none !important;
+	}
+	.buttonContainer {
+		margin-top:90px;
+	}
+	
+	.SFVButton {
+		background-image: url("Cross.png") !important;
+		background-position: center; 
+		background-repeat: no-repeat;
+		background-size: 100px;
+		margin-right:80px;
+		padding-top:2px;
+	}
+	.v-button-wrap{
+		vertical-align:top;
+	}
+	.homeButton {
+		
+	}
+	.contactButton{
+		
+	}
+	
 	.warning {
 		font-size:1.4em;
 	}

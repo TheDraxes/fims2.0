@@ -23,7 +23,7 @@ public class HeadBarLayout extends VerticalLayout {
 		this.setSizeFull();
 		this.addStyleName("headbar");
 		this.setMargin(new MarginInfo(false, true, false, true));
-		
+		/*
 		FileResource helpIconRessource = new FileResource(new File(basepath + "/WEB-INF/res/baseline_help_black.png"));
 	    Image helpIconImage = new Image("", helpIconRessource);
 	    helpIconImage.setHeight("50px");
@@ -33,6 +33,7 @@ public class HeadBarLayout extends VerticalLayout {
 
 		this.addComponent(helpIconImage);
 		this.setComponentAlignment(helpIconImage, Alignment.TOP_RIGHT);
+		*/
 	}
 	
 	private void showHelp() {
@@ -44,7 +45,7 @@ public class HeadBarLayout extends VerticalLayout {
         subWindow.setWidth(40, Unit.PERCENTAGE);
 
         // Put some components in it
-        subContent.addComponent(new Label("Dies ist der Loginscreen der Webanwendung"));
+        subContent.addComponent(new Label());
 
         // Center it in the browser window
         subWindow.center();

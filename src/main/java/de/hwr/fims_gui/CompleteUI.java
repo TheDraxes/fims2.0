@@ -5,8 +5,6 @@ import com.vaadin.navigator.View;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 
-import de.hwr.fims_gui.login.MainArea;
-
 public class CompleteUI extends VerticalLayout implements View{
 	
 	Navigator navigator;
@@ -23,7 +21,7 @@ public class CompleteUI extends VerticalLayout implements View{
 		
 		MainArea mainArea = new MainArea(content);
 		this.addComponent(mainArea);
-		this.setExpandRatio(mainArea, 8);
+		this.setExpandRatio(mainArea, 10);
 		
 		FooterLayout footerLayout = new FooterLayout();
 		this.addComponent(footerLayout);

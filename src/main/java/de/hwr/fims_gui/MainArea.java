@@ -1,4 +1,4 @@
-package de.hwr.fims_gui.login;
+package de.hwr.fims_gui;
 
 import java.io.File;
 
@@ -23,8 +23,6 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-
-import de.hwr.fims_gui.FimsUI;
 
 public class MainArea extends VerticalLayout {
 		

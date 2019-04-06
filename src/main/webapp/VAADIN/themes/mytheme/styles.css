@@ -15222,11 +15222,34 @@ div.v-layout.v-horizontal.v-widget {
 	border-width: 1px;
 }
 
-.mytheme .loginButton {
+.mytheme .Button {
 	background-color: #8d6452;
 	color: white;
 	text-decoration: none !important;
 	margin-top: 60px;
+}
+
+.mytheme .bigButton {
+	width: 320px;
+	height: 220px;
+	text-decoration: none !important;
+}
+
+.mytheme .buttonContainer {
+	margin-top: 90px;
+}
+
+.mytheme .SFVButton {
+	background-image: url("Cross.png") !important;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100px;
+	margin-right: 80px;
+	padding-top: 2px;
+}
+
+.mytheme .v-button-wrap {
+	vertical-align: top;
 }
 
 .mytheme .warning {
