@@ -12,7 +12,8 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import de.hwr.fims_gui.interfaces.HasName;
+import de.hwr.fims_gui.interfaces.*;
+import de.hwr.fims_gui.main.ApplicationHeader;
 
 @Theme("mytheme")
 public class StartPageView extends VerticalLayout implements View, HasName {
@@ -47,7 +48,6 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 		
 	}
 
-	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
