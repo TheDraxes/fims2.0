@@ -23,6 +23,7 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.ui.Alignment;
 
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.FooterLayout;
@@ -36,8 +37,9 @@ public class LoginView extends VerticalLayout implements View, HasName {
 	
 	TextField usernameField = new TextField();
 	PasswordField passwordField = new PasswordField();
-	VerticalLayout loginForm = new VerticalLayout();
 	Button loginButton = new Button("Anmelden");
+	
+	VerticalLayout loginForm = new VerticalLayout();
 	
 	String basepath = VaadinService.getCurrent()
             .getBaseDirectory().getAbsolutePath();
@@ -97,10 +99,10 @@ public class LoginView extends VerticalLayout implements View, HasName {
 		loginButton.addStyleName("Button");
 	
 		loginForm.addComponents(logoHeader, usernameField, passwordField, loginButton);
-		loginForm.setComponentAlignment(logoHeader,  com.vaadin.ui.Alignment.MIDDLE_CENTER);
-		loginForm.setComponentAlignment(usernameField,    com.vaadin.ui.Alignment.MIDDLE_CENTER);
-		loginForm.setComponentAlignment(passwordField,    com.vaadin.ui.Alignment.MIDDLE_CENTER);
-		loginForm.setComponentAlignment(loginButton, com.vaadin.ui.Alignment.MIDDLE_CENTER);
+		loginForm.setComponentAlignment(logoHeader,  	Alignment.MIDDLE_CENTER);
+		loginForm.setComponentAlignment(usernameField,  Alignment.MIDDLE_CENTER);
+		loginForm.setComponentAlignment(passwordField,  Alignment.MIDDLE_CENTER);
+		loginForm.setComponentAlignment(loginButton, 	Alignment.MIDDLE_CENTER);
 		
 		Responsive.makeResponsive(loginForm);
 		
