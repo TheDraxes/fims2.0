@@ -25,6 +25,8 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.ui.Alignment;
 
+import de.hwr.fims_backend.dbconnector.DatabaseConnector;
+import de.hwr.fims_backend.dbconnector.ResultBoolean;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.FooterLayout;
 import de.hwr.fims_gui.HeadBarLayout;
@@ -44,9 +46,13 @@ public class LoginView extends VerticalLayout implements View, HasName {
 	String basepath = VaadinService.getCurrent()
             .getBaseDirectory().getAbsolutePath();
 	
-	public LoginView(Navigator navigator) {
+	DatabaseConnector connector;
+	
+	public LoginView(Navigator navigator, DatabaseConnector connector) {
 		
 		this.navigator = navigator;
+		this.connector = connector;
+		
 		this.setMargin(false);
 		this.setSpacing(false);
 		
@@ -84,13 +90,13 @@ public class LoginView extends VerticalLayout implements View, HasName {
 		passwordField.addStyleName("loginTextField");
 		
 		loginButton.addClickListener(e -> {
-			authorize(usernameField.getValue(), passwordField.getValue());
+			authorize();
 		});
 		
 		loginButton.addShortcutListener(new ShortcutListener("Shortcut Name", ShortcutAction.KeyCode.ENTER, null) {
 			@Override
 			public void handleAction(Object sender, Object target) {
-				authorize(usernameField.getValue(), passwordField.getValue());
+				authorize();
 			}
 		});
 		
@@ -111,28 +117,32 @@ public class LoginView extends VerticalLayout implements View, HasName {
 
 	}
 	
-	private void authorize(String username, String password) {
+	private void authorize() {
+		String username = usernameField.getValue();
 		
-		String error = "Loginsystem außer Betrieb";
+		ResultBoolean login = connector.pruefeLogin(username, passwordField.getValue());
 		
-		if(username.equals("") || password.equals("")) {
-			error = "Username und Passwort müssen eingegeben werden";
-			Notification notif = new Notification(
-				    "Warnung",
-				    error,
-				    Notification.TYPE_WARNING_MESSAGE);
-
-				// Customize it
-				notif.setDelayMsec(3000);
-				notif.setPosition(Position.TOP_LEFT);
-				notif.setStyleName("warning");
-
-				// Show it in the page
-				notif.show(Page.getCurrent());
-		} else {
+		if(login.isSuccessful()) {
 			VaadinSession.getCurrent().getSession().setAttribute("user", username);
 			navigator.navigateTo(FimsUI.MAIN_VIEW);
+		} else {
+			blockLogin(login.getMessage());
 		}
+	}
+	
+	private void blockLogin(String errorMessage) {
+		Notification notif = new Notification(
+			    "Warnung",
+			    errorMessage,
+			    Notification.TYPE_WARNING_MESSAGE);
+
+			// Customize it
+			notif.setDelayMsec(3000);
+			notif.setPosition(Position.TOP_LEFT);
+			notif.setStyleName("warning");
+
+			// Show it in the page
+			notif.show(Page.getCurrent());
 	}
 
 	@Override

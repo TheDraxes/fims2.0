@@ -5,6 +5,8 @@ import com.vaadin.navigator.View;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 
+import de.hwr.fims_backend.dbconnector.DatabaseConnector;
+
 public class CompleteUI extends VerticalLayout implements View{
 	
 	Navigator navigator;

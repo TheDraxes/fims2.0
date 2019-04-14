@@ -12,6 +12,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.interfaces.*;
 import de.hwr.fims_gui.main.ApplicationHeader;
 
@@ -20,7 +21,7 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 
 	private Navigator navigator;
 	
-	public StartPageView(Navigator navigator) {
+	public StartPageView(Navigator navigator, DatabaseConnector connector) {
 		this.navigator = navigator;
 		this.setMargin(false);
 		
