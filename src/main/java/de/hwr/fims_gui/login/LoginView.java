@@ -38,7 +38,6 @@ public class LoginView extends VerticalLayout implements View, HasName {
 	PasswordField passwordField = new PasswordField();
 	VerticalLayout loginForm = new VerticalLayout();
 	Button loginButton = new Button("Anmelden");
-	Button loginButton_Banane = new Button("Hier gibt's Bananen");
 	
 	String basepath = VaadinService.getCurrent()
             .getBaseDirectory().getAbsolutePath();
@@ -97,7 +96,7 @@ public class LoginView extends VerticalLayout implements View, HasName {
 		loginButton.setStyleName(ValoTheme.BUTTON_LINK);
 		loginButton.addStyleName("Button");
 	
-		loginForm.addComponents(logoHeader, usernameField, passwordField, loginButton, loginButton_Banane);
+		loginForm.addComponents(logoHeader, usernameField, passwordField, loginButton);
 		loginForm.setComponentAlignment(logoHeader,  com.vaadin.ui.Alignment.MIDDLE_CENTER);
 		loginForm.setComponentAlignment(usernameField,    com.vaadin.ui.Alignment.MIDDLE_CENTER);
 		loginForm.setComponentAlignment(passwordField,    com.vaadin.ui.Alignment.MIDDLE_CENTER);

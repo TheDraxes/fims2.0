@@ -32,7 +32,7 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 		buttonSFV.addStyleName("Button");
 		buttonSFV.addStyleName("SFVButton");
 		
-		Button buttonWV = new Button("");
+		Button buttonWV = new Button("Warenverwaltung");
 		buttonWV.setStyleName(ValoTheme.BUTTON_LINK);
 		buttonWV.addStyleName("bigButton");
 		buttonWV.addStyleName("Button");
