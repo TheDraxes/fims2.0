@@ -15,6 +15,8 @@ import com.vaadin.ui.UI;
 
 import de.hwr.fims_gui.listener.ViewChangedListener;
 import de.hwr.fims_gui.login.LoginView;
+import de.hwr.fims_gui.main.SFVCreate;
+import de.hwr.fims_gui.main.SFVMainPage;
 import de.hwr.fims_gui.main.StartPageView;
 import de.hwr.fims_gui.session.SessionHandler;
 
@@ -25,6 +27,8 @@ public class FimsUI extends UI {
 	
     public static final String LOGIN_VIEW = "Login";
     public static final String MAIN_VIEW = "Start";
+	public static final String SFV_MAIN_VIEW = "SFV";
+	public static final String SFV_CREATE_VIEW = "CreateSFV";
 	
 	@Override
 	protected void init(VaadinRequest request) {
@@ -38,8 +42,8 @@ public class FimsUI extends UI {
         // Create and register the views
         navigator.addView(LOGIN_VIEW, new CompleteUI(new LoginView(navigator)));
         navigator.addView(MAIN_VIEW, new CompleteUI(new StartPageView(navigator)));
-        
-        
+        navigator.addView(SFV_MAIN_VIEW, new CompleteUI(new SFVMainPage(navigator)));
+        navigator.addView(SFV_CREATE_VIEW, new CompleteUI(new SFVCreate(navigator)));
         
         
         

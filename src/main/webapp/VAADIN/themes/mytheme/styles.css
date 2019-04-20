@@ -15248,6 +15248,15 @@ div.v-layout.v-horizontal.v-widget {
 	padding-top: 2px;
 }
 
+.mytheme .WVButton {
+	background-image: url("shelf.png") !important;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100px;
+	margin-right: 80px;
+	padding-top: 2px;
+}
+
 .mytheme .v-button-wrap {
 	vertical-align: top;
 }
