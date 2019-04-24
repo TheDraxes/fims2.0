@@ -1,6 +1,9 @@
 package de.hwr.fims_backend.dbconnector;
 
 import java.sql.*;
+import java.util.ArrayList;
+
+import de.hwr.fims_backend.data.customerdata.Auftrag;
 
 public class DatabaseConnector implements IDatabase {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -47,4 +50,67 @@ public class DatabaseConnector implements IDatabase {
         }
         return result;
     }
+
+
+	@Override
+	public ArrayList<Auftrag> getAuftraegeFromDatabase() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean insertAuftragToDatabase(Auftrag auftrag) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean insertUserToDatabase(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public String[] getUniqueKonfessionen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String[] getUniqueFamilienstaende() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String[] getUniqueKrankenkassen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String[] getUniqueRentenverischerungen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String[] getUniqueAnzeigenart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String[] getUniqueZeitung() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
