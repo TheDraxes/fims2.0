@@ -1,13 +1,20 @@
 package de.hwr.fims_gui.main;
 
+import java.io.File;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
+import com.vaadin.server.FileResource;
+import com.vaadin.server.Responsive;
+import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -26,7 +33,7 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 		this.navigator = navigator;
 		this.setMargin(false);
 		
-		HorizontalLayout buttonsContainer =  new HorizontalLayout();
+		HorizontalLayout layout =  new HorizontalLayout();
 		
 		Button buttonSFV = new Button("Sterbefallverwaltung");
 		buttonSFV.setStyleName(ValoTheme.BUTTON_LINK);
@@ -34,22 +41,23 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 		buttonSFV.addStyleName("Button");
 		buttonSFV.addStyleName("SFVButton");
 		buttonSFV.addClickListener(e -> {
-			navigator.navigateTo(FimsUI.SFV_VIEW);
+			navigator.navigateTo(FimsUI.SFV_MAIN_VIEW);
 		});
 		
-		Button buttonWV = new Button("");
+		Button buttonWV = new Button("Warenverwaltung");
 		buttonWV.setStyleName(ValoTheme.BUTTON_LINK);
 		buttonWV.addStyleName("bigButton");
 		buttonWV.addStyleName("Button");
-		buttonSFV.addStyleName("Button");
+		buttonWV.addStyleName("WVButton");
 		
-		buttonsContainer.addComponents(buttonSFV, buttonWV);
-		buttonsContainer.setSpacing(true);
-		buttonsContainer.addStyleName("buttonContainer");
+		layout.addComponents(buttonSFV, buttonWV);
+		layout.setSpacing(true);
+		layout.addStyleName("layout");
+		
 		
 		this.addComponent(new ApplicationHeader());
-		this.addComponent(buttonsContainer);
-		this.setComponentAlignment(buttonsContainer, Alignment.MIDDLE_CENTER);
+		this.addComponent(layout);
+		this.setComponentAlignment(layout, Alignment.MIDDLE_CENTER);
 		
 	}
 
