@@ -13,6 +13,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
+import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.interfaces.*;
 import de.hwr.fims_gui.main.ApplicationHeader;
 
@@ -32,6 +33,9 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 		buttonSFV.addStyleName("bigButton");
 		buttonSFV.addStyleName("Button");
 		buttonSFV.addStyleName("SFVButton");
+		buttonSFV.addClickListener(e -> {
+			navigator.navigateTo(FimsUI.SFV_VIEW);
+		});
 		
 		Button buttonWV = new Button("");
 		buttonWV.setStyleName(ValoTheme.BUTTON_LINK);
