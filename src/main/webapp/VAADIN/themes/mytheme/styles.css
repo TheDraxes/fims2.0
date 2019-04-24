@@ -15252,6 +15252,11 @@ div.v-layout.v-horizontal.v-widget {
 	vertical-align: top;
 }
 
+.mytheme .formContainer {
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
 .mytheme .warning {
 	font-size: 1.4em;
 }
