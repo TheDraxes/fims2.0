@@ -13,6 +13,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
+import de.hwr.fims_backend.controller.LoginController;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.listener.ViewChangedListener;
 import de.hwr.fims_gui.login.LoginView;
@@ -42,11 +43,12 @@ public class FimsUI extends UI {
         navigator = new Navigator(this, this);
         navigator.addViewChangeListener(new ViewChangedListener());
         
-        //Create db connector to control databaseconnection
-        connector = new DatabaseConnector();
+        //Create controllers to control databaseconnection
+        connector = new DatabaseConnector(); // delete
+        LoginController loginController = new LoginController();
         
         // Create and register the views
-        navigator.addView(LOGIN_VIEW, new CompleteUI(new LoginView(navigator, connector)));
+        navigator.addView(LOGIN_VIEW, new CompleteUI(new LoginView(navigator, loginController)));
         navigator.addView(MAIN_VIEW, new CompleteUI(new StartPageView(navigator, connector)));
         navigator.addView(SFV_CREATE_VIEW, new CompleteUI(new SFVView(navigator, connector)));
         navigator.addView(SFV_MAIN_VIEW, new CompleteUI(new SFVMainPage(navigator, connector)));
