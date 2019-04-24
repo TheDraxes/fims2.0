@@ -2,12 +2,12 @@ package de.hwr.fims_backend.dbconnector;
 
 import java.sql.*;
 
-public class DatabaseConnector {
+public class DatabaseConnector implements IDatabase {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "fims1234";
 
     Connection conn;
 
@@ -23,6 +23,8 @@ public class DatabaseConnector {
         }
     }
 
+
+    @Override
     public ResultBoolean pruefeLogin(String benutzername, String passwort) {
         ResultBoolean result = new ResultBoolean();
         String abfrage = null;
@@ -38,11 +40,11 @@ public class DatabaseConnector {
                 result.setSuccessful(false);
                 result.setMessage("Falsche Logindaten!");
             }
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
             result.setMessage("Syntaxfehler!");
         }
         return result;
     }
-
 }
