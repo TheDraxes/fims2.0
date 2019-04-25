@@ -20,6 +20,7 @@ public interface IDatabase {
     public String[] getUniqueKonfessionen();
     public String[] getUniqueFamilienstaende();
     public String[] getUniqueKrankenkassen();
+    public String[] getUniqueOrte();
     public String[] getUniqueRentenverischerungen();
     //Art der Zeitungsanzeige
     public String[] getUniqueAnzeigenart();

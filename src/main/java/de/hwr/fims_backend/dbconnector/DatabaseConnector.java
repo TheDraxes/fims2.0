@@ -113,4 +113,11 @@ public class DatabaseConnector implements IDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public String[] getUniqueOrte() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
