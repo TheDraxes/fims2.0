@@ -1,6 +1,7 @@
 package de.hwr.fims_gui.sfv;
 
 import com.vaadin.ui.Component;
+import com.vaadin.ui.VerticalLayout;
 
 import de.hwr.fims_gui.sfv.roadmap.*;
 
@@ -8,10 +9,11 @@ public class LayoutNumberMapping {
 
 	Component comp1 = new VerstorbenerRMLayout();
 	Component comp2 = new AuftraggeberRMLayout();
-	Component comp3;
-	Component comp4;
-	Component comp5;
-	Component comp6;
+	Component comp3 = new VerticalLayout();
+	Component comp4 = new VerticalLayout();
+	Component comp5 = new VerticalLayout();
+	Component comp6 = new VerticalLayout();
+	
 	public Component getCompOnIndex(int i) {
 		
 		if(i == 1)return comp1;

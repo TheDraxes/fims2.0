@@ -15269,3 +15269,8 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .warning {
 	font-size: 1.4em;
 }
+
+.mytheme .v-gridlayout-spacing-on {
+	width: 20px;
+	height: 20px;
+}
