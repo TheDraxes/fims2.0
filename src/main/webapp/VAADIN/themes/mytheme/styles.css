@@ -15269,3 +15269,7 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .warning {
 	font-size: 1.4em;
 }
+
+.mytheme .createSFVButton {
+	background-color: #8d6452;
+}

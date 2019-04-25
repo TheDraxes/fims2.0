@@ -1,4 +1,4 @@
-package de.hwr.fims_gui.main;
+package de.hwr.fims_gui.sfv;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
@@ -13,6 +13,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.interfaces.HasName;
+import de.hwr.fims_gui.main.ApplicationHeader;
 
 @Theme("mytheme")
 public class SFVMainPage extends VerticalLayout implements View, HasName {
@@ -23,16 +24,16 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		this.navigator = navigator;
 		this.setMargin(false);
 		
-		HorizontalLayout layout =  new HorizontalLayout();
+		VerticalLayout layout =  new VerticalLayout();
 		
 		Button createSFV = new Button("Neuen Sterbefall erstellen");
+		createSFV.addStyleName("createSFVButton");
 		createSFV.addClickListener(e -> {
 			navigator.navigateTo(FimsUI.SFV_CREATE_VIEW);
 		});
 		
 		layout.addComponent(createSFV);
 		layout.setSpacing(true);
-		layout.addStyleName("layout");
 		
 		
 		this.addComponent(new ApplicationHeader());

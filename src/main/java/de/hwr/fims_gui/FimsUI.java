@@ -17,10 +17,9 @@ import de.hwr.fims_backend.controller.LoginController;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.listener.ViewChangedListener;
 import de.hwr.fims_gui.login.LoginView;
-import de.hwr.fims_gui.main.SFVCreate;
-import de.hwr.fims_gui.main.SFVMainPage;
 import de.hwr.fims_gui.main.StartPageView;
 import de.hwr.fims_gui.session.SessionHandler;
+import de.hwr.fims_gui.sfv.SFVMainPage;
 import de.hwr.fims_gui.sfv.SFVView;
 
 @Theme("mytheme")
