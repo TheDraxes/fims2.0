@@ -13,7 +13,7 @@ import com.vaadin.ui.VerticalLayout;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.sfv.roadmap.*;
 
-public class SFCreateView extends VerticalLayout implements View {
+public class SFVView extends VerticalLayout implements View {
 	
 	Navigator navigator;
 	DatabaseConnector connector;
@@ -30,7 +30,7 @@ public class SFCreateView extends VerticalLayout implements View {
 	
 	private LayoutNumberMapping mapping = new LayoutNumberMapping();
 	
-	public SFCreateView (Navigator navigator, DatabaseConnector connector) {
+	public SFVView (Navigator navigator, DatabaseConnector connector) {
 		this.navigator = navigator;
 		this.connector = connector;
 		this.setSpacing(false);

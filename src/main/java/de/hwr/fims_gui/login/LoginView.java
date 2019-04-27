@@ -25,6 +25,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.ui.Alignment;
 
+import de.hwr.fims_backend.controller.LoginController;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_backend.dbconnector.ResultBoolean;
 import de.hwr.fims_gui.FimsUI;
@@ -46,12 +47,12 @@ public class LoginView extends VerticalLayout implements View, HasName {
 	String basepath = VaadinService.getCurrent()
             .getBaseDirectory().getAbsolutePath();
 	
-	DatabaseConnector connector;
+	LoginController loginController;
 	
-	public LoginView(Navigator navigator, DatabaseConnector connector) {
+	public LoginView(Navigator navigator, LoginController loginController) {
 		
 		this.navigator = navigator;
-		this.connector = connector;
+		this.loginController = loginController;
 		
 		this.setMargin(false);
 		this.setSpacing(false);
@@ -120,7 +121,7 @@ public class LoginView extends VerticalLayout implements View, HasName {
 	private void authorize() {
 		String username = usernameField.getValue();
 		
-		ResultBoolean login = connector.pruefeLogin(username, passwordField.getValue());
+		ResultBoolean login = loginController.pruefeLogin(username, passwordField.getValue());
 		
 		if(login.isSuccessful()) {
 			VaadinSession.getCurrent().getSession().setAttribute("user", username);
