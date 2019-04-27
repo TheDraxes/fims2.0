@@ -16,14 +16,14 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	TextField name = new TextField();
 	TextField surname = new TextField();
 	TextField plz = new TextField();
-	TextField ort = new TextField();
+	ComboBox ort = new ComboBox();
 	TextField str_hnr = new TextField();
 	
 	DateField geburt = new DateField();
-	TextField geburtsOrt = new TextField();
+	ComboBox geburtsOrt = new ComboBox();
 	
 	DateField tod = new DateField();
-	TextField todOrt = new TextField();
+	ComboBox todOrt = new ComboBox();
 	
 	ComboBox familienstand = new ComboBox<>();
 	TextField anzahlKinder = new TextField();
@@ -47,12 +47,13 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		layout.addComponent(group,      0, 0);
 		layout.addComponent(name,       1, 0);
 		layout.addComponent(surname,    2, 0);
-		layout.addComponent(geburt,     3, 0);
-		layout.addComponent(geburtsOrt, 4, 0);
 		
 		layout.addComponent(plz,     0, 1);
 		layout.addComponent(ort,     1, 1);
 		layout.addComponent(str_hnr, 2, 1);
+		
+		layout.addComponent(geburt,     0, 2);
+		layout.addComponent(geburtsOrt, 1, 2);
 		
 		
 		this.addComponents(layout);
@@ -74,14 +75,14 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	private void initTextFields() {
 		name.setCaption("Name");
 		surname.setCaption("Vorname");
-		geburtsOrt.setCaption("Geburtsort");
 		plz.setCaption("Postleitzahl");
-		ort.setCaption("Ort");
+		
 		str_hnr.setCaption("Straße & Hausnummer");
 	}
 	
 	private void initComboBoxes() {
-		
+		geburtsOrt.setCaption("Geburtsort");
+		ort.setCaption("Ort");
 	}
 	
 	private void initSpecials() {

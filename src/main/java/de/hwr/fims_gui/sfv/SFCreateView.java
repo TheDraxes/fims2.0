@@ -67,6 +67,7 @@ public class SFCreateView extends VerticalLayout implements View {
 	public void nextClicked() {
 		activeNumber++;
 		this.lab.setValue(activeNumber+"");
+		
 		Component newComp = mapping.getCompOnIndex(activeNumber);
 		this.replaceComponent(activeComp, newComp);
 		
@@ -76,13 +77,14 @@ public class SFCreateView extends VerticalLayout implements View {
 	}
 	
 	public void previousClicked() {
-		this.lab.setValue(activeNumber+"");
-		progressBar.setValue((float)progressBar.getValue() - (float)0.2);
 		activeNumber--;
+		this.lab.setValue(activeNumber+"");
 		
 		Component newComp = mapping.getCompOnIndex(activeNumber);
 		this.replaceComponent(activeComp, newComp);
 		
 		activeComp = newComp;
+	
+		progressBar.setValue((float)progressBar.getValue() - (float)0.2);
 	}
 }
