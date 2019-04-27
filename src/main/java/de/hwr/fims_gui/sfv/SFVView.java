@@ -11,6 +11,7 @@ import com.vaadin.ui.ProgressBar;
 import com.vaadin.ui.VerticalLayout;
 
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
+import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.sfv.roadmap.*;
 
 public class SFVView extends VerticalLayout implements View {
@@ -18,12 +19,12 @@ public class SFVView extends VerticalLayout implements View {
 	Navigator navigator;
 	DatabaseConnector connector;
 	
-	Label lab = new Label();
+	Label spacing = new Label();
 	
 	private Button next = new Button("weiter");
 	private Button previous = new Button("zurück");
 	private ProgressBar progressBar = new ProgressBar();
-	private Button testButton = new Button("TestButton");
+	private Button backButton = new Button("Verwaltung");
 	
 	private Component activeComp;
 	private int activeNumber = 1;
@@ -39,16 +40,16 @@ public class SFVView extends VerticalLayout implements View {
 		
 		next.addClickListener(e -> {nextClicked();});
 		previous.addClickListener(e -> {previousClicked();});
+		backButton.addClickListener(e -> {navigator.navigateTo(FimsUI.SFV_MAIN_VIEW);});
 		
 		progressBar.setWidth("80%");
 		progressBar.setValue((float)0.0);
 		
-		lab.setValue(""+activeNumber);
+		spacing.setValue(""+activeNumber);
+		spacing.setWidth(100, Unit.PIXELS);
 		
 		HorizontalLayout buttonGroup = new HorizontalLayout();
-		buttonGroup.addComponents(lab, previous, next);
-		
-		
+		buttonGroup.addComponents(backButton, spacing, previous, next);
 		
 		this.activeComp = mapping.getCompOnIndex(activeNumber);
 		
@@ -66,7 +67,7 @@ public class SFVView extends VerticalLayout implements View {
 	
 	public void nextClicked() {
 		activeNumber++;
-		this.lab.setValue(activeNumber+"");
+		this.spacing.setValue(activeNumber+"");
 		
 		Component newComp = mapping.getCompOnIndex(activeNumber);
 		this.replaceComponent(activeComp, newComp);
@@ -78,7 +79,7 @@ public class SFVView extends VerticalLayout implements View {
 	
 	public void previousClicked() {
 		activeNumber--;
-		this.lab.setValue(activeNumber+"");
+		this.spacing.setValue(activeNumber+"");
 		
 		Component newComp = mapping.getCompOnIndex(activeNumber);
 		this.replaceComponent(activeComp, newComp);
