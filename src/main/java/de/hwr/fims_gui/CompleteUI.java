@@ -23,7 +23,7 @@ public class CompleteUI extends VerticalLayout implements View{
 		
 		MainArea mainArea = new MainArea(content);
 		this.addComponent(mainArea);
-		this.setExpandRatio(mainArea, 10);
+		this.setExpandRatio(mainArea, 20);
 		
 		FooterLayout footerLayout = new FooterLayout();
 		this.addComponent(footerLayout);

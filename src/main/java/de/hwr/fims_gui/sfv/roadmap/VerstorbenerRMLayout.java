@@ -44,17 +44,27 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		GridLayout layout = new GridLayout(5, 5);
 		layout.setSpacing(true);
 		
-		layout.addComponent(group,      0, 0);
-		layout.addComponent(name,       1, 0);
-		layout.addComponent(surname,    2, 0);
+		layout.addComponent(group,       0, 0);
+		layout.addComponent(name,        1, 0);
+		layout.addComponent(surname,     2, 0);
+		layout.addComponent(anzahlKinder,3, 0);
 		
 		layout.addComponent(plz,     0, 1);
 		layout.addComponent(ort,     1, 1);
-		layout.addComponent(str_hnr, 2, 1);
+		layout.addComponent(str_hnr, 2, 1, 3, 1);
+		//layout.add
 		
-		layout.addComponent(geburt,     0, 2);
-		layout.addComponent(geburtsOrt, 1, 2);
+		layout.addComponent(geburt,        0, 2);
+		layout.addComponent(geburtsOrt,    1, 2);
+		layout.addComponent(familienstand, 2, 2);
 		
+		layout.addComponent(tod,     0, 3);
+		layout.addComponent(todOrt,  1, 3);
+		layout.addComponent(beruf,   2, 3);
+		
+		layout.addComponent(krankenkasse,      0, 4);
+		layout.addComponent(rentenversicherung,1, 4);
+		layout.addComponent(konfession,        2, 4);
 		
 		this.addComponents(layout);
 	}
@@ -76,13 +86,19 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		name.setCaption("Name");
 		surname.setCaption("Vorname");
 		plz.setCaption("Postleitzahl");
-		
+		beruf.setCaption("Beruf");
 		str_hnr.setCaption("Straße & Hausnummer");
+		anzahlKinder.setCaption("Anzahl der Kinder");
 	}
 	
 	private void initComboBoxes() {
 		geburtsOrt.setCaption("Geburtsort");
 		ort.setCaption("Ort");
+		familienstand.setCaption("Familienstand");
+		todOrt.setCaption("Todesort");
+		krankenkasse.setCaption("Krankenkasse");
+		rentenversicherung.setCaption("Rentenversicherung");
+		konfession.setCaption("Konfession");
 	}
 	
 	private void initSpecials() {
@@ -90,5 +106,6 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		group.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
 		group.setCaption("Gechlecht");
 		geburt.setCaption("Geburtsdatum");
+		tod.setCaption("Todesdatum");
 	}
 }
