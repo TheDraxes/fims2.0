@@ -14,7 +14,7 @@ public class LoginController {
         ResultBoolean result = new ResultBoolean();
         
         sql = "SELECT * FROM benutzer WHERE Benutzername = '" + benutzername + "' AND Passwort = '" + passwort + "';";
-        result = DatabaseConnector.dbConnection(sql);
+        result = new DatabaseConnector().dbConnection(sql);
         
         return result;
         
