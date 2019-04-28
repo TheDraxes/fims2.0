@@ -36,8 +36,7 @@ import de.hwr.tests.PersonTest;
 public class SFVMainPage extends VerticalLayout implements View, HasName {
 
 	private Navigator navigator;
-	String basepath = VaadinService.getCurrent()
-            .getBaseDirectory().getAbsolutePath();
+	String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
 	
 	public SFVMainPage(Navigator navigator, DatabaseConnector connector) {
 		this.navigator = navigator;
@@ -63,17 +62,18 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 			new Notification("Warnung");
 		});
 		
+		HorizontalLayout topGroup = new HorizontalLayout();
+		topGroup.addComponent(createButton);
+		topGroup.addComponent(searchContent);
+		topGroup.addComponent(searchButton);
+		
 		List<PersonTest> sfvList = new ArrayList<>();
 		sfvList.add(new PersonTest(1, "Mustermann", "23.04.2011"));
 		
 		Grid<PersonTest> sfvGrid = new Grid<>(PersonTest.class);
 		sfvGrid.setItems(sfvList);
+		sfvGrid.setWidth(70, Unit.PERCENTAGE);
 		sfvGrid.setColumns("auftragsnummer", "verstorbener", "sterbedatum");
-		
-		HorizontalLayout topGroup = new HorizontalLayout();
-		topGroup.addComponent(createButton);
-		topGroup.addComponent(searchContent);
-		topGroup.addComponent(searchButton);
 		
 		this.addComponent(new ApplicationHeader());
 		this.addComponent(topGroup);
