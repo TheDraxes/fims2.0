@@ -14,7 +14,7 @@ public class DatabaseConnector implements IDatabase {
     static final String DB_URL = "jdbc:mysql://localhost/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     static final String USER = "root";
-    static final String PASS = "fims1234";
+    static final String PASS = "";
 
     Connection conn;
     
@@ -145,7 +145,7 @@ public class DatabaseConnector implements IDatabase {
 
 	@Override
 	public String[] getUniqueOrte() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] arr = {"Schwerin", "Rastow"};
+		return arr;
 	}
 }

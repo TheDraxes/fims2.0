@@ -9,6 +9,9 @@ import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 
+import de.hwr.fims_backend.controller.DataController;
+import de.hwr.fims_backend.dbconnector.DatabaseConnector;
+
 public class VerstorbenerRMLayout extends RoadMapPart {
 
 	RadioButtonGroup<String> group = new RadioButtonGroup();
@@ -31,6 +34,8 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	ComboBox konfession = new ComboBox<>();
 	ComboBox krankenkasse = new ComboBox<>();
 	ComboBox rentenversicherung = new ComboBox<>();
+	
+	DataController controller = new DataController();
 	
 	public VerstorbenerRMLayout() {
 		super();
@@ -93,11 +98,20 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	
 	private void initComboBoxes() {
 		geburtsOrt.setCaption("Geburtsort");
+		geburtsOrt.setItems(controller.comboBoxContent(DataController.ort));
+		
 		ort.setCaption("Ort");
+		ort.setItems(controller.comboBoxContent(DataController.ort));
+		
 		familienstand.setCaption("Familienstand");
+		
 		todOrt.setCaption("Todesort");
+		todOrt.setItems(controller.comboBoxContent(DataController.ort));
+		
 		krankenkasse.setCaption("Krankenkasse");
+		
 		rentenversicherung.setCaption("Rentenversicherung");
+		
 		konfession.setCaption("Konfession");
 	}
 	
