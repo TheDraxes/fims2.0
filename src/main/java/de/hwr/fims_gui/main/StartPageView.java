@@ -25,7 +25,7 @@ import de.hwr.fims_gui.interfaces.*;
 import de.hwr.fims_gui.main.ApplicationHeader;
 
 @Theme("mytheme")
-public class StartPageView extends VerticalLayout implements View, HasName {
+public class StartPageView extends HorizontalLayout implements View, HasName {
 
 	private Navigator navigator;
 	
@@ -55,9 +55,9 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 		layout.addStyleName("layout");
 		
 		
-		this.addComponent(new ApplicationHeader());
+		this.addComponent(new ApplicationHeader(navigator));
 		this.addComponent(layout);
-		this.setComponentAlignment(layout, Alignment.MIDDLE_CENTER);
+		this.setComponentAlignment(layout, Alignment.TOP_RIGHT);
 		
 	}
 

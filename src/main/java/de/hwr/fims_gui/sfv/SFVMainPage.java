@@ -36,9 +36,9 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		layout.setSpacing(true);
 		
 		
-		this.addComponent(new ApplicationHeader());
+		this.addComponent(new ApplicationHeader(navigator));
 		this.addComponent(layout);
-		this.setComponentAlignment(layout, Alignment.MIDDLE_CENTER);
+		this.setComponentAlignment(layout, Alignment.TOP_RIGHT);
 	}
 
 	@Override
