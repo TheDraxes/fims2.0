@@ -59,6 +59,9 @@ public class ApplicationHeader extends HorizontalLayout implements View {
         contactButton.setHeight(80, Unit.PIXELS);
         contactButton.setResponsive(true);
         Responsive.makeResponsive(contactButton);
+        contactButton.addClickListener(e -> {
+        	showContact();
+	    });
         
         //LogoutButton
         FileResource logoutImageRessource = new FileResource(new File(basepath + "/WEB-INF/res/baseline_input_black.png"));
@@ -87,6 +90,17 @@ public class ApplicationHeader extends HorizontalLayout implements View {
         this.addComponent(headerButtons);
 		this.setComponentAlignment(headerButtons, Alignment.MIDDLE_RIGHT);
 	}
+	
+	private void showContact() {
+        Window subWindow = new Window("Hinweis");
+        VerticalLayout subContent = new VerticalLayout();
+        subWindow.setContent(subContent);
+        subWindow.setHeight(70, Unit.PERCENTAGE);
+        subWindow.setWidth(40, Unit.PERCENTAGE);
+        subContent.addComponent(new Label("Dieses Feature ist bald erhältlich"));
+        subWindow.center();
+        Page.getCurrent().getUI().addWindow(subWindow);
+	}	
 	
 	private void showLogout() {
 		navigator.navigateTo(FimsUI.LOGIN_VIEW);
