@@ -1,5 +1,7 @@
 package de.hwr.fims_gui.sfv.roadmap;
 
+import java.util.Optional;
+
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.GridLayout;
@@ -15,6 +17,8 @@ import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 public class VerstorbenerRMLayout extends RoadMapPart {
 
 	RadioButtonGroup<String> group = new RadioButtonGroup();
+	
+	Label heading =  new Label("1. Verstorbener");
 	
 	TextField name = new TextField();
 	TextField surname = new TextField();
@@ -35,16 +39,16 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	ComboBox krankenkasse = new ComboBox<>();
 	ComboBox rentenversicherung = new ComboBox<>();
 	
-	DataController controller = new DataController();
+	DataController controller;
 	
-	public VerstorbenerRMLayout() {
+	public VerstorbenerRMLayout(DataController controller) {
 		super();
+		this.controller = controller;
 		initSpecials();
 		initTextFields();
 		initComboBoxes();
 		
-		//HorizontalLayout layout1 = new HorizontalLayout(group, name, surname, geburt, geburtsOrt);
-		//HorizontalLayout layout2 = new HorizontalLayout(plz, ort, str_hnr);
+		heading.addStyleName("heading");
 		
 		GridLayout layout = new GridLayout(5, 5);
 		layout.setSpacing(true);
@@ -57,6 +61,7 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		layout.addComponent(plz,     0, 1);
 		layout.addComponent(ort,     1, 1);
 		layout.addComponent(str_hnr, 2, 1, 3, 1);
+		//layout.addComp
 		//layout.add
 		
 		layout.addComponent(geburt,        0, 2);
@@ -71,13 +76,28 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		layout.addComponent(rentenversicherung,1, 4);
 		layout.addComponent(konfession,        2, 4);
 		
-		this.addComponents(layout);
+		this.addComponents(heading, layout);
 	}
 	
 	@Override
 	public boolean isFilled() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		if(
+				group.isEmpty() || 
+				name.isEmpty() || 
+				surname.isEmpty() || 
+				plz.isEmpty() || 
+				ort.isEmpty() || 
+				str_hnr.isEmpty() || 
+				geburt.isEmpty() || 
+				geburtsOrt.isEmpty() ||
+				tod.isEmpty() ||
+				todOrt.isEmpty() 
+			) {
+				return false;
+			} else {
+				return true;
+			}
 	}
 
 	@Override
@@ -93,33 +113,116 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		plz.setCaption("Postleitzahl");
 		beruf.setCaption("Beruf");
 		str_hnr.setCaption("Straße & Hausnummer");
+		str_hnr.setWidth(100, Unit.PERCENTAGE);
+		
 		anzahlKinder.setCaption("Anzahl der Kinder");
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void initComboBoxes() {
 		geburtsOrt.setCaption("Geburtsort");
-		geburtsOrt.setItems(controller.comboBoxContent(DataController.ort));
+		geburtsOrt.setItems(controller.getOrtList());
+		geburtsOrt.setNewItemProvider(inputString -> {
+			
+		    controller.addOrt((String)inputString);
+		    
+		    // Update combobox content
+			geburtsOrt.setItems(controller.getOrtList());
+			ort.setItems(controller.getOrtList());
+			todOrt.setItems(controller.getOrtList());
+			
+		    return Optional.of(inputString);
+		    
+		});
 		
 		ort.setCaption("Ort");
 		ort.setItems(controller.comboBoxContent(DataController.ort));
+		ort.setNewItemProvider(inputString -> {
+			
+		    controller.addOrt((String)inputString);
+		    
+		    // Update combobox content
+		    geburtsOrt.setItems(controller.getOrtList());
+			ort.setItems(controller.getOrtList());
+			todOrt.setItems(controller.getOrtList());
+			
+		    return Optional.of(inputString);
+		    
+		});
 		
 		familienstand.setCaption("Familienstand");
+		familienstand.setItems(controller.getFamilienstandList());
+		familienstand.setNewItemProvider(inputString -> {
+		    controller.addFamilienstand((String)inputString);
+		    // Update combobox content
+		    familienstand.setItems(controller.getFamilienstandList());
+		    return Optional.of(inputString);
+		});
 		
 		todOrt.setCaption("Todesort");
-		todOrt.setItems(controller.comboBoxContent(DataController.ort));
+		todOrt.setItems(controller.getOrtList());
+		todOrt.setNewItemProvider(inputString -> {
+		    controller.addOrt((String)inputString);
+		    
+		    // Update combobox content
+		    geburtsOrt.setItems(controller.getOrtList());
+			ort.setItems(controller.getOrtList());
+			todOrt.setItems(controller.getOrtList());
+			
+		    return Optional.of(inputString);
+		});
 		
 		krankenkasse.setCaption("Krankenkasse");
+		krankenkasse.setItems(controller.getKrankenkasseList());
+		krankenkasse.setNewItemProvider(inputString -> {
+		    controller.addKrankenkasse((String)inputString);
+		    // Update combobox content
+		    krankenkasse.setItems(controller.getKrankenkasseList());
+		    return Optional.of(inputString);
+		});
 		
 		rentenversicherung.setCaption("Rentenversicherung");
+		rentenversicherung.setItems(controller.getRentenversicherungList());
+		rentenversicherung.setNewItemProvider(inputString -> {
+		    controller.addRentenversicherung((String)inputString);
+		    // Update combobox content
+		    rentenversicherung.setItems(controller.getRentenversicherungList());
+		    return Optional.of(inputString);
+		});
 		
 		konfession.setCaption("Konfession");
+		konfession.setItems(controller.getKonfessionList());
+		konfession.setNewItemProvider(inputString -> {
+		    controller.addKonfession((String)inputString);
+		    // Update combobox content
+		    konfession.setItems(controller.getKonfessionList());
+		    return Optional.of(inputString);
+		});
 	}
 	
 	private void initSpecials() {
-		group.setItems("Herr", "Frau");
-		group.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
-		group.setCaption("Gechlecht");
+			group.setItems("Herr", "Frau");
+			group.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
+			group.setCaption("Gechlecht");
 		geburt.setCaption("Geburtsdatum");
 		tod.setCaption("Todesdatum");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void clear() {
+		familienstand.setValue("");
+		anzahlKinder.setValue("");
+		name.setValue("");
+		surname.setValue("");
+		plz.setValue("");
+		ort.setValue("");
+		str_hnr.setValue("");
+		geburtsOrt.setValue("");
+		todOrt.setValue("");
+		beruf.setValue("");
+		konfession.setValue("");
+		krankenkasse.setValue("");
+		rentenversicherung.setValue("");
 	}
 }

@@ -19,6 +19,18 @@ public class DataController {
 	ArrayList<Trauerfeier> Trauerfeiern = new ArrayList<Trauerfeier>();
 	ArrayList<Zeitungsanzeige> Zeitungsanzeigen = new ArrayList<Zeitungsanzeige>();
 	
+	ArrayList<String> familienstandList = new ArrayList<String>();
+	ArrayList<String> konfessionList = new ArrayList<String>();
+	ArrayList<String> krankenkasseList = new ArrayList<String>();
+	ArrayList<String> rentenversicherungList = new ArrayList<String>();
+	ArrayList<String> ortList = new ArrayList<String>();
+	
+	ArrayList<String> bestArtList = new ArrayList<String>();
+	ArrayList<String> grabstaetteList = new ArrayList<String>();
+	ArrayList<String> rednerList = new ArrayList<String>();
+	ArrayList<String> deckeList = new ArrayList<String>();
+	ArrayList<String> tarlarList = new ArrayList<String>();
+	
 	public static final String familienstand = "familienstand";
 	public static final String konfession = "konfession";
 	public static final String krankenkasse = "krankenkasse";
@@ -28,6 +40,15 @@ public class DataController {
 	DatabaseConnector connector = new DatabaseConnector();
 	
 	public DataController() {
+		
+		init();
+		
+		familienstandList = comboBoxContent(familienstand);
+		konfessionList = comboBoxContent(konfession);
+		krankenkasseList = comboBoxContent(krankenkasse);
+		rentenversicherungList = comboBoxContent(rentenversicherung);
+		ortList = comboBoxContent(ort);
+		
 		auftraege =  connector.getAuftraegeFromDatabase();
 		if(auftraege == null) {
 			return;
@@ -72,6 +93,136 @@ public class DataController {
 				break;
 		}
 		return _return;
+	}
+
+	private void init() {
+		String[] arr1 = {"Erdbestattung", "Feuerbestattung"};
+		bestArtList.addAll(Arrays.asList(arr1));
+		
+		String[] arr2 = {"Urnengrab", "Doppelurnengrab", "Erdgrab", "Friedwald"};
+		grabstaetteList.addAll(Arrays.asList(arr2));
+		
+		String[] arr3 = {"Mario", "Riemann", "Fischer"};
+		rednerList.addAll(Arrays.asList(arr3));
+		
+		String[] arr4 = {"DE", "3-CH-ZZ-V"};
+		deckeList.addAll(Arrays.asList(arr4));
+		
+		String[] arr5 = {"eigene Kleidung", "Herrentalar", "Damentalar"};
+		tarlarList.addAll(Arrays.asList(arr5));
+	}
+	
+	public ArrayList<String> getFamilienstandList() {
+		return familienstandList;
+	}
+
+	public void setFamilienstandList(ArrayList<String> familienstandList) {
+		this.familienstandList = familienstandList;
+	}
+	
+	public void addFamilienstand(String familienstand) {
+		familienstandList.add(familienstand);
+	}
+
+	public ArrayList<String> getKonfessionList() {
+		return konfessionList;
+	}
+
+	public void setKonfessionList(ArrayList<String> konfessionList) {
+		this.konfessionList = konfessionList;
+	}
+	
+	public void addKonfession(String Konfession) {
+		konfessionList.add(Konfession);
+	}
+
+	public ArrayList<String> getKrankenkasseList() {
+		return krankenkasseList;
+	}
+
+	public void setKrankenkasseList(ArrayList<String> krankenkasseList) {
+		this.krankenkasseList = krankenkasseList;
+	}
+
+	public void addKrankenkasse(String krankenkasse) {
+		krankenkasseList.add(krankenkasse);
+	}
+	
+	public ArrayList<String> getRentenversicherungList() {
+		return rentenversicherungList;
+	}
+
+	public void setRentenversicherungList(ArrayList<String> rentenversicherungList) {
+		this.rentenversicherungList = rentenversicherungList;
+	}
+
+	public void addRentenversicherung(String rentenversicherung) {
+		rentenversicherungList.add(rentenversicherung);
+	}
+	
+	public ArrayList<String> getOrtList() {
+		return ortList;
+	}
+
+	public void setOrtList(ArrayList<String> ortList) {
+		this.ortList = ortList;
+	}
+	
+	public void addOrt(String ort) {
+		ortList.add(ort);
+		System.out.println("[INFO] neuer stand: " + ortList.toString());
+	}
+
+	public ArrayList<String> getBestArtList() {
+		return bestArtList;
+	}
+	public void addArt(String art) {
+		bestArtList.add(art);
+	}
+
+	public void setBestArtList(ArrayList<String> bestArtList) {
+		this.bestArtList = bestArtList;
+	}
+
+	public ArrayList<String> getGrabstaetteList() {
+		return grabstaetteList;
+	}
+	public void addGrabst(String Grabst) {
+		grabstaetteList.add(Grabst);
+	}
+
+	public void setGrabstaetteList(ArrayList<String> grabstaetteList) {
+		this.grabstaetteList = grabstaetteList;
+	}
+
+	public ArrayList<String> getRednerList() {
+		return rednerList;
+	}
+	public void addRedner(String Redner) {
+		rednerList.add(Redner);
+	}
+	public void setRednerList(ArrayList<String> rednerList) {
+		this.rednerList = rednerList;
+	}
+
+	public ArrayList<String> getDeckeList() {
+		return deckeList;
+	}
+	public void addDecke(String Redner) {
+		deckeList.add(Redner);
+	}
+	public void setDeckeList(ArrayList<String> deckeList) {
+		this.deckeList = deckeList;
+	}
+
+	public ArrayList<String> getTarlarList() {
+		return tarlarList;
+	}
+	public void addTarlar(String tarlar) {
+		tarlarList.add(tarlar);
+	}
+	public void setTarlarList(ArrayList<String> tarlarList) {
+		this.tarlarList = tarlarList;
 	}
 	
 }

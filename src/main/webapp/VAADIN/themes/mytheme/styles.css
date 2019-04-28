@@ -15257,10 +15257,6 @@ div.v-layout.v-horizontal.v-widget {
 	padding-top: 2px;
 }
 
-.mytheme .v-button-wrap {
-	vertical-align: top;
-}
-
 .mytheme .formContainer {
 	margin-left: 15%;
 	margin-right: 15%;
@@ -15277,4 +15273,8 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .v-gridlayout-spacing-on {
 	width: 20px;
 	height: 20px;
+}
+
+.mytheme .heading {
+	font-size: 2.3em;
 }
