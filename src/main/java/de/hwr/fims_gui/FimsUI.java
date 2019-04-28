@@ -13,12 +13,14 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
+import de.hwr.fims_backend.controller.DataController;
 import de.hwr.fims_backend.controller.LoginController;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.listener.ViewChangedListener;
 import de.hwr.fims_gui.login.LoginView;
 import de.hwr.fims_gui.main.StartPageView;
 import de.hwr.fims_gui.session.SessionHandler;
+import de.hwr.fims_gui.sfv.SFVAnzeigen;
 import de.hwr.fims_gui.sfv.SFVMainPage;
 import de.hwr.fims_gui.sfv.SFVView;
 
@@ -32,6 +34,7 @@ public class FimsUI extends UI {
     public static final String MAIN_VIEW = "Start";
     public static final String SFV_VIEW = "SF erstellen";
 	public static final String SFV_MAIN_VIEW = "SFV";
+	public static final String SFV_DISPLAY_VIEW = "SFV anzeigen";
 	
 	
 	@Override
@@ -45,13 +48,14 @@ public class FimsUI extends UI {
         //Create controllers to control databaseconnection
         connector = new DatabaseConnector(); // delete
         LoginController loginController = new LoginController();
+        DataController dataController = new DataController();
         
         // Create and register the views
         navigator.addView(LOGIN_VIEW, new CompleteUI(new LoginView(navigator, loginController)));
         navigator.addView(MAIN_VIEW, new CompleteUI(new StartPageView(navigator, connector)));
         navigator.addView(SFV_VIEW, new CompleteUI(new SFVView(navigator, connector)));
         navigator.addView(SFV_MAIN_VIEW, new CompleteUI(new SFVMainPage(navigator, connector)));
-
+        navigator.addView(SFV_DISPLAY_VIEW, new CompleteUI(new SFVAnzeigen(navigator, dataController)));
         
         
         

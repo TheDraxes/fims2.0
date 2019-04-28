@@ -5,13 +5,15 @@ import java.io.Serializable;
 public class PersonTest implements Serializable {
 	
 	private long auftragsnummer;
-	private String verstorbener;
+	private String vorname;
+	private String name;
 	private String sterbedatum;
 
 	
-	public PersonTest(long auftragsnummer, String verstorbener, String sterbedatum) {
+	public PersonTest(long auftragsnummer, String vorname, String name, String sterbedatum) {
 		this.auftragsnummer = auftragsnummer;
-		this.verstorbener = verstorbener;
+		this.name = name;
+		this.vorname = vorname;
 		this.sterbedatum = sterbedatum;
 		
 	}
@@ -27,13 +29,23 @@ public class PersonTest implements Serializable {
 	}
 
 
-	public String getVerstorbener() {
-		return verstorbener;
+	public String getName() {
+		return name;
 	}
 
 
-	public void setVerstorbener(String verstorbener) {
-		this.verstorbener = verstorbener;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getVorname() {
+		return vorname;
+	}
+
+
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
 	}
 
 
@@ -47,6 +59,7 @@ public class PersonTest implements Serializable {
 	}
 
 
+	
 	
 	
 }

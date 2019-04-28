@@ -31,7 +31,7 @@ public class StartPageView extends HorizontalLayout implements View, HasName {
 	
 	public StartPageView(Navigator navigator, DatabaseConnector connector) {
 		this.navigator = navigator;
-		this.setMargin(false);
+		this.setMargin(true);
 		
 		HorizontalLayout layout =  new HorizontalLayout();
 		

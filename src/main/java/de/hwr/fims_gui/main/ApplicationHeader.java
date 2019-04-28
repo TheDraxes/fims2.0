@@ -83,7 +83,7 @@ public class ApplicationHeader extends HorizontalLayout implements View {
         
         //HeaderButtons Layout collection
         HorizontalLayout headerButtons = new HorizontalLayout();
-        headerButtons.addComponents(homeButton, contactButton, logoutButton, helpButton);
+        headerButtons.addComponents(fimsLogoImage, homeButton, contactButton, logoutButton, helpButton);
 
         this.addComponent(headerButtons);
 		this.setComponentAlignment(headerButtons, Alignment.MIDDLE_RIGHT);
