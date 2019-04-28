@@ -6,6 +6,7 @@ public abstract class RoadMapPart extends VerticalLayout {
 
 	public abstract boolean isFilled();
 	public abstract boolean safeData();
+	public abstract void clear();
 	
 	public RoadMapPart(){
 		this.setMargin(false);

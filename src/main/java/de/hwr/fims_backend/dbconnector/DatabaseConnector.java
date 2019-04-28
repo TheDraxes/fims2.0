@@ -103,43 +103,43 @@ public class DatabaseConnector implements IDatabase {
 
 	@Override
 	public String[] getUniqueKonfessionen() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] arr = {"Christlich", "Atheist"};
+		return arr;
 	}
 
 
 	@Override
 	public String[] getUniqueFamilienstaende() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] arr = {"Ledig", "Verheiratet"};
+		return arr;
 	}
 
 
 	@Override
 	public String[] getUniqueKrankenkassen() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] arr = {"Barmer", "IKK"};
+		return arr;
 	}
 
 
 	@Override
 	public String[] getUniqueRentenverischerungen() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] arr = {"Deutsche Rentenversicherung"};
+		return arr;
 	}
 
 
 	@Override
 	public String[] getUniqueAnzeigenart() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] arr = {"Anzeigeart1", "Anzeigeart2"};
+		return arr;
 	}
 
 
 	@Override
 	public String[] getUniqueZeitung() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] arr = {"Zeitung 1", "Zeitung2"};
+		return arr;
 	}
 
 
