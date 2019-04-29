@@ -7,14 +7,24 @@ public class DatabaseTests {
     public static void main(String[] args) {
         DatabaseConnector datenbank = new DatabaseConnector();
 
-        if(datenbank.pruefeLogin("admin", "12345").isSuccessful()) {
-            System.out.println("Login erfolgreich!");
-        } else
-            System.out.println("Falsche Logindaten!");
+        /*String[] testKonfession = datenbank.getUniqueKonfessionen();
 
-        if(datenbank.pruefeLogin("admin", "512142").isSuccessful()) {
-            System.out.println("Login erfolgreich!");
-        } else
-            System.out.println("Falsche Logindaten!");
+        for(int i = 0; i < testKonfession.length; i++) {
+            System.out.println(testKonfession[i]);
+        }*/
+
+        /*String[] testFamilienstand = datenbank.getUniqueFamilienstaende();
+
+        for(int i = 0; i < testFamilienstand.length; i++) {
+            System.out.println(testFamilienstand[i]);
+        }*/
+
+        /*String[] testOrte = datenbank.getUniqueOrte();
+
+        for(int i = 0; i < testOrte.length; i++) {
+            System.out.println(testOrte[i]);
+        }*/
+
+        datenbank.insertUserToDatabase("test345", "abcd123");
     }
 }
