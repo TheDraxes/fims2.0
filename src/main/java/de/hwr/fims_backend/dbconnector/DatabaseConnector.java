@@ -134,10 +134,10 @@ public class DatabaseConnector implements IDatabase {
 				}
 				return resultArray;
 			} else
-				return null;
+				return new String[0];
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 	}
 
@@ -165,10 +165,10 @@ public class DatabaseConnector implements IDatabase {
 				}
 				return resultArray;
 			} else
-				return null;
+				return new String[0];
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 	}
 
@@ -196,10 +196,10 @@ public class DatabaseConnector implements IDatabase {
 				}
 				return resultArray;
 			} else
-				return null;
+				return new String[0];
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 	}
 
@@ -227,10 +227,10 @@ public class DatabaseConnector implements IDatabase {
 				}
 				return resultArray;
 			} else
-				return null;
+				return new String[0];
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 	}
 
@@ -258,10 +258,10 @@ public class DatabaseConnector implements IDatabase {
 				}
 				return resultArray;
 			} else
-				return null;
+				return new String[0];
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 	}
 
@@ -289,10 +289,10 @@ public class DatabaseConnector implements IDatabase {
 				}
 				return resultArray;
 			} else
-				return null;
+				return new String[0];
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 	}
 
@@ -320,10 +320,10 @@ public class DatabaseConnector implements IDatabase {
 				}
 				return resultArray;
 			} else
-				return null;
+				return new String[0];
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 	}
 }
