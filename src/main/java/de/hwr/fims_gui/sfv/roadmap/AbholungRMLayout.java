@@ -1,5 +1,7 @@
 package de.hwr.fims_gui.sfv.roadmap;
 
+import java.util.Date;
+
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
@@ -8,6 +10,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.hwr.fims_backend.controller.DataController;
+import de.hwr.fims_backend.data.services.Abholung;
 
 public class AbholungRMLayout extends RoadMapPart {
 
@@ -53,9 +56,19 @@ public class AbholungRMLayout extends RoadMapPart {
 		return true;
 	}
 
-	public boolean safeData() {
-		// TODO Auto-generated method stub
-		return false;
+	public Abholung safeData() {
+		boolean gesch = false;
+		if(group.getValue().equals("Ja")) {
+			gesch = true;
+		}
+		
+		Date date = new Date();
+		date.setYear(wann.getValue().getYear());
+		date.setMonth(wann.getValue().getMonthValue());
+		date.setDate(wann.getValue().getDayOfMonth());
+		
+		
+		return new Abholung(woabholen.getValue(), date, gesch);
 	}
 
 	@Override

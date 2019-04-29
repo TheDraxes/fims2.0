@@ -1,5 +1,6 @@
 package de.hwr.fims_gui.sfv.roadmap;
 
+import java.util.Date;
 import java.util.Optional;
 
 import com.vaadin.ui.ComboBox;
@@ -12,6 +13,8 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.hwr.fims_backend.controller.DataController;
+import de.hwr.fims_backend.data.services.Blumenbestellung;
+import de.hwr.fims_backend.data.services.Trauerfeier;
 
 public class TrauerfeierRMLayout extends RoadMapPart {
 
@@ -138,9 +141,23 @@ public class TrauerfeierRMLayout extends RoadMapPart {
 		return true;
 	}
 
-	public boolean safeData() {
-		// TODO Auto-generated method stub
-		return false;
+	public Trauerfeier safeData() {
+		
+		datumBest.getValue();
+		
+		Date date = new Date();
+		date.setYear(datumBest.getValue().getYear());
+		date.setMonth(datumBest.getValue().getMonthValue());
+		date.setDate(datumBest.getValue().getDayOfMonth());
+		
+		boolean aufb = false;
+		
+		if(aufbewahrung.getValue().equals("Ja")) {
+			aufb = true;
+		}
+		
+		Trauerfeier tf = new Trauerfeier(bestArt.getValue(), grabstaette.getValue(), ortBest.getValue(), date, redner.getValue(), musik.getValue(), aufb, bemerkung.getValue(), "", "", decke.getValue(), tarlar.getValue(), new Blumenbestellung(), sonstiges.getValue());
+		return tf;
 	}
 
 	@Override

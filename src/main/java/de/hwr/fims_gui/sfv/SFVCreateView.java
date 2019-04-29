@@ -60,7 +60,11 @@ public class SFVCreateView extends VerticalLayout implements View {
 		
 		safeButton.setIcon(VaadinIcons.INBOX);
 		safeButton.addClickListener(e -> {
-			if(mapping.allDataFilled()) {
+			
+			String[] arr = mapping.allDataFilled().getRoadsNotFilled();
+			boolean allFilled = mapping.allDataFilled().getAllFilled();
+			
+			if(allFilled) {
 				Notification not = new Notification(
 						"Geschafft!", 
 						"Eintrag wurde gespeichert!", 
@@ -68,10 +72,19 @@ public class SFVCreateView extends VerticalLayout implements View {
 						);
 				not.setPosition(Position.TOP_LEFT);
 				not.show(Page.getCurrent());
+				
 			} else {
+				
+				String str = "Nicht alle Pflichtfelder wurden ausgefüllt. Pflichtfelder sind mit einem * markiert! <br> Unvollständige Seiten: <br> <ul>";
+				for(int i = 0; i < arr.length - 1; i ++) {
+					str += "<li>" + arr[i] + "</li>";
+				}
+			
+				str+="</ul>";
+				
 				Notification not = new Notification(
 						"Error!", 
-						"Nicht alle Pflichtfelder wurden ausgefüllt. Pflichtfelder sind mit einem * markiert! <br> Unvollständige Seiten: <br> <ul><li>test</li><li>test</li></ul>", 
+						str, 
 						Notification.Type.ERROR_MESSAGE, true
 						);
 				not.setPosition(Position.TOP_LEFT);

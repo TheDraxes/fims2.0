@@ -1,5 +1,7 @@
 package de.hwr.fims_gui.sfv;
 
+import java.util.Arrays;
+
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
@@ -44,35 +46,40 @@ public class LayoutNumberMapping {
 		
 	}
 	
-	public boolean allDataFilled() {
-		if(comp1.isFilled()) {
-			System.out.println("Comp1 sieht gut aus!");
+	public FilledCheckResult allDataFilled() {
+		
+		String[] arr = new String[1];
+		
+		if(!comp1.isFilled()) {
+			arr = extendArray(arr, "Verstorbener");
 		}
-		if(comp2.isFilled()) {
-			System.out.println("Comp2 sieht gut aus!");
+		if(!comp2.isFilled()) {
+			arr = extendArray(arr, "Auftraggeber");
 		}
-		if(comp3.isFilled()) {
-			System.out.println("Comp3 sieht gut aus!");
+		if(!comp3.isFilled()) {
+			arr = extendArray(arr, "Angehöriger");
 		}
-		if(comp4.isFilled()) {
-			System.out.println("Comp4 sieht gut aus!");
+		if(!comp4.isFilled()) {
+			arr = extendArray(arr, "Abholung");
 		}
-		if(comp5.isFilled()) {
-			System.out.println("Comp5 sieht gut aus!");
+		if(!comp5.isFilled()) {
+			arr = extendArray(arr, "Trauerfeier");
 		}
-		if(comp6.isFilled()) {
-			System.out.println("Comp6 sieht gut aus!");
+		if(!comp6.isFilled()) {
+			arr = extendArray(arr, "Blumen");
 		}
-		if(comp7.isFilled()) {
-			System.out.println("Comp7 sieht gut aus!");
+		if(!comp7.isFilled()) {
+			arr = extendArray(arr, "Zeitungsanzeigen");
 		}
 
+		System.out.println(Arrays.asList(arr).toString());
+		
 		if(comp1.isFilled() && comp2.isFilled() && comp3.isFilled() && comp4.isFilled() && comp5.isFilled() && comp6.isFilled() && comp7.isFilled()) {
 			System.out.println("passt");
-			return true;
+			return new FilledCheckResult(null, true);
 		} else {
 			System.out.println("passt nicht");
-			return false;
+			return new FilledCheckResult(arr, false);
 		}
 	}
 	
@@ -94,6 +101,18 @@ public class LayoutNumberMapping {
 		if(number == 5)comp5.clear();
 		if(number == 6)comp6.clear();
 		if(number == 6)comp7.clear();
+	}
+	
+	private String[] extendArray(String[] arr, String newEnt) {
+		String[] newArr = new String[arr.length+1];
+		
+		for(int i = 0; i < arr.length; i++) {
+			newArr[i] = arr[i];
+		}
+		
+		newArr[arr.length-1] = newEnt;
+		
+		return newArr;
 	}
 	
 	public Component getComp1() {

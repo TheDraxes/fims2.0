@@ -26,6 +26,6 @@ public class DatabaseTests {
             System.out.println(testOrte[i]);
         }*/
 
-        datenbank.insertUserToDatabase("test345", "abcd123");
+        //datenbank.insertUserToDatabase("test345", "abcd123");
     }
 }

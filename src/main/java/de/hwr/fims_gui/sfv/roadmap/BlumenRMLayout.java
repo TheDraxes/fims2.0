@@ -9,6 +9,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.hwr.fims_backend.controller.DataController;
+import de.hwr.fims_backend.data.services.Blumenarrangement;
 
 public class BlumenRMLayout extends RoadMapPart {
 
@@ -76,9 +77,9 @@ public class BlumenRMLayout extends RoadMapPart {
 		return true;
 	}
 
-	public boolean safeData() {
-		// TODO Auto-generated method stub
-		return false;
+	public Blumenarrangement safeData() {
+		Blumenarrangement blumenargangement = new Blumenarrangement(bemerkung.getValue(), Double.parseDouble(preis.getValue()));
+		return blumenargangement;
 	}
 
 	@Override

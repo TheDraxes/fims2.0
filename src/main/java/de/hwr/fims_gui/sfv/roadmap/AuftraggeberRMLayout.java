@@ -9,6 +9,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 
 import de.hwr.fims_backend.controller.DataController;
+import de.hwr.fims_backend.data.customerdata.Auftraggeber;
 
 public class AuftraggeberRMLayout extends RoadMapPart {
 
@@ -87,9 +88,11 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 		}
 	}
 
-	public boolean safeData() {
-		// TODO Auto-generated method stub
-		return false;
+	public Auftraggeber safeData() {
+		String strasse = extractStreet(str_hnr.getValue());
+		String hNR = extractHNR(str_hnr.getValue());
+		
+		return new Auftraggeber(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), strasse, hNR, beruf.getValue(), beziehung.getValue(), telefon.getValue());
 	}
 
 	@Override
@@ -102,5 +105,22 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 		beruf.setValue("");
 		telefon.setValue("");
 		beziehung.setValue("");
+	}
+	
+	public String extractStreet(String input) {
+		
+		if(input.contains(",")) {
+			return input.substring(0, input.indexOf(","));
+		} else {
+			return "";
+		}
+	}
+	
+	public static String extractHNR(String input) {
+		if(input.contains(",")) {
+			int index = input.indexOf(",");
+			return input.substring(index + 1).trim();
+		}
+		return "";
 	}
 }

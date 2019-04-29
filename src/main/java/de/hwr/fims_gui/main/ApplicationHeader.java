@@ -106,10 +106,11 @@ public class ApplicationHeader extends HorizontalLayout implements View {
 	}	
 	
 	private void showLogout() {
-		navigator.navigateTo(FimsUI.LOGIN_VIEW);
 		UI ui = UI.getCurrent();
 		VaadinSession vaadinSession = ui.getSession();
         vaadinSession.setAttribute("user", null);  
+        vaadinSession.close();
+		navigator.navigateTo(FimsUI.LOGIN_VIEW);
 	}
 	
 	private void showHelp() {

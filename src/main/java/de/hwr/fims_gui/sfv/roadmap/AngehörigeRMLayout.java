@@ -130,9 +130,12 @@ public class AngehörigeRMLayout extends RoadMapPart {
 		}
 	}
 
-	public boolean safeData() {
-		// TODO Auto-generated method stub
-		return false;
+	public Angehoeriger safeData() {
+		
+		String strasse = extractStreet(str_hnr.getValue());
+		String hNR = extractHNR(str_hnr.getValue());
+		
+		return new Angehoeriger(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), strasse, hNR, "", beziehung.getValue());
 	}
 
 	private void schowSubWindow() {
@@ -177,6 +180,14 @@ public class AngehörigeRMLayout extends RoadMapPart {
 		} else {
 			return "";
 		}
+	}
+	
+	public static String extractHNR(String input) {
+		if(input.contains(",")) {
+			int index = input.indexOf(",");
+			return input.substring(index + 1).trim();
+		}
+		return "";
 	}
 	
 	@Override

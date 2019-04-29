@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class Trauerfeier implements Serializable{
 
-	private boolean bestArt;				//Bestattungsart: true = Erdbestattung, false = Feuerbestattung
+	private String bestArt;				//Bestattungsart: true = Erdbestattung, false = Feuerbestattung
 	private String grabArt;					//Art des Grabs
 	private String beisetzOrt;				//Beisetzungsort
 	private Date tfDatum;					//Datum der Trauerfeier
@@ -33,7 +33,7 @@ public class Trauerfeier implements Serializable{
 	private static final long serialVersionUID = 1806201810L;
 		
 	
-	public Trauerfeier(boolean bestArt,String grabArt,String beisetzOrt,Date tfDatum,String redner, String musik,
+	public Trauerfeier(String bestArt,String grabArt,String beisetzOrt,Date tfDatum,String redner, String musik,
 			boolean aufgebahrt, String aufbahBem, String sarg, String urne, String decke, String talar, Blumenbestellung blumen,
 			String sonstiges) {
 		
@@ -65,11 +65,11 @@ public class Trauerfeier implements Serializable{
 	
 	
 		//Bestattungsart ( Erde = true / Feuer = false)
-		public boolean isBestArt() {
+		public String getBestArt() {
 			return bestArt;
 		}
 	
-		public void setBestArt(boolean bestArt) {
+		public void setBestArt(String bestArt) {
 			this.bestArt = bestArt;
 		}
 	
