@@ -22,7 +22,7 @@ import de.hwr.fims_gui.main.StartPageView;
 import de.hwr.fims_gui.session.SessionHandler;
 import de.hwr.fims_gui.sfv.SFVAnzeigen;
 import de.hwr.fims_gui.sfv.SFVMainPage;
-import de.hwr.fims_gui.sfv.SFVView;
+import de.hwr.fims_gui.sfv.SFVCreateView;
 
 @Theme("mytheme")
 public class FimsUI extends UI {
@@ -32,7 +32,7 @@ public class FimsUI extends UI {
 	
     public static final String LOGIN_VIEW = "Login";
     public static final String MAIN_VIEW = "Start";
-    public static final String SFV_VIEW = "SF erstellen";
+    public static final String SFV_CREATE_VIEW = "SF erstellen";
 	public static final String SFV_MAIN_VIEW = "SFV";
 	public static final String SFV_DISPLAY_VIEW = "SFV anzeigen";
 	
@@ -48,12 +48,12 @@ public class FimsUI extends UI {
         //Create controllers to control databaseconnection
         connector = new DatabaseConnector(); // delete
         LoginController loginController = new LoginController();
-        DataController dataController = new DataController();
+        DataController dataController = new DataController(connector);
         
         // Create and register the views
         navigator.addView(LOGIN_VIEW, new CompleteUI(new LoginView(navigator, loginController)));
         navigator.addView(MAIN_VIEW, new CompleteUI(new StartPageView(navigator, connector)));
-        navigator.addView(SFV_VIEW, new CompleteUI(new SFVView(navigator, connector)));
+        navigator.addView(SFV_CREATE_VIEW, new CompleteUI(new SFVCreateView(navigator, dataController)));
         navigator.addView(SFV_MAIN_VIEW, new CompleteUI(new SFVMainPage(navigator, connector)));
         navigator.addView(SFV_DISPLAY_VIEW, new CompleteUI(new SFVAnzeigen(navigator, dataController)));
         
@@ -64,7 +64,7 @@ public class FimsUI extends UI {
         	navigator.navigateTo(MAIN_VIEW);
         } else {
         	VaadinSession.getCurrent().getSession().setMaxInactiveInterval( ( int ) TimeUnit.MINUTES.toSeconds( 240 ) );
-        	navigator.navigateTo(SFV_MAIN_VIEW);
+        	navigator.navigateTo(MAIN_VIEW);
         }
 	}
 	

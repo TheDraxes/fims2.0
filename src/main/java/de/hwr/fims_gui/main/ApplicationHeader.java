@@ -32,7 +32,7 @@ public class ApplicationHeader extends HorizontalLayout implements View {
 	
 	public ApplicationHeader(Navigator navigator) {
 		this.navigator = navigator;
-		this.setMargin(false);
+		this.setWidth(100,Unit.PERCENTAGE);
 		
 		//FimsImage
 		FileResource fimsLogoRessource = new FileResource(new File(basepath + "/WEB-INF/res/MyWayBestattungenlogo.png"));
@@ -83,10 +83,15 @@ public class ApplicationHeader extends HorizontalLayout implements View {
         
         //HeaderButtons Layout collection
         HorizontalLayout headerButtons = new HorizontalLayout();
-        headerButtons.addComponents(fimsLogoImage, homeButton, contactButton, logoutButton, helpButton);
+        HorizontalLayout logo = new HorizontalLayout();
+        
+        headerButtons.addComponents(homeButton, contactButton, logoutButton, helpButton);
+        
+        logo.addComponent(fimsLogoImage);
 
-        this.addComponent(headerButtons);
+        this.addComponents(logo, headerButtons);
 		this.setComponentAlignment(headerButtons, Alignment.MIDDLE_RIGHT);
+		this.setComponentAlignment(logo, Alignment.MIDDLE_LEFT);
 	}
 	
 	private void showContact() {
@@ -104,8 +109,7 @@ public class ApplicationHeader extends HorizontalLayout implements View {
 		navigator.navigateTo(FimsUI.LOGIN_VIEW);
 		UI ui = UI.getCurrent();
 		VaadinSession vaadinSession = ui.getSession();
-        vaadinSession.setAttribute("user", null);
-        vaadinSession.close();  
+        vaadinSession.setAttribute("user", null);  
 	}
 	
 	private void showHelp() {

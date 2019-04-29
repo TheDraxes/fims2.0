@@ -33,24 +33,26 @@ public class AbholungRMLayout extends RoadMapPart {
 	}
 	
 	private void init() {
-		woabholen.setCaption("Wo soll der Verstorbene abgeholt werden?");
+		woabholen.setCaption("Wo soll der Verstorbene abgeholt werden?*");
 		woabholen.setWidth(100, Unit.PERCENTAGE);
-		wann.setCaption("Wann soll der Verstorbene abgeholt werden?");
+		wann.setCaption("Wann soll der Verstorbene abgeholt werden?*");
 		
 		group.setItems("Ja", "Nein");
 		group.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
-		group.setCaption("In den Geschäftszeiten?");
+		group.setCaption("In den Geschäftszeiten?*");
 	}
 	
 	
 	
 	@Override
 	public boolean isFilled() {
-		// TODO Auto-generated method stub
-		return false;
+		if(woabholen.isEmpty() || wann.isEmpty() || group.isEmpty()) {
+			System.out.println("[fehler] Abholung nicht ausgefüllt!");
+			return false;
+		}
+		return true;
 	}
 
-	@Override
 	public boolean safeData() {
 		// TODO Auto-generated method stub
 		return false;
@@ -58,8 +60,8 @@ public class AbholungRMLayout extends RoadMapPart {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		woabholen.setValue("");
+		group.setValue("");
 	}
 
 }

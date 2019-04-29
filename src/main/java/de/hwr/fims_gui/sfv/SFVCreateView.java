@@ -15,11 +15,12 @@ import com.vaadin.ui.ProgressBar;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import de.hwr.fims_backend.controller.DataController;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.sfv.roadmap.*;
 
-public class SFVView extends VerticalLayout implements View {
+public class SFVCreateView extends VerticalLayout implements View {
 	
 	Navigator navigator;
 	DatabaseConnector connector;
@@ -37,11 +38,12 @@ public class SFVView extends VerticalLayout implements View {
 	private Component activeComp;
 	private int activeNumber = 1;
 	
-	private LayoutNumberMapping mapping = new LayoutNumberMapping();
+	private LayoutNumberMapping mapping;
 	
-	public SFVView (Navigator navigator, DatabaseConnector connector) {
+	public SFVCreateView (Navigator navigator, DataController controller) {
 		this.navigator = navigator;
 		this.connector = connector;
+		this.mapping = new LayoutNumberMapping(controller);
 		this.setSpacing(false);
 		this.setMargin(false);
 		this.setHeight(100, Unit.PERCENTAGE);
@@ -59,11 +61,17 @@ public class SFVView extends VerticalLayout implements View {
 		safeButton.setIcon(VaadinIcons.INBOX);
 		safeButton.addClickListener(e -> {
 			if(mapping.allDataFilled()) {
-				Notification.show("Gespeichert!");
+				Notification not = new Notification(
+						"Geschafft!", 
+						"Eintrag wurde gespeichert!", 
+						Notification.Type.HUMANIZED_MESSAGE, true
+						);
+				not.setPosition(Position.TOP_LEFT);
+				not.show(Page.getCurrent());
 			} else {
 				Notification not = new Notification(
 						"Error!", 
-						"Nicht alle Pflichtfelder wurden ausgefüllt. Pflichtfelder sind mit einem * markiert!", 
+						"Nicht alle Pflichtfelder wurden ausgefüllt. Pflichtfelder sind mit einem * markiert! <br> Unvollständige Seiten: <br> <ul><li>test</li><li>test</li></ul>", 
 						Notification.Type.ERROR_MESSAGE, true
 						);
 				not.setPosition(Position.TOP_LEFT);
@@ -115,6 +123,12 @@ public class SFVView extends VerticalLayout implements View {
 		activeComp = newComp;
 		
 		progressBar.setValue((float)progressBar.getValue() + (float)0.16666666666);	
+		
+		if(activeNumber == 7 || activeNumber == 3) {
+			clearButton.setEnabled(false);
+		} else {
+			clearButton.setEnabled(true);
+		}
 	}
 	
 	public void previousClicked() {

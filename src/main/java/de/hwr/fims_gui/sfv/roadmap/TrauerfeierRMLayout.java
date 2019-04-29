@@ -66,13 +66,13 @@ public class TrauerfeierRMLayout extends RoadMapPart {
 	}
 	
 	private void initTextFields() {
-		ortBest.setCaption("Ort");
+		ortBest.setCaption("Ort*");
 		musik.setCaption("Musik");
 		sonstiges.setCaption("Sonstiges");
 	}
 	
 	private void initComboBoxes() {
-		bestArt.setCaption("Art der Bestattung");
+		bestArt.setCaption("Art der Bestattung*");
 		bestArt.setItems(controller.getBestArtList());
 		bestArt.setNewItemProvider(inputString -> {
 		    controller.addArt((String)inputString);
@@ -81,7 +81,7 @@ public class TrauerfeierRMLayout extends RoadMapPart {
 		    return Optional.of(inputString);
 		});
 		
-		grabstaette.setCaption("Grabstätte"); 
+		grabstaette.setCaption("Grabstätte*"); 
 		grabstaette.setItems(controller.getGrabstaetteList());
 		grabstaette.setNewItemProvider(inputString -> {
 		    controller.addGrabst((String)inputString);
@@ -122,7 +122,7 @@ public class TrauerfeierRMLayout extends RoadMapPart {
 		bemerkung.setCaption("Bemerkungen");
 		bemerkung.setSizeFull();
 		
-		aufbewahrung.setCaption("Aufbewahrung?");
+		aufbewahrung.setCaption("Aufbewahrung?*");
 		aufbewahrung.setItems("Ja", "Nein");
 		aufbewahrung.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
 		
@@ -131,11 +131,13 @@ public class TrauerfeierRMLayout extends RoadMapPart {
 	
 	@Override
 	public boolean isFilled() {
-		// TODO Auto-generated method stub
-		return false;
+		if(bestArt.isEmpty() || grabstaette.isEmpty() || ortBest.isEmpty() || aufbewahrung.isEmpty()) {
+			System.out.println("[fehler] Trauerfeier nicht ausgefüllt!");
+			return false;
+		}
+		return true;
 	}
 
-	@Override
 	public boolean safeData() {
 		// TODO Auto-generated method stub
 		return false;
@@ -143,8 +145,15 @@ public class TrauerfeierRMLayout extends RoadMapPart {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		bestArt.setValue("");
+		grabstaette.setValue("");
+		redner.setValue("");
+		decke.setValue("");
+		tarlar.setValue("");
+		ortBest.setValue("");
+		musik.setValue("");
+		sonstiges.setValue("");
+		aufbewahrung.setValue("");
+		bemerkung.setValue("");
 	}
-
 }

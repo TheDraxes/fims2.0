@@ -94,13 +94,13 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 				tod.isEmpty() ||
 				todOrt.isEmpty() 
 			) {
+				System.out.println("[fehler] Verstorbener nicht ausgefüllt!");
 				return false;
 			} else {
 				return true;
 			}
 	}
 
-	@Override
 	public boolean safeData() {
 		// TODO Auto-generated method stub
 		return false;
@@ -108,11 +108,11 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 
 	
 	private void initTextFields() {
-		name.setCaption("Name");
-		surname.setCaption("Vorname");
-		plz.setCaption("Postleitzahl");
+		name.setCaption("Name*");
+		surname.setCaption("Vorname*");
+		plz.setCaption("Postleitzahl*");
 		beruf.setCaption("Beruf");
-		str_hnr.setCaption("Straße & Hausnummer");
+		str_hnr.setCaption("Straße & Hausnummer*");
 		str_hnr.setWidth(100, Unit.PERCENTAGE);
 		
 		anzahlKinder.setCaption("Anzahl der Kinder");
@@ -120,7 +120,7 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	
 	@SuppressWarnings("unchecked")
 	private void initComboBoxes() {
-		geburtsOrt.setCaption("Geburtsort");
+		geburtsOrt.setCaption("Geburtsort*");
 		geburtsOrt.setItems(controller.getOrtList());
 		geburtsOrt.setNewItemProvider(inputString -> {
 			
@@ -135,7 +135,7 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		    
 		});
 		
-		ort.setCaption("Ort");
+		ort.setCaption("Ort*");
 		ort.setItems(controller.comboBoxContent(DataController.ort));
 		ort.setNewItemProvider(inputString -> {
 			
@@ -159,7 +159,7 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 		    return Optional.of(inputString);
 		});
 		
-		todOrt.setCaption("Todesort");
+		todOrt.setCaption("Todesort*");
 		todOrt.setItems(controller.getOrtList());
 		todOrt.setNewItemProvider(inputString -> {
 		    controller.addOrt((String)inputString);
@@ -201,11 +201,12 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	}
 	
 	private void initSpecials() {
-			group.setItems("Herr", "Frau");
-			group.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
-			group.setCaption("Gechlecht");
-		geburt.setCaption("Geburtsdatum");
-		tod.setCaption("Todesdatum");
+		
+		group.setItems("Herr", "Frau");
+		group.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
+		group.setCaption("Gechlecht*");
+		geburt.setCaption("Geburtsdatum*");
+		tod.setCaption("Todesdatum*");
 	}
 	
 	@SuppressWarnings("unchecked")

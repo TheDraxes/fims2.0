@@ -43,7 +43,7 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		createButton.addStyleName("createSFVButton");
 		createButton.setIcon(VaadinIcons.PLUS_CIRCLE_O);
 		createButton.addClickListener(e -> {
-			navigator.navigateTo(FimsUI.SFV_VIEW);
+			navigator.navigateTo(FimsUI.SFV_CREATE_VIEW);
 		});
 		
 

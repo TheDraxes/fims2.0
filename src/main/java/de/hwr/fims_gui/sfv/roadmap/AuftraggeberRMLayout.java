@@ -51,11 +51,11 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 	}
 	
 	private void initTextFields() {
-		name.setCaption("Name");
-		surname.setCaption("Vorname");
-		plz.setCaption("Postleitzahl");
+		name.setCaption("Name*");
+		surname.setCaption("Vorname*");
+		plz.setCaption("Postleitzahl*");
 		beruf.setCaption("Beruf");
-		str_hnr.setCaption("Straße & Hausnummer");
+		str_hnr.setCaption("Straße & Hausnummer*");
 		str_hnr.setWidth(100, Unit.PERCENTAGE);
 		telefon.setCaption("Telefonnummer");
 		beziehung.setCaption("Beziehungsart");
@@ -63,7 +63,7 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 	
 	@SuppressWarnings("unchecked")
 	private void initComboBoxes() {
-		ort.setCaption("Ort");
+		ort.setCaption("Ort*");
 		ort.setItems(controller.comboBoxContent(DataController.ort));
 		ort.setNewItemProvider(inputString -> {
 			
@@ -79,11 +79,14 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 	
 	@Override
 	public boolean isFilled() {
-		// TODO Auto-generated method stub
-		return false;
+		if(name.isEmpty() || surname.isEmpty() || plz.isEmpty() || str_hnr.isEmpty() || ort.isEmpty()) {
+			System.out.println("[fehler] Auftraggeber nicht ausgefüllt!");
+			return false;
+		} else {
+			return true;
+		}
 	}
 
-	@Override
 	public boolean safeData() {
 		// TODO Auto-generated method stub
 		return false;
@@ -95,6 +98,7 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 		surname.setValue("");
 		plz.setValue("");
 		str_hnr.setValue("");
+		ort.setValue("");
 		beruf.setValue("");
 		telefon.setValue("");
 		beziehung.setValue("");

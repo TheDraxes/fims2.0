@@ -8,15 +8,27 @@ import de.hwr.fims_gui.sfv.roadmap.*;
 
 public class LayoutNumberMapping {
 
-	DataController controller = new DataController();
+	DataController controller;
 	
-	RoadMapPart comp1 = new VerstorbenerRMLayout(controller);
-	RoadMapPart comp2 = new AuftraggeberRMLayout(controller);
-	RoadMapPart comp3 = new AngehörigeRMLayout(controller);
-	RoadMapPart comp4 = new AbholungRMLayout(controller);
-	RoadMapPart comp5 = new TrauerfeierRMLayout(controller);
-	RoadMapPart comp6 = new BlumenRMLayout(controller);
-	RoadMapPart comp7 = new ZeitungRMLayout(controller);
+	RoadMapPart comp1;
+	RoadMapPart comp2;
+	RoadMapPart comp3;
+	RoadMapPart comp4;
+	RoadMapPart comp5;
+	RoadMapPart comp6;
+	RoadMapPart comp7;
+	
+	public LayoutNumberMapping(DataController controller) {
+		this.controller = controller;
+		
+		comp1 = new VerstorbenerRMLayout(controller);
+		comp2 = new AuftraggeberRMLayout(controller);
+		comp3 = new AngehörigeRMLayout(controller);
+		comp4 = new AbholungRMLayout(controller);
+		comp5 = new TrauerfeierRMLayout(controller);
+		comp6 = new BlumenRMLayout(controller);
+		comp7 = new ZeitungRMLayout(controller);
+	}
 	
 	public Component getCompOnIndex(int i) {
 		
@@ -33,9 +45,33 @@ public class LayoutNumberMapping {
 	}
 	
 	public boolean allDataFilled() {
+		if(comp1.isFilled()) {
+			System.out.println("Comp1 sieht gut aus!");
+		}
+		if(comp2.isFilled()) {
+			System.out.println("Comp2 sieht gut aus!");
+		}
+		if(comp3.isFilled()) {
+			System.out.println("Comp3 sieht gut aus!");
+		}
+		if(comp4.isFilled()) {
+			System.out.println("Comp4 sieht gut aus!");
+		}
+		if(comp5.isFilled()) {
+			System.out.println("Comp5 sieht gut aus!");
+		}
+		if(comp6.isFilled()) {
+			System.out.println("Comp6 sieht gut aus!");
+		}
+		if(comp7.isFilled()) {
+			System.out.println("Comp7 sieht gut aus!");
+		}
+
 		if(comp1.isFilled() && comp2.isFilled() && comp3.isFilled() && comp4.isFilled() && comp5.isFilled() && comp6.isFilled() && comp7.isFilled()) {
+			System.out.println("passt");
 			return true;
 		} else {
+			System.out.println("passt nicht");
 			return false;
 		}
 	}

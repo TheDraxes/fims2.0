@@ -33,7 +33,7 @@ public class AngehörigeRMLayout extends RoadMapPart {
 	Button newEntry = new Button("Neuen Hinzufügen");
 	
 	Button safeEntry = new Button("Speichern");
-	Button clear = new Button("Löschen");
+	Button clear = new Button("Leeren");
 	
 	Grid<Angehoeriger> grid = new Grid<Angehoeriger>(Angehoeriger.class);
 	
@@ -123,13 +123,13 @@ public class AngehörigeRMLayout extends RoadMapPart {
 	@Override
 	public boolean isFilled() {
 		if(angehoerige.isEmpty()) {
+			System.out.println("[fehler] Angehörige nicht ausgefüllt!");
 			return false;
 		} else {
 			return true;
 		}
 	}
 
-	@Override
 	public boolean safeData() {
 		// TODO Auto-generated method stub
 		return false;

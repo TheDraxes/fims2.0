@@ -31,6 +31,9 @@ public class DataController {
 	ArrayList<String> deckeList = new ArrayList<String>();
 	ArrayList<String> tarlarList = new ArrayList<String>();
 	
+	ArrayList<String> zeitungen = new ArrayList<String>();
+	ArrayList<String> anzeigenart = new ArrayList<String>();
+	
 	public static final String familienstand = "familienstand";
 	public static final String konfession = "konfession";
 	public static final String krankenkasse = "krankenkasse";
@@ -39,7 +42,7 @@ public class DataController {
 	
 	DatabaseConnector connector = new DatabaseConnector();
 	
-	public DataController() {
+	public DataController(DatabaseConnector connector) {
 		
 		init();
 		
@@ -73,23 +76,18 @@ public class DataController {
 		switch(listToFill) {
 			case familienstand:	
 				_return.addAll(Arrays.asList(connector.getUniqueFamilienstaende()));
-				System.out.println("[INFO] gewählt: " + familienstand);
 				break;
 			case konfession:
 				_return.addAll(Arrays.asList(connector.getUniqueKonfessionen()));
-				System.out.println("[INFO] gewählt: " + konfession);
 				break;
 			case krankenkasse:
 				_return.addAll(Arrays.asList(connector.getUniqueKrankenkassen()));
-				System.out.println("[INFO] gewählt: " + krankenkasse);
 				break;
 			case rentenversicherung:
 				_return.addAll(Arrays.asList(connector.getUniqueRentenverischerungen()));
-				System.out.println("[INFO] gewählt: " + rentenversicherung);
 				break;
 			case ort:
 				_return.addAll(Arrays.asList(connector.getUniqueOrte()));
-				System.out.println("[INFO] gewählt: " + ort);
 				break;
 		}
 		return _return;
@@ -110,6 +108,12 @@ public class DataController {
 		
 		String[] arr5 = {"eigene Kleidung", "Herrentalar", "Damentalar"};
 		tarlarList.addAll(Arrays.asList(arr5));
+		
+		String[] arr6 = {"Traueranzeige", "Danksagung"};
+		anzeigenart.addAll(Arrays.asList(arr6));
+		
+		String[] arr7 = {"Mitteldeutsche Zeitung", "Zeitung 1"};
+		zeitungen.addAll(Arrays.asList(arr7));
 	}
 	
 	public ArrayList<String> getFamilienstandList() {
@@ -225,4 +229,17 @@ public class DataController {
 		this.tarlarList = tarlarList;
 	}
 	
+	public ArrayList<String> getZeitungenList() {
+		return zeitungen;
+	}
+	public void addZeitung(String zeitung) {
+		zeitungen.add(zeitung);
+	}
+	
+	public ArrayList<String> getAnzeigenart() {
+		return anzeigenart;
+	}
+	public void addAnzeigenart(String art) {
+		anzeigenart.add(art);
+	}
 }
