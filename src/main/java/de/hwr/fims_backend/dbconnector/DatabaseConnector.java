@@ -166,7 +166,7 @@ public class DatabaseConnector implements IDatabase {
 				verstorbener.setGebDatum(rs.getDate("geburtsdatum"));
 				verstorbener.setGebOrt(getOrtById(rs.getInt("geburtsort_ID")));
 				verstorbener.setTodDatum(rs.getDate("todesdatum"));
-				verstorbener.setTodOrt(getOrtById(rs.getInt("todesort_ID"));
+				verstorbener.setTodOrt(getOrtById(rs.getInt("todesort_ID")));
 				verstorbener.setFamStand(rs.getString("familienstand"));
 				verstorbener.setAnzSohn(rs.getInt("anz_sohn"));
 				verstorbener.setAnzTocht(rs.getInt("anz_tochter"));
