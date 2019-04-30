@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import de.hwr.fims_backend.data.customerdata.Auftrag;
+import de.hwr.fims_backend.data.customerdata.Auftraggeber;
+import de.hwr.fims_backend.data.customerdata.Verstorbener;
+import de.hwr.fims_backend.data.services.Abholung;
 
 public class DatabaseConnector implements IDatabase {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -51,10 +54,151 @@ public class DatabaseConnector implements IDatabase {
         return result;
     }
 
-
 	@Override
 	public ArrayList<Auftrag> getAuftraegeFromDatabase() {
 		// TODO Auto-generated method stub
+		String sql;
+		ArrayList<Auftrag> auftraege = new ArrayList<Auftrag>();
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			sql = "SELECT * FROM auftraege";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Auftrag auftrag = new Auftrag();
+				auftrag.setAuftragNr(rs.getInt("ID_Auftrag"));
+				auftrag.setNiederL(rs.getString("niederlassung"));
+				auftrag.setRechnDatum(rs.getDate("rechnungsdatum"));
+				auftrag.setZahlDatum(rs.getDate("zahlungsdatum"));
+				auftrag.setAuftraggeber(getAuftraggeberById(rs.getInt("auftraggeber_id")));
+				auftrag.setVerstorbener(getVerstorbeneById(rs.getInt("verstorbene_id")));
+				auftrag.setAbholung(getAbholungByAuftrag_Id((int) auftrag.getAuftragNr()));
+				auftrag.setTrauerfeier(null);
+				auftrag.setAnzeigen(null); //mehrere
+				auftrag.setAngehoerige(null); //mehrere
+				auftraege.add(auftrag);
+			}
+			stmt.close();
+			return auftraege;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private Abholung getAbholungByAuftrag_Id(int auftrag_id) {
+		String sql;
+		Abholung abholung = new Abholung();
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			sql = "SELECT * FROM abholungen WHERE auftrag_ID = " + auftrag_id + ";";
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				abholung.setAbhDat(rs.getDate("datum"));
+				if(rs.getShort("geschaeftszeiten") == 1) {
+					abholung.setGeschZeit(true);
+				} else
+					abholung.setGeschZeit(false);
+				abholung.setOrt("abholungsort");
+			}
+			stmt.close();
+			return abholung;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private Auftraggeber getAuftraggeberById(int auftraggeber_id) {
+		String sql;
+		Auftraggeber auftraggeber = new Auftraggeber();
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			sql = "SELECT * FROM auftraggeber WHERE ID_auftraggeber = " + auftraggeber_id + ";";
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				if(rs.getString("geschlecht").equals("m")) {
+					auftraggeber.setGeschlecht(true);
+				} else
+					auftraggeber.setGeschlecht(false);
+				auftraggeber.setName(rs.getString("name"));
+				auftraggeber.setVorname(rs.getString("vorname"));
+				auftraggeber.setPlz(rs.getString("plz"));
+				auftraggeber.setOrt(getOrtById(rs.getInt("ort_ID")));
+				auftraggeber.setStrasse(rs.getString("strasse"));
+				auftraggeber.setHausNr(rs.getString("hausNr"));
+				auftraggeber.setBezArt("beziehungsart");
+				auftraggeber.setTelefonNr(rs.getString("telefonNr"));
+			}
+			stmt.close();
+			return auftraggeber;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private Verstorbener getVerstorbeneById(int verstorbene_id) {
+		String sql;
+		Verstorbener verstorbener = new Verstorbener();
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			sql = "SELECT * FROM verstorbene WHERE ID_verstorbene = " + verstorbene_id + ";";
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				if(rs.getString("geschlecht").equals("m")) {
+					verstorbener.setGeschlecht(true);
+				} else
+					verstorbener.setGeschlecht(false);
+				verstorbener.setName(rs.getString("name"));
+				verstorbener.setVorname(rs.getString("vorname"));
+				verstorbener.setPlz(rs.getString("plz"));
+				verstorbener.setOrt(getOrtById(rs.getInt("ort_ID")));
+				verstorbener.setStrasse(rs.getString("strasse"));
+				verstorbener.setHausNr(rs.getString("hausNr"));
+				verstorbener.setGebDatum(rs.getDate("geburtsdatum"));
+				verstorbener.setGebOrt(getOrtById(rs.getInt("geburtsort_ID")));
+				verstorbener.setTodDatum(rs.getDate("todesdatum"));
+				verstorbener.setTodOrt(getOrtById(rs.getInt("todesort_ID"));
+				verstorbener.setFamStand(rs.getString("familienstand"));
+				verstorbener.setAnzSohn(rs.getInt("anz_sohn"));
+				verstorbener.setAnzTocht(rs.getInt("anz_tochter"));
+				verstorbener.setBeruf(rs.getString("beruf"));
+				verstorbener.setKonfes(rs.getString("konfession"));
+				verstorbener.setKrankKas(rs.getString("krankenkasse"));
+				verstorbener.setRenteVers(rs.getString("rentenvers"));
+			}
+			stmt.close();
+			return verstorbener;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private String getOrtById(int ort_id) {
+		String sql;
+		String ort;
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			sql = "SELECT bezeichnung FROM ort WHERE ID_ort = " + ort_id + ";";
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				return rs.getString("bezeichnung");
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
