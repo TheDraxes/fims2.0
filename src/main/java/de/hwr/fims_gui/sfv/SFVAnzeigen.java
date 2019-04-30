@@ -5,6 +5,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
+import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
 import de.hwr.fims_backend.controller.DataController;
@@ -21,18 +22,30 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 		this.setMargin(true);
 		this.addComponent(new ApplicationHeader(navigator));
 		
-		MenuBar menubar = new MenuBar();
+		TabSheet tabsheet = new TabSheet();
 		
-		MenuItem auftragssdaten = menubar.addItem("Auftragsdaten", null, null);
-		MenuItem verstorbener = menubar.addItem("Verstorbener", null, null);
-		MenuItem auftraggeber = menubar.addItem("Auftraggeber", null, null);
-		MenuItem angehoerige = menubar.addItem("Angehörige", null, null);
-		MenuItem trauerfeier = menubar.addItem("Trauerfeier", null, null);
-		MenuItem blumenbestellung = menubar.addItem("Blumenbestellung", null, null);
-		MenuItem zeitungsauftrag = menubar.addItem("Zeitungsauftrag", null, null);
+		VerticalLayout tab1 = new VerticalLayout();
+		tabsheet.addTab(tab1).setCaption("Auftragsdaten");
 		
-		this.addComponent(menubar);
-		this.setComponentAlignment(menubar, Alignment.TOP_CENTER);
+		VerticalLayout tab2 = new VerticalLayout();
+		tabsheet.addTab(tab2).setCaption("Verstorbener");
+		
+		VerticalLayout tab3 = new VerticalLayout();
+		tabsheet.addTab(tab3).setCaption("Auftraggeber");
+		
+		VerticalLayout tab4 = new VerticalLayout();
+		tabsheet.addTab(tab4).setCaption("Angehörige");
+		
+		VerticalLayout tab5 = new VerticalLayout();
+		tabsheet.addTab(tab5).setCaption("Trauerfeier");
+		
+		VerticalLayout tab6 = new VerticalLayout();
+		tabsheet.addTab(tab6).setCaption("Blumenbestellung");
+		
+		VerticalLayout tab7 = new VerticalLayout();
+		tabsheet.addTab(tab7).setCaption("Zeitungsauftrag");
+		
+		this.addComponent(tabsheet);
 	}
 	
 
