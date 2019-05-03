@@ -4,11 +4,13 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
@@ -76,7 +78,7 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 								tsAuftragsdaten.init();
 								break;
 							case "Verstorbener":
-								tsVerstorbener.init();
+								tsVerstorbener.init(true);
 								break;
 							case "Auftraggeber":
 								tsAuftraggeber.init();
@@ -99,7 +101,7 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 					}
 				});
 		
-		this.addComponents(tabsheet, tsAuftragsdaten.init());
+		this.addComponents(tabsheet, tsVerstorbener.init(true));
 	}
 	
 

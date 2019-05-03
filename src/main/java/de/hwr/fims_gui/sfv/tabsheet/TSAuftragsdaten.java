@@ -8,13 +8,16 @@ import com.vaadin.ui.VerticalLayout;
 
 public class TSAuftragsdaten {
 	
+	GridLayout layout = new GridLayout(1, 1);
+	
+	TextField auftragsnummer = new TextField();
+	
 	public GridLayout init() {
+	
+		auftragsnummer.setCaption("Auftragsnummer");
 		
-		TextField auftragsnummer = new TextField();
-		
-		GridLayout layout = new GridLayout(1, 1);
 		layout.setSpacing(true);
-		layout.addComponent(auftragsnummer);
+		layout.addComponent(auftragsnummer, 0, 0);
 		layout.setWidth(40, Unit.PERCENTAGE);
 		
 		Notification.show("Hier sollten Auftragsdaten stehen :)");
