@@ -41,43 +41,43 @@ public class TSVerstorbener {
 		// Set properties
 	
 		geschlGroup.setItems("Herr", "Frau");
-		geschlGroup.setCaption("Geschlecht");
+		geschlGroup.setCaption("Geschlecht*");
 		geschlGroup.addStyleName(ValoTheme.OPTIONGROUP_HORIZONTAL);
 		geschlGroup.setReadOnly(isReadable);
 		
-		name.setCaption("Name");
+		name.setCaption("Name*");
 		name.setReadOnly(isReadable);
 		
-		surname.setCaption("Vorname");
+		surname.setCaption("Vorname*");
 		surname.setReadOnly(isReadable);
 		
 		anzahlKinder.setCaption("Anzahl der Kinder");
 		anzahlKinder.setReadOnly(isReadable);
 		
-		plz.setCaption("Postleitzahl");
+		plz.setCaption("Postleitzahl*");
 		plz.setReadOnly(isReadable);
 		
-		ort.setCaption("Ort");
+		ort.setCaption("Ort*");
 		ort.setReadOnly(isReadable);
 		// Content depends on ID
 		
-		str_hnr.setCaption("Straße & Hausnummer");
+		str_hnr.setCaption("Straße & Hausnummer*");
 		str_hnr.setReadOnly(isReadable);
 		str_hnr.setWidth(100, Unit.PERCENTAGE);
 		
-		geburt.setCaption("Geburtsdatum");
+		geburt.setCaption("Geburtsdatum*");
 		geburt.setReadOnly(isReadable);
 		
-		geburtsOrt.setCaption("Geburtsort");
+		geburtsOrt.setCaption("Geburtsort*");
 		geburtsOrt.setReadOnly(isReadable);
 		
 		familienstand.setCaption("Familientsand");
 		familienstand.setReadOnly(isReadable);
 		
-		tod.setCaption("Todesdatum");
+		tod.setCaption("Todesdatum*");
 		tod.setReadOnly(isReadable);
 		
-		todOrt.setCaption("Todesort");
+		todOrt.setCaption("Todesort*");
 		todOrt.setReadOnly(isReadable);
 		
 		beruf.setCaption("Beruf");
