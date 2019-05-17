@@ -168,6 +168,7 @@ public class ZeitungRMLayout extends RoadMapPart {
 		return true;
 	}
 
+
 	public Zeitungsanzeigen safeData() {
 		Zeitungsanzeigen anzeigen = new Zeitungsanzeigen();
 		anzeigen.setListe(zeitungsanzeigen);

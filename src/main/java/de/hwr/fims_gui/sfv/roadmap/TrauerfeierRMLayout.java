@@ -143,20 +143,13 @@ public class TrauerfeierRMLayout extends RoadMapPart {
 
 	public Trauerfeier safeData() {
 		
-		datumBest.getValue();
-		
-		Date date = new Date();
-		date.setYear(datumBest.getValue().getYear());
-		date.setMonth(datumBest.getValue().getMonthValue());
-		date.setDate(datumBest.getValue().getDayOfMonth());
-		
 		boolean aufb = false;
 		
 		if(aufbewahrung.getValue().equals("Ja")) {
 			aufb = true;
 		}
 		
-		Trauerfeier tf = new Trauerfeier(bestArt.getValue(), grabstaette.getValue(), ortBest.getValue(), date, redner.getValue(), musik.getValue(), aufb, bemerkung.getValue(), "", "", decke.getValue(), tarlar.getValue(), new Blumenbestellung(), sonstiges.getValue());
+		Trauerfeier tf = new Trauerfeier(bestArt.getValue(), grabstaette.getValue(), ortBest.getValue(), ConvertHelper.convertVaadinDate(datumBest.getValue()), redner.getValue(), musik.getValue(), aufb, bemerkung.getValue(), "", "", decke.getValue(), tarlar.getValue(), new Blumenbestellung(), sonstiges.getValue());
 		return tf;
 	}
 

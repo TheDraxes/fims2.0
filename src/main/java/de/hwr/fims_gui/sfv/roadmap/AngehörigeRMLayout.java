@@ -101,7 +101,7 @@ public class AngehörigeRMLayout extends RoadMapPart {
 			angehoeriger.setVorname(surname.getValue());
 			angehoeriger.setPlz(plz.getValue());
 			angehoeriger.setOrt((String)ort.getValue());
-			angehoeriger.setStrasse(extractStreet(str_hnr.getValue()));
+			angehoeriger.setStrasse(ConvertHelper.extractStreet(str_hnr.getValue()));
 			//angehoeriger.setHausNr(hausNr);
 			angehoeriger.setBezArt(beziehung.getValue());
 			
@@ -132,8 +132,8 @@ public class AngehörigeRMLayout extends RoadMapPart {
 
 	public Angehoeriger safeData() {
 		
-		String strasse = extractStreet(str_hnr.getValue());
-		String hNR = extractHNR(str_hnr.getValue());
+		String strasse = ConvertHelper.extractStreet(str_hnr.getValue());
+		String hNR = ConvertHelper.extractHNR(str_hnr.getValue());
 		
 		return new Angehoeriger(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), strasse, hNR, "", beziehung.getValue());
 	}
@@ -171,23 +171,6 @@ public class AngehörigeRMLayout extends RoadMapPart {
 
         // Open it in the UI
         UI.getCurrent().addWindow(subWindow);
-	}
-	
-	public String extractStreet(String input) {
-		
-		if(input.contains(",")) {
-			return input.substring(0, input.indexOf(","));
-		} else {
-			return "";
-		}
-	}
-	
-	public static String extractHNR(String input) {
-		if(input.contains(",")) {
-			int index = input.indexOf(",");
-			return input.substring(index + 1).trim();
-		}
-		return "";
 	}
 	
 	@Override

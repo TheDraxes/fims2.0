@@ -89,8 +89,8 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 	}
 
 	public Auftraggeber safeData() {
-		String strasse = extractStreet(str_hnr.getValue());
-		String hNR = extractHNR(str_hnr.getValue());
+		String strasse = ConvertHelper.extractStreet(str_hnr.getValue());
+		String hNR = ConvertHelper.extractHNR(str_hnr.getValue());
 		
 		return new Auftraggeber(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), strasse, hNR, beruf.getValue(), beziehung.getValue(), telefon.getValue());
 	}
@@ -105,22 +105,5 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 		beruf.setValue("");
 		telefon.setValue("");
 		beziehung.setValue("");
-	}
-	
-	public String extractStreet(String input) {
-		
-		if(input.contains(",")) {
-			return input.substring(0, input.indexOf(","));
-		} else {
-			return "";
-		}
-	}
-	
-	public static String extractHNR(String input) {
-		if(input.contains(",")) {
-			int index = input.indexOf(",");
-			return input.substring(index + 1).trim();
-		}
-		return "";
 	}
 }

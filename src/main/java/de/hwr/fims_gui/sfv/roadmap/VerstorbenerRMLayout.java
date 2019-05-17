@@ -102,10 +102,9 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 			}
 	}
 
-	public boolean safeData() {
-
-		//Verstorbener vers = new Verstorbener(false, name.getValue(), surname.getValue(), plz.getValue(), (String)geburtsOrt.getValue(), strasse, hausNr, beruf, gebName, gebDatum, gebOrt, todDatum, todOrt, famStand, anzTocht, anzSohn, konfes, krankKas, renteVers)
-		return false;
+	public Verstorbener safeData() {
+		Verstorbener verst = new Verstorbener(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), ConvertHelper.extractStreet(str_hnr.getValue()), ConvertHelper.extractHNR(str_hnr.getValue()), beruf.getValue(), "", ConvertHelper.convertVaadinDate(geburt.getValue()), (String)geburtsOrt.getValue(), ConvertHelper.convertVaadinDate(tod.getValue()), (String) todOrt.getValue(), (String)familienstand.getValue(), Integer.parseInt(anzahlKinder.getValue()), 0, (String)konfession.getValue(),(String) krankenkasse.getValue(), (String)rentenversicherung.getValue());
+		return verst;
 	}
 
 	
