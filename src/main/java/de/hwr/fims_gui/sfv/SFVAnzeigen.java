@@ -81,16 +81,16 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 								tsVerstorbener.init(true);
 								break;
 							case "Auftraggeber":
-								tsAuftraggeber.init();
+								tsAuftraggeber.init(true);
 								break;
 							case "Angehörige":
 								tsAngehoerige.init();
 								break;
 							case "Trauerfeier":
-								tsTrauerfeier.init();
+								tsTrauerfeier.init(true);
 								break;
 							case "Blumenbestellung":
-								tsBlumenbestellung.init();
+								tsBlumenbestellung.init(true);
 								break;
 							case "Zeitungsauftrag":
 								tsZeitungsauftrag.init();

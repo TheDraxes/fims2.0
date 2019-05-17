@@ -18,6 +18,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.renderers.ButtonRenderer;
 
+import de.hwr.fims_backend.administration.Zeitungsanzeigen;
 import de.hwr.fims_backend.controller.DataController;
 import de.hwr.fims_backend.data.advertisement.Zeitungsanzeige;
 import de.hwr.fims_backend.data.customerdata.Angehoeriger;
@@ -167,9 +168,10 @@ public class ZeitungRMLayout extends RoadMapPart {
 		return true;
 	}
 
-	public boolean safeData() {
-		// TODO Auto-generated method stub
-		return false;
+	public Zeitungsanzeigen safeData() {
+		Zeitungsanzeigen anzeigen = new Zeitungsanzeigen();
+		anzeigen.setListe(zeitungsanzeigen);
+		return anzeigen;
 	}
 
 	@Override
