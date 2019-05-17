@@ -12,6 +12,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.hwr.fims_backend.controller.DataController;
+import de.hwr.fims_backend.data.customerdata.Verstorbener;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 
 public class VerstorbenerRMLayout extends RoadMapPart {
@@ -102,7 +103,9 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	}
 
 	public boolean safeData() {
-		// TODO Auto-generated method stub
+		
+		Verstorbener verst = new Verstorbener(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), ConvertHelper.extractStreet(str_hnr.getValue()), ConvertHelper.extractHNR(str_hnr.getValue()), beruf.getValue(), "", ConvertHelper.convertVaadinDate(geburt.getValue()), (String)geburtsOrt.getValue(), ConvertHelper.convertVaadinDate(tod.getValue()), (String) todOrt.getValue(), (String)familienstand.getValue(), Integer.parseInt(anzahlKinder.getValue()), 0, (String)konfession.getValue(),(String) krankenkasse.getValue(), (String)rentenversicherung.getValue());
+		
 		return false;
 	}
 

@@ -167,9 +167,12 @@ public class ZeitungRMLayout extends RoadMapPart {
 		return true;
 	}
 
-	public boolean safeData() {
-		// TODO Auto-generated method stub
-		return false;
+	public ArrayList safeData() {
+		if(zeitungsanzeigen.isEmpty()) {
+			return null;
+		} else {
+			return zeitungsanzeigen;
+		}
 	}
 
 	@Override

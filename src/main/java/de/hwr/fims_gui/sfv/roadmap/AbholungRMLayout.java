@@ -62,13 +62,8 @@ public class AbholungRMLayout extends RoadMapPart {
 			gesch = true;
 		}
 		
-		Date date = new Date();
-		date.setYear(wann.getValue().getYear());
-		date.setMonth(wann.getValue().getMonthValue());
-		date.setDate(wann.getValue().getDayOfMonth());
 		
-		
-		return new Abholung(woabholen.getValue(), date, gesch);
+		return new Abholung(woabholen.getValue(), ConvertHelper.convertVaadinDate(wann.getValue()), gesch);
 	}
 
 	@Override
