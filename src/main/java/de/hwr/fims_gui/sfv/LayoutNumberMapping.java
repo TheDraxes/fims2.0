@@ -12,13 +12,13 @@ public class LayoutNumberMapping {
 
 	DataController controller;
 	
-	RoadMapPart comp1;
-	RoadMapPart comp2;
-	RoadMapPart comp3;
-	RoadMapPart comp4;
-	RoadMapPart comp5;
-	RoadMapPart comp6;
-	RoadMapPart comp7;
+	private RoadMapPart comp1;
+	private RoadMapPart comp2;
+	private RoadMapPart comp3;
+	private RoadMapPart comp4;
+	private RoadMapPart comp5;
+	private RoadMapPart comp6;
+	private RoadMapPart comp7;
 	
 	public LayoutNumberMapping(DataController controller) {
 		this.controller = controller;

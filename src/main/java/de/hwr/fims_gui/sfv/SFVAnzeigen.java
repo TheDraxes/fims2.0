@@ -3,6 +3,7 @@ package de.hwr.fims_gui.sfv;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
@@ -21,6 +22,7 @@ import de.hwr.fims_gui.sfv.tabsheet.TSAngehoerige;
 import de.hwr.fims_gui.sfv.tabsheet.TSAuftraggeber;
 import de.hwr.fims_gui.sfv.tabsheet.TSAuftragsdaten;
 import de.hwr.fims_gui.sfv.tabsheet.TSBlumenbestellung;
+import de.hwr.fims_gui.sfv.tabsheet.TSNumberMapping;
 import de.hwr.fims_gui.sfv.tabsheet.TSTrauerfeier;
 import de.hwr.fims_gui.sfv.tabsheet.TSVerstorbener;
 import de.hwr.fims_gui.sfv.tabsheet.TSZeitungsauftrag;
@@ -29,6 +31,9 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 	
 	Navigator navigator;
 	DatabaseConnector connector;
+	static TSNumberMapping mapping = new TSNumberMapping();
+	Component activeComp;
+	Component newComp;
 	
 	TSAuftragsdaten tsAuftragsdaten = new TSAuftragsdaten();
 	TSVerstorbener tsVerstorbener = new TSVerstorbener();
@@ -38,6 +43,8 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 	TSBlumenbestellung tsBlumenbestellung = new TSBlumenbestellung();
 	TSZeitungsauftrag tsZeitungsauftrag = new TSZeitungsauftrag();
 	
+	TabSheet tabsheet = new TabSheet();
+	
 	VerticalLayout tab1 = new VerticalLayout();
 	VerticalLayout tab2 = new VerticalLayout();
 	VerticalLayout tab3 = new VerticalLayout();
@@ -46,12 +53,13 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 	VerticalLayout tab6 = new VerticalLayout();
 	VerticalLayout tab7 = new VerticalLayout();
 	
+	public static int tsNumber;
+	
 	public SFVAnzeigen(Navigator navigator, DataController dataController) {
 		this.navigator = navigator;
 		this.setMargin(true);
 		this.addComponent(new ApplicationHeader(navigator));
-		
-		TabSheet tabsheet = new TabSheet();
+		SFVAnzeigen.tsNumber = 1;
 		
 		tabsheet.addTab(tab1).setCaption("Auftragsdaten");
 		tabsheet.addTab(tab2).setCaption("Verstorbener");
@@ -75,13 +83,16 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 						
 						switch(tabCaption) {
 							case "Auftragsdaten":
-								tsAuftragsdaten.init();
+								tsNumber = 1;
+								getTSNumber();
 								break;
 							case "Verstorbener":
-								tsVerstorbener.init(true);
+								tsNumber = 2;
+								getTSNumber();
 								break;
 							case "Auftraggeber":
-								tsAuftraggeber.init(true);
+								tsNumber = 3;
+								getTSNumber();
 								break;
 							case "Angehörige":
 								tsAngehoerige.init();
@@ -100,9 +111,37 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 
 					}
 				});
-		
-		this.addComponents(tabsheet, tsVerstorbener.init(true));
+				
+		switchTabSheet();
 	}
 	
+	public static void getTSNumber() {
+		DataController dataConnector = null;
+		Navigator navigator = null;
+		new SFVAnzeigen(navigator, dataConnector).switchTabSheet();
+	}
+	
+	public void switchTabSheet() {
+		// Init TabSheet
+		activeComp = tsAuftragsdaten.init(true);
+		this.addComponents(tabsheet, activeComp);
+		System.out.print("It's working!!");
+		
+		// If current TabSheet is not 1 anymore -> has been switched
+		switch(tsNumber) {
+			case 2:
+				newComp = tsVerstorbener.init(true);
+				this.replaceComponent(activeComp, newComp);
+				activeComp = newComp;
+				System.out.print("I am here!!");
+				break;
+			case 3:
+				newComp = tsAuftraggeber.init(true);
+				this.replaceComponent(activeComp, newComp);
+				break;
+			default:
+				Notification.show("Ok this doesn't seem work at all.. Amazing!");
+		}
+	}
 
 }
