@@ -84,15 +84,15 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 						switch(tabCaption) {
 							case "Auftragsdaten":
 								tsNumber = 1;
-								getTSNumber();
+								callSwitchMethod();
 								break;
 							case "Verstorbener":
 								tsNumber = 2;
-								getTSNumber();
+								callSwitchMethod();
 								break;
 							case "Auftraggeber":
 								tsNumber = 3;
-								getTSNumber();
+								callSwitchMethod();
 								break;
 							case "Angehörige":
 								tsAngehoerige.init();
@@ -115,7 +115,8 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 		switchTabSheet();
 	}
 	
-	public static void getTSNumber() {
+	// Dummy Class to access non-static method 'switchTabSheet' from inside method 'selectedTabChange'
+	public static void callSwitchMethod() {
 		DataController dataConnector = null;
 		Navigator navigator = null;
 		new SFVAnzeigen(navigator, dataConnector).switchTabSheet();
