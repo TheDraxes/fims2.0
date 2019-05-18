@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.hwr.fims_backend.controller.LoginController;
+import de.hwr.fims_backend.data.TabData;
 import de.hwr.fims_backend.data.advertisement.Zeitungsanzeige;
 import de.hwr.fims_backend.data.customerdata.Auftrag;
 import de.hwr.fims_backend.data.customerdata.Verstorbener;
@@ -86,7 +87,41 @@ public class DatabaseConnector implements IDatabase {
         return result;
     }
 
-    // Diese Methode ist noch nicht vollständig aber für den Durchstich reichen die Daten
+    // Fetch data to fill in table on SFVMainPage
+    @Override
+	public ArrayList<TabData> getDataForTable() {
+		// TODO Auto-generated method stub
+		ArrayList<TabData> tabdataRS = new ArrayList<TabData>();
+		String sql;
+		
+		try {
+			Statement stmt = conn.createStatement();
+			
+			sql = "SELECT ID_auftrag, name, vorname, todesdatum "
+					+ "FROM auftraege "
+					+ "INNER JOIN verstorbene "
+					+ "ON auftraege.verstorbene_ID = verstorbene.ID_verstorbene";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				int ID_auftrag = rs.getInt("ID_auftrag");
+				String name = rs.getString("name");
+				String vorname = rs.getString("vorname");
+				Date todesdatum = rs.getDate("todesdatum");
+				
+				tabdataRS.add(new TabData(ID_auftrag, vorname, name, todesdatum));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return tabdataRS;
+		
+	}
+    
+    // Covers 'Auftrag' and 'Verstorbener' for testing purposes only, other data currently missing 
 	@Override
 	public ArrayList<Auftrag> getAuftraegeFromDatabase() {
 		ArrayList<Verstorbener> verstorbenerRS = new ArrayList<Verstorbener>();
