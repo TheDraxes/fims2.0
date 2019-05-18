@@ -1,12 +1,17 @@
 package de.hwr.tests;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import de.hwr.fims_backend.controller.LoginController;
+import de.hwr.fims_backend.data.customerdata.Auftrag;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_backend.dbconnector.ResultBoolean;
 
 public class DatabaseTests {
     public static void main(String[] args) {
        LoginController datenbank = new LoginController();
+       DatabaseConnector dbConn = new DatabaseConnector();
 
         /*String[] testKonfession = datenbank.getUniqueKonfessionen();
 
@@ -27,5 +32,7 @@ public class DatabaseTests {
         }*/
 
         //datenbank.insertUserToDatabase("test345", "abcd123");
+       
+       dbConn.getAuftraegeFromDatabase();
     }
 }

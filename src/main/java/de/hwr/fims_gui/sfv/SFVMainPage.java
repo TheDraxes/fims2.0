@@ -59,6 +59,7 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		topGroup.addComponent(searchTF);
 		topGroup.addComponent(searchButton);
 		
+		
 		List<PersonTest> sfvList = new ArrayList<>();
 		sfvList.add(new PersonTest(1, "Nguyen Tien Dung", "Otten", "23.04.2011"));
 		sfvList.add(new PersonTest(2, "Daniel", "Schützler", "24.04.2020"));

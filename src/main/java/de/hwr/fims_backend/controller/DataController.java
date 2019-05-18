@@ -10,7 +10,7 @@ import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 
 public class DataController {
 	
-	ArrayList<Auftrag> auftraege= new ArrayList();
+	ArrayList<Auftrag> auftraege= new ArrayList<Auftrag>();
 	
 	ArrayList<Verstorbener> Verstorbene = new ArrayList<Verstorbener>();
 	ArrayList<Auftraggeber> Auftraggeber = new ArrayList<Auftraggeber>();
@@ -52,7 +52,7 @@ public class DataController {
 		rentenversicherungList = comboBoxContent(rentenversicherung);
 		ortList = comboBoxContent(ort);
 		
-		auftraege =  connector.getAuftraegeFromDatabase();
+		//auftraege =  connector.getAuftraegeFromDatabase();
 		if(auftraege == null) {
 			return;
 		}
@@ -64,7 +64,7 @@ public class DataController {
 				Angehörige.add(auftrag.getAngehoeriger());
 				Abholung.add(auftrag.getAbholung());
 				Trauerfeiern.add(auftrag.getTrauerfeier());
-				Zeitungsanzeigen.addAll(auftrag.getAnzeigen().getListe());
+				//Zeitungsanzeigen.addAll(auftrag.getAnzeigen().getListe());
 			}
 		}
 	}

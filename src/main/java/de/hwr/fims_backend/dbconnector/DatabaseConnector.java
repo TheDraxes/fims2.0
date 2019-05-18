@@ -2,9 +2,11 @@ package de.hwr.fims_backend.dbconnector;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+import java.util.Arrays;
+import java.util.List;
 
 import de.hwr.fims_backend.controller.LoginController;
+import de.hwr.fims_backend.data.advertisement.Zeitungsanzeige;
 import de.hwr.fims_backend.data.customerdata.Auftrag;
 
 
@@ -82,8 +84,53 @@ public class DatabaseConnector implements IDatabase {
 
 	@Override
 	public ArrayList<Auftrag> getAuftraegeFromDatabase() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Zeitungsanzeige> anzeigeRS = new ArrayList<Zeitungsanzeige>();
+		ArrayList<Auftrag> auftragRS = new ArrayList<Auftrag>();
+		Statement stmt;
+		
+		String sql1;
+		String sql2;
+		String sql3;
+		String sql4;
+		String sql5;
+		String sql6;
+		String sql7;
+		
+		try {
+			stmt = conn.createStatement();
+			sql1 = "SELECT ID_zeitungsanzeige, auftrag_ID, anzeigeart, zeitung, groesse, preis FROM zeitungsanzeigenn;";
+			sql7 = "SELECT ID_auftrag, auftraggeber_ID, niederlassung, rechnungsdatum, zahlungsdatum, verstorbene_ID FROM auftraege;";
+			
+//			ResultSet rs1 = stmtAuftrag.executeQuery(sql1);
+			ResultSet rs7 = stmt.executeQuery(sql7);
+			
+//			while(rs1.next()) {
+//				String anzeigeart = rs1.getString("anzeigeart");
+//				String zeitung = rs1.getString("zeitung");
+//				String groesse = rs1.getString("groesse");
+//				double preis = rs1.getDouble("preis");
+//				
+//				anzeigeRS.add(new Zeitungsanzeige(preis, anzeigeart, groesse, zeitung));
+//			}
+			
+			int countAnzeige = 0;
+			while(rs7.next()) {
+				int ID_auftrag = rs7.getInt("ID_auftrag");
+				String niederlassung = rs7.getString("niederlassung");
+				Date rechnDatum = rs7.getDate("rechnungsdatum");
+				Date zahlDatum = rs7.getDate("zahlungsdatum");
+				
+				auftragRS.add(new Auftrag(ID_auftrag, niederlassung, rechnDatum, zahlDatum, null, null, null, null, null, null));
+				countAnzeige = countAnzeige++;
+			}
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(auftragRS.get(1).getNiederL());
+		return auftragRS;
 	}
 
 
