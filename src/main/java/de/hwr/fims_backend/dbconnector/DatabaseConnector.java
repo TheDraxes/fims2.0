@@ -90,19 +90,13 @@ public class DatabaseConnector implements IDatabase {
 	@Override
 	public ArrayList<Auftrag> getAuftraegeFromDatabase() {
 		ArrayList<Verstorbener> verstorbenerRS = new ArrayList<Verstorbener>();
-		ArrayList<Zeitungsanzeige> anzeigeRS = new ArrayList<Zeitungsanzeige>();
 		ArrayList<Auftrag> auftragRS = new ArrayList<Auftrag>();
 		
 		Statement stmtVerstorbene;
 		Statement stmtAuftrag;
 		
 		String sql1; // Select Verstorbene
-		String sql2; // Select Zeitungsanzeige
-		String sql3;
-		String sql4;
-		String sql5;
-		String sql6;
-		String sql7; // Select Aufträge
+		String sql2; // Select Aufträge
 		
 		try {
 			stmtAuftrag = conn.createStatement();
@@ -111,15 +105,13 @@ public class DatabaseConnector implements IDatabase {
 			sql1 = "SELECT ID_verstorbene, geschlecht, name, vorname, plz, ort_ID, strasse, hausNr, "
 					+ "geburtsdatum, geburtsort_ID, todesdatum, todesort_ID, familienstand, anz_sohn, "
 					+ "anz_tochter, konfession, krankenkasse, rentenvers FROM verstorbene;";
-//			sql2 = "SELECT ID_zeitungsanzeige, auftrag_ID, anzeigeart, zeitung, groesse, preis FROM zeitungsanzeigenn;";
-			sql7 = "SELECT ID_auftrag, niederlassung, rechnungsdatum, zahlungsdatum FROM auftraege;";
+			sql2 = "SELECT ID_auftrag, niederlassung, rechnungsdatum, zahlungsdatum FROM auftraege;";
 			
 			ResultSet rs1 = stmtVerstorbene.executeQuery(sql1);
-//			ResultSet rs2 = stmt.executeQuery(sql2);
-			ResultSet rs7 = stmtAuftrag.executeQuery(sql7);
+			ResultSet rs2 = stmtAuftrag.executeQuery(sql2);
 			
-			ResultSetMetaData rsmd7 = rs7.getMetaData();
-			int columnNumber = rsmd7.getColumnCount();
+			ResultSetMetaData rsmd2 = rs2.getMetaData();
+			int columnNumber = rsmd2.getColumnCount();
 			System.out.println(columnNumber);
 			
 			while(rs1.next()) {
@@ -146,11 +138,11 @@ public class DatabaseConnector implements IDatabase {
 			}
 				
 			int countRows = 0;	
-			while(rs7.next()) {
-				int ID_auftrag = rs7.getInt("ID_auftrag");
-				String niederlassung = rs7.getString("niederlassung");
-				Date rechnDatum = rs7.getDate("rechnungsdatum");
-				Date zahlDatum = rs7.getDate("zahlungsdatum");
+			while(rs2.next()) {
+				int ID_auftrag = rs2.getInt("ID_auftrag");
+				String niederlassung = rs2.getString("niederlassung");
+				Date rechnDatum = rs2.getDate("rechnungsdatum");
+				Date zahlDatum = rs2.getDate("zahlungsdatum");
 				System.out.println(countRows);
 				countRows++;
 				

@@ -42,7 +42,7 @@ public class DataController {
 	
 	DatabaseConnector connector = new DatabaseConnector();
 	
-	public DataController(DatabaseConnector connector) {
+	public DataController() {
 		
 		init();
 		
@@ -52,7 +52,7 @@ public class DataController {
 		rentenversicherungList = comboBoxContent(rentenversicherung);
 		ortList = comboBoxContent(ort);
 		
-		//auftraege =  connector.getAuftraegeFromDatabase();
+		auftraege =  connector.getAuftraegeFromDatabase();
 		if(auftraege == null) {
 			return;
 		}

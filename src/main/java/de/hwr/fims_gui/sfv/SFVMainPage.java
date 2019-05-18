@@ -34,7 +34,7 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 
 
 	
-	public SFVMainPage(Navigator navigator, DatabaseConnector connector) {
+	public SFVMainPage(Navigator navigator) {
 		this.navigator = navigator;
 		this.setMargin(false);
 		
@@ -60,7 +60,8 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		topGroup.addComponent(searchTF);
 		topGroup.addComponent(searchButton);
 		
-		//ArrayList<Auftrag> sfvList1 = connector.getAuftraegeFromDatabase();	
+		DatabaseConnector dbConnector = new DatabaseConnector();
+		ArrayList<Auftrag> sfvList1 = dbConnector.getAuftraegeFromDatabase();	
 		
 		List<PersonTest> sfvList = new ArrayList<>();
 		sfvList.add(new PersonTest(1, "Nguyen Tien Dung", "Otten", "23.04.2011"));
