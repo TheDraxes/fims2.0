@@ -19,6 +19,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import de.hwr.fims_backend.data.customerdata.Auftrag;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.interfaces.HasName;
@@ -59,6 +60,7 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		topGroup.addComponent(searchTF);
 		topGroup.addComponent(searchButton);
 		
+		//ArrayList<Auftrag> sfvList1 = connector.getAuftraegeFromDatabase();	
 		
 		List<PersonTest> sfvList = new ArrayList<>();
 		sfvList.add(new PersonTest(1, "Nguyen Tien Dung", "Otten", "23.04.2011"));
