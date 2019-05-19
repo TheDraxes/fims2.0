@@ -2,6 +2,8 @@ package de.hwr.fims_gui.sfv.tabsheet;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -82,7 +84,7 @@ public class TSVerstorbener {
 		geburtsOrt.setCaption("Geburtsort*");
 		geburtsOrt.setReadOnly(isReadable);
 		
-		familienstand.setCaption("Familientsand");
+		familienstand.setCaption("Familientstand");
 		familienstand.setReadOnly(isReadable);
 		
 		tod.setCaption("Todesdatum*");
@@ -139,10 +141,28 @@ public class TSVerstorbener {
 				+ connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getHausNr());
 		
 		Date gebDatum = connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getGebDatum();
-//		gebDatum.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		geburt.setValue(convertToLocalDateViaMilisecond(gebDatum));
+		
+		geburtsOrt.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getGebOrt());
+		
+		Date todDatum = connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getTodDatum();
+		tod.setValue(convertToLocalDateViaMilisecond(todDatum));
+		
+		todOrt.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getTodOrt());
+		beruf.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getBeruf());
+		familienstand.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getFamStand());
+		krankenkasse.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getKrankKas());
+		rentenversicherung.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getRenteVers());
+		konfession.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getKonfes());
 		
 		return layout;
 		
+	}
+	
+	public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
+	    return Instant.ofEpochMilli(dateToConvert.getTime())
+	      .atZone(ZoneId.systemDefault())
+	      .toLocalDate();
 	}
 	
 	public void insertData(long auftragsID) {
@@ -156,8 +176,22 @@ public class TSVerstorbener {
 		str_hnr.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getStrasse()
 				+ " "
 				+ connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getHausNr());
+		
 		Date gebDatum = connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getGebDatum();
-//		gebDatum.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		geburt.setValue(convertToLocalDateViaMilisecond(gebDatum));
+		
+		geburtsOrt.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getGebOrt());
+		
+		Date todDatum = connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getTodDatum();
+		tod.setValue(convertToLocalDateViaMilisecond(todDatum));
+
+		todOrt.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getTodOrt());
+		beruf.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getBeruf());
+		familienstand.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getFamStand());
+		krankenkasse.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getKrankKas());
+		rentenversicherung.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getRenteVers());
+		konfession.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getKonfes());
+
 	}
 
 }

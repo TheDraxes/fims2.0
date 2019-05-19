@@ -20,7 +20,6 @@ public class DatabaseConnector implements IDatabase {
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://127.0.0.1/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-
     static final String USER = "fims";
     static final String PASS = "fims";
 
@@ -162,7 +161,7 @@ public class DatabaseConnector implements IDatabase {
 				String vorname = rs1.getString("vorname");
 				String plz = rs1.getString("plz");				
 				
-				int ort_ID = rs1.getInt("ort_ID"); // int to String???
+				int ort_ID = rs1.getInt("ort_ID"); 
 				String ort_String = "";
 				switch(ort_ID) {
 					case 1: 
@@ -180,9 +179,37 @@ public class DatabaseConnector implements IDatabase {
 				String hausNr = rs1.getString("hausNr");
 				String beruf = rs1.getString("beruf");
 				Date geburtsdatum = rs1.getDate("geburtsdatum");
-//				int geburtsort_ID = rs1.getInt("geburtsort_ID"); // int to String???
+				
+				int geburtsort_ID = rs1.getInt("geburtsort_ID"); 
+				String geburtsort_String = "";
+				switch(geburtsort_ID) {
+					case 1: 
+						geburtsort_String = "Schwerin";
+						break;
+					case 2:
+						geburtsort_String = "Berlin";
+						break;
+					case 3:
+						geburtsort_String = "Rostock";
+						break;
+				}
+				
 				Date todesdatum = rs1.getDate("todesdatum");
-//				int todesort_ID = rs1.getInt("todesort_ID"); // int to String???
+				
+				int todesort_ID = rs1.getInt("todesort_ID");
+				String todesort_String = "";
+				switch(todesort_ID) {
+					case 1: 
+						todesort_String = "Schwerin";
+						break;
+					case 2:
+						todesort_String = "Berlin";
+						break;
+					case 3:
+						todesort_String = "Rostock";
+						break;
+				}
+				
 				String familienstand = rs1.getString("familienstand");
 				int anz_sohn = rs1.getInt("anz_sohn");
 				int anz_tochter = rs1.getInt("anz_tochter");
@@ -190,7 +217,7 @@ public class DatabaseConnector implements IDatabase {
 				String krankenkasse = rs1.getString("krankenkasse");
 				String rentenvers = rs1.getString("rentenvers");
 				
-				verstorbenerRS.add(new Verstorbener(false, name, vorname, plz, ort_String, strasse, hausNr, beruf, null, null, null, null, null, null, anz_sohn, anz_tochter, null, null, null));
+				verstorbenerRS.add(new Verstorbener(false, name, vorname, plz, ort_String, strasse, hausNr, beruf, null, geburtsdatum, geburtsort_String, todesdatum, todesort_String, familienstand, anz_sohn, anz_tochter, konfession, krankenkasse, rentenvers));
 			}
 				
 			int countRows = 0;	
@@ -212,14 +239,10 @@ public class DatabaseConnector implements IDatabase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
-<<<<<<< HEAD
+
 //		System.out.println(auftragRS.get(1).getNiederL());
 //		System.out.println(auftragRS.get(1).getVerstorbener().getName());
-=======
-		//System.out.println(auftragRS.get(1).getNiederL());
-		//System.out.println(auftragRS.get(1).getVerstorbener().getName());
->>>>>>> 7f251a0ef376a7ca1980f42f71650253815c1551
+
 		return auftragRS;
 	}
 
