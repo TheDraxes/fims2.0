@@ -22,10 +22,10 @@ import de.hwr.fims_gui.sfv.tabsheet.TSAngehoerige;
 import de.hwr.fims_gui.sfv.tabsheet.TSAuftraggeber;
 import de.hwr.fims_gui.sfv.tabsheet.TSAuftragsdaten;
 import de.hwr.fims_gui.sfv.tabsheet.TSBlumenbestellung;
-import de.hwr.fims_gui.sfv.tabsheet.TSNumberMapping;
 import de.hwr.fims_gui.sfv.tabsheet.TSTrauerfeier;
 import de.hwr.fims_gui.sfv.tabsheet.TSVerstorbener;
 import de.hwr.fims_gui.sfv.tabsheet.TSZeitungsauftrag;
+import de.hwr.fims_gui.sfv.tabsheet.TransferAuftragsID;
 
 /**
  * @author Nguyen Tien Dung Otten
@@ -35,9 +35,12 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 	
 	Navigator navigator;
 	DatabaseConnector connector;
-	static TSNumberMapping mapping = new TSNumberMapping();
 	static Component activeComp;
+	static Layout tab;
 	Component newComp;
+	
+	long auftragsnummer;
+	TransferAuftragsID tfAuftragsID = new TransferAuftragsID();
 	
 	TSAuftragsdaten tsAuftragsdaten = new TSAuftragsdaten();
 	TSVerstorbener tsVerstorbener = new TSVerstorbener();
@@ -57,7 +60,7 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 	VerticalLayout tab6 = new VerticalLayout();
 	VerticalLayout tab7 = new VerticalLayout();
 	
-	public SFVAnzeigen(Navigator navigator, DataController dataController) {
+	public SFVAnzeigen(Navigator navigator) {
 		this.navigator = navigator;
 		this.setMargin(true);
 		this.addComponent(new ApplicationHeader(navigator));
@@ -85,7 +88,7 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 					@Override
 					public void selectedTabChange(SelectedTabChangeEvent event) {
 						TabSheet tabsheet = event.getTabSheet();
-						Layout tab = (Layout) tabsheet.getSelectedTab();
+						tab = (Layout) tabsheet.getSelectedTab();
 						
 						//Get caption from tab to call appropriate classes
 						String tabCaption = tabsheet.getTab(tab).getCaption();
@@ -129,36 +132,9 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 
 					}
 				});
-				
-			tabsheet.addComponent(activeComp);
-			this.addComponent(tabsheet);
+			
+//			tabsheet.addComponent(activeComp);
+			this.addComponents(tabsheet);
 	}
-	
-//	// Dummy Class to access non-static method 'switchTabSheet' from inside method 'selectedTabChange'
-//	public static void callSwitchMethod() {
-//		DataController dataConnector = null;
-//		Navigator navigator = null;
-//		new SFVAnzeigen(navigator, dataConnector).switchTabSheet();
-//	}
-	
-//	public void switchTabSheet() {
-//		// If current TabSheet is not 1 anymore -> has been switched
-//		switch(tsNumber) {
-//			case 2:
-//				newComp = tsVerstorbener.init(true);
-//				this.replaceComponent(activeComp, newComp);
-//				activeComp = newComp;
-//				System.out.print("I am here!!");
-//				break;
-//			case 3:
-//				newComp = tsAuftraggeber.init(true);
-//				this.replaceComponent(activeComp, newComp);
-//				break;
-//			default:
-//				Notification.show("Ok this doesn't seem work at all.. Amazing!");
-//				System.out.println("uffffff");
-//				System.out.println(tsNumber);
-//		}
-//	}
 
 }

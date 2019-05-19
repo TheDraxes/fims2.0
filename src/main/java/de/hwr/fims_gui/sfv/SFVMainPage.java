@@ -13,6 +13,8 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.ListSelect;
+import com.vaadin.ui.MultiSelect;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.SingleSelect;
 import com.vaadin.ui.TextField;
@@ -25,6 +27,9 @@ import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.interfaces.HasName;
 import de.hwr.fims_gui.main.ApplicationHeader;
+import de.hwr.fims_gui.sfv.tabsheet.TSAuftragsdaten;
+import de.hwr.fims_gui.sfv.tabsheet.TSVerstorbener;
+import de.hwr.fims_gui.sfv.tabsheet.TransferAuftragsID;
 import de.hwr.tests.PersonTest;
 
 @Theme("mytheme")
@@ -32,8 +37,11 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 
 	private Navigator navigator;
 	String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
-
-
+	
+	// Displayed content on TabSheet depends on this ID
+	public long auftragsnummer; 
+	TSAuftragsdaten tsAuftragsdaten = new TSAuftragsdaten();
+	TSVerstorbener tsVerstorbener = new TSVerstorbener();
 	
 	public SFVMainPage(Navigator navigator) {
 		this.navigator = navigator;
@@ -65,22 +73,29 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		ArrayList<TabData> sfvList = new ArrayList<TabData>();
 		sfvList.addAll(dbConnector.getDataForTable());
 		
-//		List<PersonTest> sfvList = new ArrayList<>();
-//		sfvList.add(new PersonTest(1, "Nguyen Tien Dung", "Otten", "23.04.2011"));
-//		sfvList.add(new PersonTest(2, "Daniel", "Schützler", "24.04.2020"));
-		
 		Grid<TabData> sfvGrid = new Grid<>(TabData.class);
 		sfvGrid.setItems(sfvList);
 		sfvGrid.setWidth(70, Unit.PERCENTAGE);
 		sfvGrid.setColumns("auftragsnummer", "vorname", "name", "sterbedatum");
 		sfvGrid.addSelectionListener(listener -> {
 		    SingleSelect<TabData> selection = sfvGrid.asSingleSelect();
-		    Notification.show(selection.getValue().getVorname() + " " + selection.getValue().getName()+ " ausgewählt");
+		    Notification.show(selection.getValue().getVorname() + " " + selection.getValue().getName()+ " ausgewählt");   
 		    searchTF.setValue(selection.getValue().getName());
+		    this.auftragsnummer = selection.getValue().getAuftragsnummer();
+		    
 		});
 		sfvGrid.addItemClickListener(listener -> {
 			if (listener.getMouseEventDetails().isDoubleClick()) {
-				navigator.navigateTo(FimsUI.SFV_DISPLAY_VIEW); //interne Übergabe der Auftragsnummer
+			    
+				// Doesn't work due to how Vaadin works but this is how it should work if it were possible
+				/*
+				 
+				tsAuftragsdaten.insertData(this.auftragsnummer);
+				tsVerstorbener.insertData(this.auftragsnummer);
+				
+				*/
+				
+				navigator.navigateTo(FimsUI.SFV_DISPLAY_VIEW); 
 			}
 		});
 		

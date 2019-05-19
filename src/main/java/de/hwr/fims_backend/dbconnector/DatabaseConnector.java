@@ -139,8 +139,10 @@ public class DatabaseConnector implements IDatabase {
 			
 			sql1 = "SELECT ID_verstorbene, geschlecht, name, vorname, plz, ort_ID, strasse, hausNr, "
 					+ "geburtsdatum, geburtsort_ID, todesdatum, todesort_ID, familienstand, anz_sohn, "
-					+ "anz_tochter, konfession, krankenkasse, rentenvers FROM verstorbene;";
-			sql2 = "SELECT ID_auftrag, niederlassung, rechnungsdatum, zahlungsdatum FROM auftraege;";
+					+ "anz_tochter, beruf, konfession, krankenkasse, rentenvers "
+					+ "FROM verstorbene;";
+			sql2 = "SELECT ID_auftrag, niederlassung, rechnungsdatum, zahlungsdatum "
+					+ "FROM auftraege;";
 			
 			ResultSet rs1 = stmtVerstorbene.executeQuery(sql1);
 			ResultSet rs2 = stmtAuftrag.executeQuery(sql2);
@@ -154,10 +156,25 @@ public class DatabaseConnector implements IDatabase {
 //				boolean geschlecht = rs1.getBoolean("geschlecht"); // enum to boolean???
 				String name = rs1.getString("name");
 				String vorname = rs1.getString("vorname");
-				String plz = rs1.getString("plz")
-;				int ort_ID = rs1.getInt("ort_ID"); // int to String???
+				String plz = rs1.getString("plz");				
+				
+				int ort_ID = rs1.getInt("ort_ID"); // int to String???
+				String ort_String = "";
+				switch(ort_ID) {
+					case 1: 
+						ort_String = "Schwerin";
+						break;
+					case 2:
+						ort_String = "Berlin";
+						break;
+					case 3:
+						ort_String = "Rostock";
+						break;
+				}
+
 				String strasse = rs1.getString("strasse");
 				String hausNr = rs1.getString("hausNr");
+				String beruf = rs1.getString("beruf");
 				Date geburtsdatum = rs1.getDate("geburtsdatum");
 //				int geburtsort_ID = rs1.getInt("geburtsort_ID"); // int to String???
 				Date todesdatum = rs1.getDate("todesdatum");
@@ -169,7 +186,7 @@ public class DatabaseConnector implements IDatabase {
 				String krankenkasse = rs1.getString("krankenkasse");
 				String rentenvers = rs1.getString("rentenvers");
 				
-				verstorbenerRS.add(new Verstorbener(false, name, vorname, null, null, null, null, null, null, null, null, null, null, null, anz_sohn, anz_tochter, null, null, null));
+				verstorbenerRS.add(new Verstorbener(false, name, vorname, plz, ort_String, strasse, hausNr, beruf, null, null, null, null, null, null, anz_sohn, anz_tochter, null, null, null));
 			}
 				
 			int countRows = 0;	
@@ -178,7 +195,7 @@ public class DatabaseConnector implements IDatabase {
 				String niederlassung = rs2.getString("niederlassung");
 				Date rechnDatum = rs2.getDate("rechnungsdatum");
 				Date zahlDatum = rs2.getDate("zahlungsdatum");
-				System.out.println(countRows);
+//				System.out.println(countRows);
 				countRows++;
 				
 				// Only works if the relation between 'Auftraege 'and 'Verstorbene' is 1:1
@@ -192,8 +209,8 @@ public class DatabaseConnector implements IDatabase {
 			e.printStackTrace();
 		}
 				
-		System.out.println(auftragRS.get(1).getNiederL());
-		System.out.println(auftragRS.get(1).getVerstorbener().getName());
+//		System.out.println(auftragRS.get(1).getNiederL());
+//		System.out.println(auftragRS.get(1).getVerstorbener().getName());
 		return auftragRS;
 	}
 
