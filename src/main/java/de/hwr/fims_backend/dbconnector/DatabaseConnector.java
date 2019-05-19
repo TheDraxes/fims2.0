@@ -213,13 +213,8 @@ public class DatabaseConnector implements IDatabase {
 			e.printStackTrace();
 		}
 				
-<<<<<<< HEAD
 //		System.out.println(auftragRS.get(1).getNiederL());
 //		System.out.println(auftragRS.get(1).getVerstorbener().getName());
-=======
-		//System.out.println(auftragRS.get(1).getNiederL());
-		//System.out.println(auftragRS.get(1).getVerstorbener().getName());
->>>>>>> 7f251a0ef376a7ca1980f42f71650253815c1551
 		return auftragRS;
 	}
 
