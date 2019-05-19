@@ -7,8 +7,10 @@ import com.vaadin.ui.DateField;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.hwr.fims_backend.controller.DataController;
@@ -103,7 +105,24 @@ public class VerstorbenerRMLayout extends RoadMapPart {
 	}
 
 	public Verstorbener safeData() {
-		Verstorbener verst = new Verstorbener(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), ConvertHelper.extractStreet(str_hnr.getValue()), ConvertHelper.extractHNR(str_hnr.getValue()), beruf.getValue(), "", ConvertHelper.convertVaadinDate(geburt.getValue()), (String)geburtsOrt.getValue(), ConvertHelper.convertVaadinDate(tod.getValue()), (String) todOrt.getValue(), (String)familienstand.getValue(), Integer.parseInt(anzahlKinder.getValue()), 0, (String)konfession.getValue(),(String) krankenkasse.getValue(), (String)rentenversicherung.getValue());
+		String strasse = ConvertHelper.extractStreet(str_hnr.getValue());
+		String hNR = ConvertHelper.extractHNR(str_hnr.getValue());
+		if(strasse.equals("") || hNR.equals("")) {
+			Notification.show("Fehler", "Geben sie Straße und Hausnummer mit ',' getrennt ein!", Type.ASSISTIVE_NOTIFICATION.WARNING_MESSAGE);
+			return null;
+		}
+		
+		int anzahlKinderInt = 0;
+		
+		if(!(anzahlKinder.getValue() == null && anzahlKinder.getValue().equals(""))) {
+			try {
+				anzahlKinderInt = Integer.parseInt(anzahlKinder.getValue());
+			} catch (Exception e){
+				Notification.show("Fehler", "anzahl der Kinder nicht richtig eingegeben", Type.ASSISTIVE_NOTIFICATION.WARNING_MESSAGE);
+				return null;
+			}
+		}
+		Verstorbener verst = new Verstorbener(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), strasse, hNR, beruf.getValue(), "", ConvertHelper.convertVaadinDate(geburt.getValue()), (String)geburtsOrt.getValue(), ConvertHelper.convertVaadinDate(tod.getValue()), (String) todOrt.getValue(), (String)familienstand.getValue(), anzahlKinderInt, 0, (String)konfession.getValue(),(String) krankenkasse.getValue(), (String)rentenversicherung.getValue());
 		return verst;
 	}
 

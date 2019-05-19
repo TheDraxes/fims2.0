@@ -243,6 +243,9 @@ public class DatabaseConnector implements IDatabase {
 //		System.out.println(auftragRS.get(1).getNiederL());
 //		System.out.println(auftragRS.get(1).getVerstorbener().getName());
 
+				
+//		System.out.println(auftragRS.get(1).getNiederL());
+//		System.out.println(auftragRS.get(1).getVerstorbener().getName());
 		return auftragRS;
 	}
 

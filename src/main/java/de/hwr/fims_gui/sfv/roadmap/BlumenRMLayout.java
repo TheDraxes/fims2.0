@@ -3,6 +3,7 @@ package de.hwr.fims_gui.sfv.roadmap;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
@@ -78,7 +79,15 @@ public class BlumenRMLayout extends RoadMapPart {
 	}
 
 	public Blumenarrangement safeData() {
-		Blumenarrangement blumenargangement = new Blumenarrangement(bemerkung.getValue(), Double.parseDouble(preis.getValue()));
+		double preisd = 0;
+		try {
+			preisd = Double.parseDouble(preis.getValue());
+		} catch(Exception e) {
+			Notification.show("Fehler", "Preis wurde nicht richtig eingegeben! Komma muss als Punkt geschrieben werden", Notification.TYPE_WARNING_MESSAGE);
+			return null;
+		}
+		
+		Blumenarrangement blumenargangement = new Blumenarrangement(bemerkung.getValue(), preisd);
 		return blumenargangement;
 	}
 

@@ -6,7 +6,9 @@ import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.Notification.Type;
 
 import de.hwr.fims_backend.controller.DataController;
 import de.hwr.fims_backend.data.customerdata.Auftraggeber;
@@ -91,7 +93,10 @@ public class AuftraggeberRMLayout extends RoadMapPart {
 	public Auftraggeber safeData() {
 		String strasse = ConvertHelper.extractStreet(str_hnr.getValue());
 		String hNR = ConvertHelper.extractHNR(str_hnr.getValue());
-		
+		if(strasse.equals("") || hNR.equals("")) {
+			Notification.show("Fehler", "Geben sie Straße und Hausnummer mit ',' getrennt ein!", Type.ASSISTIVE_NOTIFICATION.WARNING_MESSAGE);
+			return null;
+		}
 		return new Auftraggeber(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), strasse, hNR, beruf.getValue(), beziehung.getValue(), telefon.getValue());
 	}
 
