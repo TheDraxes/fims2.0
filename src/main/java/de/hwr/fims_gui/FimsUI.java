@@ -66,7 +66,7 @@ public class FimsUI extends UI {
         	navigator.navigateTo(MAIN_VIEW);
         } else {
         	VaadinSession.getCurrent().getSession().setMaxInactiveInterval( ( int ) TimeUnit.MINUTES.toSeconds( 240 ) );
-        	navigator.navigateTo(SFV_MAIN_VIEW);
+        	navigator.navigateTo(LOGIN_VIEW);
         }
 	}
 	

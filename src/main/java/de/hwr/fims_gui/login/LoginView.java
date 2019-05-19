@@ -63,7 +63,7 @@ public class LoginView extends VerticalLayout implements View, HasName {
         fimsLogoImage.setResponsive(true);
         Responsive.makeResponsive(fimsLogoImage);
 		
-        FileResource textLogoRessource = new FileResource(new File(basepath + "/WEB-INF/res/MyWayBestattungenlogo.png"));
+        FileResource textLogoRessource = new FileResource(new File(basepath + "/WEB-INF/res/MyWayBestattungenLogo.png"));
         Image textLogoImage = new Image("", textLogoRessource);
         textLogoImage.setHeight(150, Unit.PIXELS);
         textLogoImage.setResponsive(true);
