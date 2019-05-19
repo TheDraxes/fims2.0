@@ -8,11 +8,12 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextField;
 
+import de.hwr.fims_backend.dbconnector.DatabaseConnector;
+
 public class TSAuftraggeber {
 	
 	GridLayout layout = new GridLayout(5, 5);
-	//Pflichtfelder
-	ComboBox ort = new ComboBox();
+	ComboBox<String> ort = new ComboBox<String>();
 	
 	TextField name = new TextField();
 	TextField surname = new TextField();
@@ -23,6 +24,9 @@ public class TSAuftraggeber {
 	TextField telefon = new TextField();
 	TextField beziehung = new TextField();
 	
+	// To retrieve data
+	DatabaseConnector connector = new DatabaseConnector();
+		
 	public GridLayout init(boolean isReadable) {
 	
 	// Set properties
@@ -61,10 +65,24 @@ public class TSAuftraggeber {
 	layout.addComponent(plz, 	   0, 1);
 	layout.addComponent(ort,	   1, 1);
 	layout.addComponent(str_hnr,   2, 1,3,1);
-	Notification.show("Hier sollten Auftraggeberdaten stehen :)");
-		
+	
+	// Insert default values for auftragsID = 1
+	name.setValue(connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getName());
+	surname.setValue(connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getVorname());
+	plz.setValue(connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getPlz());
+	ort.setValue(connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getOrt());
+	str_hnr.setValue(connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getStrasse()
+			+ " "
+			+ connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getHausNr());
+	telefon.setValue(connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getTelefonNr());
+	beziehung.setValue(connector.getAuftraegeFromDatabase().get(0).getAuftraggeber().getBezArt());
+	
 	return layout;
 		
 	}
-
+	
+	// Doesn't work
+	public void insertData(long auftragsID) {
+		
+	}
 }

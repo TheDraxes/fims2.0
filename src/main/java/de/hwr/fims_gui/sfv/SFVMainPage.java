@@ -27,6 +27,7 @@ import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.interfaces.HasName;
 import de.hwr.fims_gui.main.ApplicationHeader;
+import de.hwr.fims_gui.sfv.tabsheet.TSAuftraggeber;
 import de.hwr.fims_gui.sfv.tabsheet.TSAuftragsdaten;
 import de.hwr.fims_gui.sfv.tabsheet.TSVerstorbener;
 import de.hwr.fims_gui.sfv.tabsheet.TransferAuftragsID;
@@ -42,6 +43,7 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 	public long auftragsnummer; 
 	TSAuftragsdaten tsAuftragsdaten = new TSAuftragsdaten();
 	TSVerstorbener tsVerstorbener = new TSVerstorbener();
+	TSAuftraggeber tsAuftraggeber = new TSAuftraggeber();
 	
 	public SFVMainPage(Navigator navigator) {
 		this.navigator = navigator;
@@ -92,6 +94,7 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 				 
 				tsAuftragsdaten.insertData(this.auftragsnummer);
 				tsVerstorbener.insertData(this.auftragsnummer);
+				tsAuftraggeber.insertData(this.auftragsnummer);
 				
 				*/
 				

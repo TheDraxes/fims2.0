@@ -10,6 +10,7 @@ import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 
 public class TSAuftragsdaten {
 	
+	// To retrieve data
 	DatabaseConnector connector = new DatabaseConnector();
 	
 	GridLayout layout = new GridLayout(1, 1);
@@ -31,6 +32,7 @@ public class TSAuftragsdaten {
 		return layout;
 	}
 	
+	// Doesn't work
 	public void insertData(long auftragsID) {
 		auftragsnummer.setValue(Long.toString(connector.getAuftraegeFromDatabase().get((int) auftragsID).getAuftragNr()));
 	}

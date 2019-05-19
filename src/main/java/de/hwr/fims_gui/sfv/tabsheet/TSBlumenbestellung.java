@@ -50,9 +50,7 @@ public class TSBlumenbestellung {
 		
 		//3rd line
 		layout.addComponent(bemerkung,     0, 2, 2, 3);
-		
-		Notification.show("Hier sollten Blumenbestellungsdaten stehen :)");
-		
+				
 		return layout;
 		
 	}

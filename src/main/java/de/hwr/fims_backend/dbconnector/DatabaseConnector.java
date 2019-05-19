@@ -9,6 +9,7 @@ import de.hwr.fims_backend.controller.LoginController;
 import de.hwr.fims_backend.data.TabData;
 import de.hwr.fims_backend.data.advertisement.Zeitungsanzeige;
 import de.hwr.fims_backend.data.customerdata.Auftrag;
+import de.hwr.fims_backend.data.customerdata.Auftraggeber;
 import de.hwr.fims_backend.data.customerdata.Verstorbener;
 
 
@@ -19,10 +20,15 @@ import de.hwr.fims_backend.data.customerdata.Verstorbener;
 public class DatabaseConnector implements IDatabase {
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    static final String USER = "fims";
-    static final String PASS = "fims";
-
+//    static final String DB_URL = "jdbc:mysql://127.0.0.1/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+//    static final String USER = "fims";
+//    static final String PASS = "fims";
+    
+    // Lokal
+    static final String DB_URL = "jdbc:mysql://localhost/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String USER = "root";
+    static final String PASS = "";
+    
     Connection conn;
     
     public ResultBoolean dbConnection(String sql) {
@@ -128,32 +134,36 @@ public class DatabaseConnector implements IDatabase {
 	@Override
 	public ArrayList<Auftrag> getAuftraegeFromDatabase() {
 		ArrayList<Verstorbener> verstorbenerRS = new ArrayList<Verstorbener>();
+		ArrayList<Auftraggeber> auftraggeberRS = new ArrayList<Auftraggeber>();
 		ArrayList<Auftrag> auftragRS = new ArrayList<Auftrag>();
 		
 		Statement stmtVerstorbene;
+		Statement stmtAuftraggeber;
 		Statement stmtAuftrag;
 		
 		String sql1; // Select Verstorbene
-		String sql2; // Select Aufträge
+		String sql2; // Select Auftraggeber
+		String sql3; // Select Auftraege
 		
 		try {
-			stmtAuftrag = conn.createStatement();
 			stmtVerstorbene = conn.createStatement();
+			stmtAuftraggeber = conn.createStatement();
+			stmtAuftrag = conn.createStatement();
 			
 			sql1 = "SELECT ID_verstorbene, geschlecht, name, vorname, plz, ort_ID, strasse, hausNr, "
 					+ "geburtsdatum, geburtsort_ID, todesdatum, todesort_ID, familienstand, anz_sohn, "
 					+ "anz_tochter, beruf, konfession, krankenkasse, rentenvers "
 					+ "FROM verstorbene;";
-			sql2 = "SELECT ID_auftrag, niederlassung, rechnungsdatum, zahlungsdatum "
+			sql2 = "SELECT ID_auftraggeber, geschlecht, name, vorname, plz, ort_ID, strasse, hausNr, beziehungsart, telefonNr "
+					+ "FROM auftraggeber;";
+			sql3 = "SELECT ID_auftrag, niederlassung, rechnungsdatum, zahlungsdatum "
 					+ "FROM auftraege;";
 			
 			ResultSet rs1 = stmtVerstorbene.executeQuery(sql1);
-			ResultSet rs2 = stmtAuftrag.executeQuery(sql2);
+			ResultSet rs2 = stmtAuftraggeber.executeQuery(sql2);
+			ResultSet rs3 = stmtAuftrag.executeQuery(sql3);
 			
-			ResultSetMetaData rsmd2 = rs2.getMetaData();
-			int columnNumber = rsmd2.getColumnCount();
-			System.out.println(columnNumber);
-			
+			// Retrieve columns in 'verstorbene' by name 
 			while(rs1.next()) {
 				int ID_verstorbene = rs1.getInt("ID_Verstorbene");
 //				boolean geschlecht = rs1.getBoolean("geschlecht"); // enum to boolean???
@@ -217,20 +227,55 @@ public class DatabaseConnector implements IDatabase {
 				String krankenkasse = rs1.getString("krankenkasse");
 				String rentenvers = rs1.getString("rentenvers");
 				
+				// sex default value
 				verstorbenerRS.add(new Verstorbener(false, name, vorname, plz, ort_String, strasse, hausNr, beruf, null, geburtsdatum, geburtsort_String, todesdatum, todesort_String, familienstand, anz_sohn, anz_tochter, konfession, krankenkasse, rentenvers));
 			}
-				
-			int countRows = 0;	
+			
+			// Retrieve column in 'auftraggeber' by name
 			while(rs2.next()) {
-				int ID_auftrag = rs2.getInt("ID_auftrag");
-				String niederlassung = rs2.getString("niederlassung");
-				Date rechnDatum = rs2.getDate("rechnungsdatum");
-				Date zahlDatum = rs2.getDate("zahlungsdatum");
+				int ID_auftraggeber = rs2.getInt("ID_auftraggeber");
+//				boolean geschlecht = rs2.getBoolean("geschlecht"); // enum to boolean???
+				String name = rs2.getString("name");
+				String vorname = rs2.getString("vorname");
+				String plz = rs2.getString("plz");				
+				
+				int ort_ID = rs2.getInt("ort_ID"); 
+				String ort_String = "";
+				switch(ort_ID) {
+					case 1: 
+						ort_String = "Schwerin";
+						break;
+					case 2:
+						ort_String = "Berlin";
+						break;
+					case 3:
+						ort_String = "Rostock";
+						break;
+				}
+
+				String strasse = rs2.getString("strasse");
+				String hausNr = rs2.getString("hausNr");
+				String beziehungsart = rs2.getString("beziehungsart");
+				String telefonNr = rs2.getString("telefonNr");
+				// 'beruf' is missing
+				
+				// sex default value
+				auftraggeberRS.add(new Auftraggeber(false, name, vorname, plz, ort_String, strasse, hausNr, null, beziehungsart, telefonNr));
+			}
+			
+			// Retrieve columns in 'auftraege' by name
+			int countRows = 0;	
+			while(rs3.next()) {
+				int ID_auftrag = rs3.getInt("ID_auftrag");
+				String niederlassung = rs3.getString("niederlassung");
+				Date rechnDatum = rs3.getDate("rechnungsdatum");
+				Date zahlDatum = rs3.getDate("zahlungsdatum");
 //				System.out.println(countRows);
 				countRows++;
 				
-				// Only works if the relation between 'Auftraege 'and 'Verstorbene' is 1:1
-				auftragRS.add(new Auftrag(ID_auftrag, niederlassung, rechnDatum, zahlDatum, null, null, null, null, verstorbenerRS.get(countRows), null));
+				// Only works if the relation between 'Auftraege and 'Verstorbene' is 1:1
+				// Using default value for auftraggeber row -> 1:1 relation between 'Auftraege' and 'Verstorbene' is also necessary
+				auftragRS.add(new Auftrag(ID_auftrag, niederlassung, rechnDatum, zahlDatum, null, null, auftraggeberRS.get(0), null, verstorbenerRS.get(countRows), null));
 			}
 			stmtVerstorbene.close();
 			stmtAuftrag.close();

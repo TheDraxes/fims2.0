@@ -130,6 +130,15 @@ public class TSVerstorbener {
 		layout.addComponent(konfession,        2, 4);
 		
 		// Insert default values for auftragsID = 1
+		String geschlString;
+		boolean isGeschlecht = connector.getAuftraegeFromDatabase().get(0).getVerstorbener().isGeschlecht();
+		if(isGeschlecht == true) {
+			geschlString = "Frau";
+		} else {
+			geschlString = "Herr";
+		}
+		geschlGroup.setValue(geschlString);
+		
 		name.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getName());
 		surname.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getVorname());
 		anzahlKinder.setValue(Integer.toString(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getAnzSohn()
@@ -165,32 +174,13 @@ public class TSVerstorbener {
 	      .toLocalDate();
 	}
 	
+	// Doesn't work
 	public void insertData(long auftragsID) {
-		// geschlecht enum -> boolean???
-		name.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getName());
-		surname.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getVorname());
-		anzahlKinder.setValue(Integer.toString(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getAnzSohn()
-				+ connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getAnzTocht()));
-		plz.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getPlz());
-		ort.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getOrt());
-		str_hnr.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getStrasse()
-				+ " "
-				+ connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getHausNr());
-		
-		Date gebDatum = connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getGebDatum();
-		geburt.setValue(convertToLocalDateViaMilisecond(gebDatum));
-		
-		geburtsOrt.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getGebOrt());
-		
-		Date todDatum = connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getTodDatum();
-		tod.setValue(convertToLocalDateViaMilisecond(todDatum));
-
-		todOrt.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getTodOrt());
-		beruf.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getBeruf());
-		familienstand.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getFamStand());
-		krankenkasse.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getKrankKas());
-		rentenversicherung.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getRenteVers());
-		konfession.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getKonfes());
+//		name.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getName());
+//		surname.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getVorname());
+//		anzahlKinder.setValue(Integer.toString(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getAnzSohn()
+//				+ connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getAnzTocht()));
+//		plz.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getPlz());
 
 	}
 

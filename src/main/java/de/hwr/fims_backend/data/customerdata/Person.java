@@ -68,7 +68,7 @@ public abstract class Person implements Serializable{
 		
 		
 	//Getter & Setter
-	
+		
 		//NAME
 		public String getName() {
 			return name;

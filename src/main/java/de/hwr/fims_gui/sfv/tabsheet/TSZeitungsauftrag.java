@@ -9,8 +9,6 @@ public GridLayout init(boolean isReadble) {
 		
 		GridLayout layout = new GridLayout(4, 4);
 		
-		Notification.show("Hier sollten Zeitungsauftragsdaten stehen :)");
-		
 		return layout;
 		
 	}
