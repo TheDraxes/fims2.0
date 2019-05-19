@@ -30,6 +30,8 @@ public class FimsUI extends UI {
 	Navigator navigator;
 	DatabaseConnector connector;
 	
+	long auftragsnummer;
+	
     public static final String LOGIN_VIEW = "Login";
     public static final String MAIN_VIEW = "Start";
     public static final String SFV_CREATE_VIEW = "SF erstellen";
@@ -55,7 +57,7 @@ public class FimsUI extends UI {
         navigator.addView(MAIN_VIEW, new CompleteUI(new StartPageView(navigator, connector)));
         navigator.addView(SFV_CREATE_VIEW, new CompleteUI(new SFVCreateView(navigator, dataController)));
         navigator.addView(SFV_MAIN_VIEW, new CompleteUI(new SFVMainPage(navigator)));
-        navigator.addView(SFV_DISPLAY_VIEW, new CompleteUI(new SFVAnzeigen(navigator, dataController)));
+        navigator.addView(SFV_DISPLAY_VIEW, new CompleteUI(new SFVAnzeigen(navigator)));
         
         
         
@@ -66,6 +68,13 @@ public class FimsUI extends UI {
         	VaadinSession.getCurrent().getSession().setMaxInactiveInterval( ( int ) TimeUnit.MINUTES.toSeconds( 240 ) );
         	navigator.navigateTo(LOGIN_VIEW);
         }
+	}
+	
+	public long setAuftragsnummer() {
+		SFVMainPage mainpage = new SFVMainPage(navigator);
+		this.auftragsnummer = mainpage.auftragsnummer;
+        System.out.println("Schau mal: " + this.auftragsnummer);
+		return this.auftragsnummer;
 	}
 	
 	@WebServlet(urlPatterns = "/*", name = "UIServlet")

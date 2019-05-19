@@ -16,6 +16,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -49,6 +50,9 @@ public class StartPageView extends VerticalLayout implements View, HasName {
 		buttonWV.addStyleName("bigButton");
 		buttonWV.addStyleName("Button");
 		buttonWV.addStyleName("WVButton");
+		buttonWV.addClickListener(e -> {
+			Notification.show("Currently not available", Notification.TYPE_WARNING_MESSAGE);
+		});
 		
 		layout.addComponents(buttonSFV, buttonWV);
 		layout.setSpacing(true);

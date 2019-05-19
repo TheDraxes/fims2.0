@@ -1,5 +1,10 @@
 package de.hwr.fims_gui.sfv.tabsheet;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.Date;
+
 import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
@@ -8,6 +13,9 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
+
+import de.hwr.fims_backend.dbconnector.DatabaseConnector;
+import de.hwr.fims_gui.sfv.SFVMainPage;
 
 /**
  * @author Nguyen Tien Dung Otten
@@ -35,6 +43,9 @@ public class TSVerstorbener {
 	TextField plz = new TextField();
 	TextField str_hnr = new TextField();
 	TextField beruf = new TextField();
+	
+	// To retrieve data
+	DatabaseConnector connector = new DatabaseConnector();
 	
 	public GridLayout init(boolean isReadable) {
 		
@@ -116,11 +127,37 @@ public class TSVerstorbener {
 		layout.addComponent(rentenversicherung,1, 4);
 		layout.addComponent(konfession,        2, 4);
 		
+		// Insert default values for auftragsID = 1
+		name.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getName());
+		surname.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getVorname());
+		anzahlKinder.setValue(Integer.toString(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getAnzSohn()
+				+ connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getAnzTocht()));
+		plz.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getPlz());
+		ort.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getOrt());
+		str_hnr.setValue(connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getStrasse()
+				+ " "
+				+ connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getHausNr());
 		
-		Notification.show("Hier sollten Verstorbenendaten stehen :)");
+		Date gebDatum = connector.getAuftraegeFromDatabase().get(0).getVerstorbener().getGebDatum();
+//		gebDatum.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 		
 		return layout;
 		
+	}
+	
+	public void insertData(long auftragsID) {
+		// geschlecht enum -> boolean???
+		name.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getName());
+		surname.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getVorname());
+		anzahlKinder.setValue(Integer.toString(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getAnzSohn()
+				+ connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getAnzTocht()));
+		plz.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getPlz());
+		ort.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getOrt());
+		str_hnr.setValue(connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getStrasse()
+				+ " "
+				+ connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getHausNr());
+		Date gebDatum = connector.getAuftraegeFromDatabase().get((int) auftragsID).getVerstorbener().getGebDatum();
+//		gebDatum.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 
 }
