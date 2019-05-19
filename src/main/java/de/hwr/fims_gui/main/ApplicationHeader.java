@@ -35,7 +35,7 @@ public class ApplicationHeader extends HorizontalLayout implements View {
 		this.setWidth(100,Unit.PERCENTAGE);
 		
 		//FimsImage
-		FileResource fimsLogoRessource = new FileResource(new File(basepath + "/WEB-INF/res/MyWayBestattungenlogo.png"));
+		FileResource fimsLogoRessource = new FileResource(new File(basepath + "/WEB-INF/res/MyWayBestattungenLogo.png"));
         Image fimsLogoImage = new Image("", fimsLogoRessource);
         fimsLogoImage.setHeight(80, Unit.PIXELS);
         fimsLogoImage.setResponsive(true);

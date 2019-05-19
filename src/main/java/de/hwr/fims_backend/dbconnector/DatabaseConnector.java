@@ -19,10 +19,10 @@ import de.hwr.fims_backend.data.customerdata.Verstorbener;
 public class DatabaseConnector implements IDatabase {
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-    static final String USER = "root";
-    static final String PASS = "";
+    static final String USER = "fims";
+    static final String PASS = "fims";
 
     Connection conn;
     
@@ -52,6 +52,7 @@ public class DatabaseConnector implements IDatabase {
     
     public DatabaseConnector() {
         try {
+        	Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
@@ -59,7 +60,10 @@ public class DatabaseConnector implements IDatabase {
             //Statement stmt = conn.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 
@@ -192,8 +196,8 @@ public class DatabaseConnector implements IDatabase {
 			e.printStackTrace();
 		}
 				
-		System.out.println(auftragRS.get(1).getNiederL());
-		System.out.println(auftragRS.get(1).getVerstorbener().getName());
+		//System.out.println(auftragRS.get(1).getNiederL());
+		//System.out.println(auftragRS.get(1).getVerstorbener().getName());
 		return auftragRS;
 	}
 

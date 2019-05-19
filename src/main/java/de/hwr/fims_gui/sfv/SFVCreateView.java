@@ -23,7 +23,7 @@ import de.hwr.fims_gui.sfv.roadmap.*;
 public class SFVCreateView extends VerticalLayout implements View {
 	
 	Navigator navigator;
-	DatabaseConnector connector;
+	DataController controller;
 	
 	Label spacing = new Label();
 	Label spacing2 = new Label();
@@ -42,7 +42,7 @@ public class SFVCreateView extends VerticalLayout implements View {
 	
 	public SFVCreateView (Navigator navigator, DataController controller) {
 		this.navigator = navigator;
-		this.connector = connector;
+		this.controller = controller;
 		this.mapping = new LayoutNumberMapping(controller);
 		this.setSpacing(false);
 		this.setMargin(false);
@@ -65,7 +65,7 @@ public class SFVCreateView extends VerticalLayout implements View {
 			boolean allFilled = mapping.allDataFilled().getAllFilled();
 			
 			if(allFilled) {
-				connector.insertAuftragToDatabase(mapping.safeAuftrag());
+				controller.insertAuftrag(mapping.safeAuftrag());
 				Notification not = new Notification(
 						"Geschafft!", 
 						"Eintrag wurde gespeichert!", 

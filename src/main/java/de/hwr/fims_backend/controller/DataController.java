@@ -242,4 +242,7 @@ public class DataController {
 	public void addAnzeigenart(String art) {
 		anzeigenart.add(art);
 	}
+	public void insertAuftrag(Auftrag auftrag) {
+		connector.insertAuftragToDatabase(auftrag);
+	}
 }
