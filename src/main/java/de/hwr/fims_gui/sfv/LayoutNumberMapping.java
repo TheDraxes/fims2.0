@@ -5,7 +5,15 @@ import java.util.Arrays;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
+import de.hwr.fims_backend.administration.Angehoerige;
+import de.hwr.fims_backend.administration.Zeitungsanzeigen;
 import de.hwr.fims_backend.controller.DataController;
+import de.hwr.fims_backend.data.customerdata.Auftrag;
+import de.hwr.fims_backend.data.customerdata.Auftraggeber;
+import de.hwr.fims_backend.data.customerdata.Verstorbener;
+import de.hwr.fims_backend.data.services.Abholung;
+import de.hwr.fims_backend.data.services.Blumenbestellung;
+import de.hwr.fims_backend.data.services.Trauerfeier;
 import de.hwr.fims_gui.sfv.roadmap.*;
 
 public class LayoutNumberMapping {
@@ -113,6 +121,42 @@ public class LayoutNumberMapping {
 		newArr[arr.length-1] = newEnt;
 		
 		return newArr;
+	}
+	
+	public Auftrag safeAuftrag() {
+		AbholungRMLayout ab = (AbholungRMLayout)comp4;
+		AngehörigeRMLayout ang = (AngehörigeRMLayout)comp3;
+		AuftraggeberRMLayout aufg = (AuftraggeberRMLayout)comp2;
+		BlumenRMLayout blum = (BlumenRMLayout)comp6;
+		TrauerfeierRMLayout trauer = (TrauerfeierRMLayout)comp5;
+		VerstorbenerRMLayout verst = (VerstorbenerRMLayout)comp1;
+		ZeitungRMLayout zeit = (ZeitungRMLayout)comp7;
+		
+		Abholung newAbholung= ab.safeData();
+		
+		Angehoerige angehoerige = new Angehoerige();
+		angehoerige.setFamilie(ang.safeData());
+		
+		Auftraggeber auftraggeber = aufg.safeData();
+		
+		Blumenbestellung bestellung = new Blumenbestellung();
+		bestellung.addElement(blum.safeData());
+		
+		Trauerfeier trauerfeier = trauer.safeData();
+		Verstorbener verstorbener = verst.safeData();
+		Zeitungsanzeigen zeitungsanzeigen = zeit.safeData();
+		
+		Auftrag newAuftrag = new Auftrag();
+		
+		newAuftrag.setAbholung(newAbholung);
+		newAuftrag.setAngehoerige(angehoerige);
+		newAuftrag.setAnzeigen(zeitungsanzeigen);
+		newAuftrag.setAuftraggeber(auftraggeber);
+		newAuftrag.setTrauerfeier(trauerfeier);
+		newAuftrag.setVerstorbener(verstorbener);
+		//newAuftrag.set   Blumenarr fehlt irgendwie?
+		
+		return newAuftrag;
 	}
 	
 	public Component getComp1() {

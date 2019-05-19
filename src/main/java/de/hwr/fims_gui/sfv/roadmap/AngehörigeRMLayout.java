@@ -19,6 +19,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.renderers.ButtonRenderer;
 
+import de.hwr.fims_backend.administration.Angehoerige;
 import de.hwr.fims_backend.controller.DataController;
 import de.hwr.fims_backend.data.customerdata.Angehoeriger;
 
@@ -130,12 +131,12 @@ public class AngehörigeRMLayout extends RoadMapPart {
 		}
 	}
 
-	public Angehoeriger safeData() {
+	public ArrayList<Angehoeriger> safeData() {
 		
 		String strasse = ConvertHelper.extractStreet(str_hnr.getValue());
 		String hNR = ConvertHelper.extractHNR(str_hnr.getValue());
 		
-		return new Angehoeriger(false, name.getValue(), surname.getValue(), plz.getValue(), (String) ort.getValue(), strasse, hNR, "", beziehung.getValue());
+		return angehoerige;
 	}
 
 	private void schowSubWindow() {

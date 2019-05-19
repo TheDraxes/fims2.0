@@ -65,6 +65,7 @@ public class SFVCreateView extends VerticalLayout implements View {
 			boolean allFilled = mapping.allDataFilled().getAllFilled();
 			
 			if(allFilled) {
+				connector.insertAuftragToDatabase(mapping.safeAuftrag());
 				Notification not = new Notification(
 						"Geschafft!", 
 						"Eintrag wurde gespeichert!", 
