@@ -20,14 +20,14 @@ import de.hwr.fims_backend.data.customerdata.Verstorbener;
 public class DatabaseConnector implements IDatabase {
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-//    static final String DB_URL = "jdbc:mysql://127.0.0.1/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-//    static final String USER = "fims";
-//    static final String PASS = "fims";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String USER = "fims";
+    static final String PASS = "fims";
     
-    // Lokal
-    static final String DB_URL = "jdbc:mysql://localhost/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    static final String USER = "root";
-    static final String PASS = "";
+//    // Lokal
+//    static final String DB_URL = "jdbc:mysql://localhost/fimsdatabase?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+//    static final String USER = "root";
+//    static final String PASS = "";
     
     Connection conn;
     
