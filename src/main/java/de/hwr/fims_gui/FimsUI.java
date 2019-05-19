@@ -48,13 +48,13 @@ public class FimsUI extends UI {
         //Create controllers to control databaseconnection
         connector = new DatabaseConnector(); // delete
         LoginController loginController = new LoginController();
-        DataController dataController = new DataController(connector);
+        DataController dataController = new DataController();
         
         // Create and register the views
         navigator.addView(LOGIN_VIEW, new CompleteUI(new LoginView(navigator, loginController)));
         navigator.addView(MAIN_VIEW, new CompleteUI(new StartPageView(navigator, connector)));
         navigator.addView(SFV_CREATE_VIEW, new CompleteUI(new SFVCreateView(navigator, dataController)));
-        navigator.addView(SFV_MAIN_VIEW, new CompleteUI(new SFVMainPage(navigator, connector)));
+        navigator.addView(SFV_MAIN_VIEW, new CompleteUI(new SFVMainPage(navigator)));
         navigator.addView(SFV_DISPLAY_VIEW, new CompleteUI(new SFVAnzeigen(navigator, dataController)));
         
         

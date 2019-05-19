@@ -5,7 +5,7 @@ import com.vaadin.ui.Notification;
 
 public class TSZeitungsauftrag {
 	
-public GridLayout init() {
+public GridLayout init(boolean isReadble) {
 		
 		GridLayout layout = new GridLayout(4, 4);
 		

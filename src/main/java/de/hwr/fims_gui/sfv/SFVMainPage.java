@@ -19,6 +19,8 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import de.hwr.fims_backend.data.TabData;
+import de.hwr.fims_backend.data.customerdata.Auftrag;
 import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 import de.hwr.fims_gui.FimsUI;
 import de.hwr.fims_gui.interfaces.HasName;
@@ -33,7 +35,7 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 
 
 	
-	public SFVMainPage(Navigator navigator, DatabaseConnector connector) {
+	public SFVMainPage(Navigator navigator) {
 		this.navigator = navigator;
 		this.setMargin(false);
 		
@@ -59,16 +61,20 @@ public class SFVMainPage extends VerticalLayout implements View, HasName {
 		topGroup.addComponent(searchTF);
 		topGroup.addComponent(searchButton);
 		
-		List<PersonTest> sfvList = new ArrayList<>();
-		sfvList.add(new PersonTest(1, "Nguyen Tien Dung", "Otten", "23.04.2011"));
-		sfvList.add(new PersonTest(2, "Daniel", "Schützler", "24.04.2020"));
+		DatabaseConnector dbConnector = new DatabaseConnector();
+		ArrayList<TabData> sfvList = new ArrayList<TabData>();
+		sfvList.addAll(dbConnector.getDataForTable());
 		
-		Grid<PersonTest> sfvGrid = new Grid<>(PersonTest.class);
+//		List<PersonTest> sfvList = new ArrayList<>();
+//		sfvList.add(new PersonTest(1, "Nguyen Tien Dung", "Otten", "23.04.2011"));
+//		sfvList.add(new PersonTest(2, "Daniel", "Schützler", "24.04.2020"));
+		
+		Grid<TabData> sfvGrid = new Grid<>(TabData.class);
 		sfvGrid.setItems(sfvList);
 		sfvGrid.setWidth(70, Unit.PERCENTAGE);
 		sfvGrid.setColumns("auftragsnummer", "vorname", "name", "sterbedatum");
 		sfvGrid.addSelectionListener(listener -> {
-		    SingleSelect<PersonTest> selection = sfvGrid.asSingleSelect();
+		    SingleSelect<TabData> selection = sfvGrid.asSingleSelect();
 		    Notification.show(selection.getValue().getVorname() + " " + selection.getValue().getName()+ " ausgewählt");
 		    searchTF.setValue(selection.getValue().getName());
 		});

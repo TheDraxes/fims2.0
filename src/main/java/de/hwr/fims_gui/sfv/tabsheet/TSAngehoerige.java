@@ -5,7 +5,7 @@ import com.vaadin.ui.Notification;
 
 public class TSAngehoerige {
 	
-public GridLayout init() {
+public GridLayout init(boolean isReadable) {
 		
 		GridLayout layout = new GridLayout(4, 4);
 		

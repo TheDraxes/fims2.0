@@ -1,7 +1,9 @@
 package de.hwr.fims_backend.dbconnector;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import de.hwr.fims_backend.data.TabData;
 import de.hwr.fims_backend.data.customerdata.Auftrag;
 
 public interface IDatabase {
@@ -9,6 +11,7 @@ public interface IDatabase {
     ResultBoolean pruefeLogin(String benutzername, String passwort);
     
     public ArrayList<Auftrag> getAuftraegeFromDatabase();
+    public ArrayList<TabData> getDataForTable();
     public boolean insertAuftragToDatabase(Auftrag auftrag);
     public boolean insertUserToDatabase(String username, String password);
     

@@ -12,9 +12,10 @@ public class TSAuftragsdaten {
 	
 	TextField auftragsnummer = new TextField();
 	
-	public GridLayout init() {
+	public GridLayout init(boolean isReadable) {
 	
 		auftragsnummer.setCaption("Auftragsnummer");
+		auftragsnummer.setReadOnly(isReadable);
 		
 		layout.setSpacing(true);
 		layout.addComponent(auftragsnummer, 0, 0);

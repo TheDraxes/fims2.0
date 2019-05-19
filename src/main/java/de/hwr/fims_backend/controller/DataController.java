@@ -10,7 +10,7 @@ import de.hwr.fims_backend.dbconnector.DatabaseConnector;
 
 public class DataController {
 	
-	ArrayList<Auftrag> auftraege= new ArrayList();
+	ArrayList<Auftrag> auftraege= new ArrayList<Auftrag>();
 	
 	ArrayList<Verstorbener> Verstorbene = new ArrayList<Verstorbener>();
 	ArrayList<Auftraggeber> Auftraggeber = new ArrayList<Auftraggeber>();
@@ -42,7 +42,7 @@ public class DataController {
 	
 	DatabaseConnector connector = new DatabaseConnector();
 	
-	public DataController(DatabaseConnector connector) {
+	public DataController() {
 		
 		init();
 		
@@ -64,7 +64,7 @@ public class DataController {
 				Angehörige.add(auftrag.getAngehoeriger());
 				Abholung.add(auftrag.getAbholung());
 				Trauerfeiern.add(auftrag.getTrauerfeier());
-				Zeitungsanzeigen.addAll(auftrag.getAnzeigen().getListe());
+				//Zeitungsanzeigen.addAll(auftrag.getAnzeigen().getListe());
 			}
 		}
 	}

@@ -21,13 +21,13 @@ public class TSVerstorbener {
 	DateField geburt = new DateField();
 	DateField tod = new DateField();
 	
-	ComboBox ort = new ComboBox();
-	ComboBox geburtsOrt = new ComboBox();
-	ComboBox familienstand = new ComboBox();
-	ComboBox todOrt = new ComboBox();
-	ComboBox krankenkasse = new ComboBox();
-	ComboBox rentenversicherung = new ComboBox();
-	ComboBox konfession = new ComboBox();
+	ComboBox<String> ort = new ComboBox<String>();
+	ComboBox<String> geburtsOrt = new ComboBox<String>();
+	ComboBox<String> familienstand = new ComboBox<String>();
+	ComboBox<String> todOrt = new ComboBox<String>();
+	ComboBox<String> krankenkasse = new ComboBox<String>();
+	ComboBox<String> rentenversicherung = new ComboBox<String>();
+	ComboBox<String> konfession = new ComboBox<String>();
 	
 	TextField name = new TextField();
 	TextField surname = new TextField();

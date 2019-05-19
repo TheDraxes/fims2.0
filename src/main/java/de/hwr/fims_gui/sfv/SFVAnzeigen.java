@@ -3,6 +3,7 @@ package de.hwr.fims_gui.sfv;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
@@ -21,14 +22,22 @@ import de.hwr.fims_gui.sfv.tabsheet.TSAngehoerige;
 import de.hwr.fims_gui.sfv.tabsheet.TSAuftraggeber;
 import de.hwr.fims_gui.sfv.tabsheet.TSAuftragsdaten;
 import de.hwr.fims_gui.sfv.tabsheet.TSBlumenbestellung;
+import de.hwr.fims_gui.sfv.tabsheet.TSNumberMapping;
 import de.hwr.fims_gui.sfv.tabsheet.TSTrauerfeier;
 import de.hwr.fims_gui.sfv.tabsheet.TSVerstorbener;
 import de.hwr.fims_gui.sfv.tabsheet.TSZeitungsauftrag;
 
+/**
+ * @author Nguyen Tien Dung Otten
+ *
+ */
 public class SFVAnzeigen extends VerticalLayout implements View {
 	
 	Navigator navigator;
 	DatabaseConnector connector;
+	static TSNumberMapping mapping = new TSNumberMapping();
+	static Component activeComp;
+	Component newComp;
 	
 	TSAuftragsdaten tsAuftragsdaten = new TSAuftragsdaten();
 	TSVerstorbener tsVerstorbener = new TSVerstorbener();
@@ -37,6 +46,8 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 	TSTrauerfeier tsTrauerfeier = new TSTrauerfeier();
 	TSBlumenbestellung tsBlumenbestellung = new TSBlumenbestellung();
 	TSZeitungsauftrag tsZeitungsauftrag = new TSZeitungsauftrag();
+	
+	TabSheet tabsheet = new TabSheet();
 	
 	VerticalLayout tab1 = new VerticalLayout();
 	VerticalLayout tab2 = new VerticalLayout();
@@ -50,8 +61,7 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 		this.navigator = navigator;
 		this.setMargin(true);
 		this.addComponent(new ApplicationHeader(navigator));
-		
-		TabSheet tabsheet = new TabSheet();
+		SFVAnzeigen.activeComp = tab1;
 		
 		tabsheet.addTab(tab1).setCaption("Auftragsdaten");
 		tabsheet.addTab(tab2).setCaption("Verstorbener");
@@ -60,6 +70,14 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 		tabsheet.addTab(tab5).setCaption("Trauerfeier");
 		tabsheet.addTab(tab6).setCaption("Blumenbestellung");
 		tabsheet.addTab(tab7).setCaption("Zeitungsauftrag");
+		
+		tab1.addComponent(tsAuftragsdaten.init(true));
+		tab2.addComponent(tsVerstorbener.init(true));
+		tab3.addComponent(tsAuftraggeber.init(true));
+		tab4.addComponent(tsAngehoerige.init(true));
+		tab5.addComponent(tsTrauerfeier.init(true));
+		tab6.addComponent(tsBlumenbestellung.init(true));
+		tab7.addComponent(tsZeitungsauftrag.init(true));
 		
 				//Create tab content dynamically when tab is selected
 				tabsheet.addSelectedTabChangeListener(new TabSheet.SelectedTabChangeListener() {
@@ -72,37 +90,75 @@ public class SFVAnzeigen extends VerticalLayout implements View {
 						//Get caption from tab to call appropriate classes
 						String tabCaption = tabsheet.getTab(tab).getCaption();
 						
-						
 						switch(tabCaption) {
 							case "Auftragsdaten":
-								tsAuftragsdaten.init();
+								newComp = tab1;
+								tabsheet.replaceComponent(activeComp, newComp);
+								activeComp = newComp;
 								break;
 							case "Verstorbener":
-								tsVerstorbener.init(true);
+								newComp = tab2;
+								tabsheet.replaceComponent(activeComp, newComp);
+								activeComp = newComp;
 								break;
 							case "Auftraggeber":
-								tsAuftraggeber.init(true);
+								newComp = tab3;
+								tabsheet.replaceComponent(activeComp, newComp);
+								activeComp = newComp;
 								break;
 							case "Angehörige":
-								tsAngehoerige.init();
+								newComp = tab4;
+								tabsheet.replaceComponent(activeComp, newComp);
+								activeComp = newComp;
 								break;
 							case "Trauerfeier":
-								tsTrauerfeier.init(true);
+								newComp = tab5;
+								tabsheet.replaceComponent(activeComp, newComp);
+								activeComp = newComp;
 								break;
 							case "Blumenbestellung":
-								tsBlumenbestellung.init(true);
+								newComp = tab6;
+								tabsheet.replaceComponent(activeComp, newComp);
+								activeComp = newComp;
 								break;
 							case "Zeitungsauftrag":
-								tsZeitungsauftrag.init();
-							default:
-								Notification.show("What the hell are you doing???");
+								newComp = tab7;
+								tabsheet.replaceComponent(activeComp, newComp);
+								activeComp = newComp;
 						}
 
 					}
 				});
-		
-		this.addComponents(tabsheet, tsVerstorbener.init(true));
+				
+			tabsheet.addComponent(activeComp);
+			this.addComponent(tabsheet);
 	}
 	
+//	// Dummy Class to access non-static method 'switchTabSheet' from inside method 'selectedTabChange'
+//	public static void callSwitchMethod() {
+//		DataController dataConnector = null;
+//		Navigator navigator = null;
+//		new SFVAnzeigen(navigator, dataConnector).switchTabSheet();
+//	}
+	
+//	public void switchTabSheet() {
+//		// If current TabSheet is not 1 anymore -> has been switched
+//		switch(tsNumber) {
+//			case 2:
+//				newComp = tsVerstorbener.init(true);
+//				this.replaceComponent(activeComp, newComp);
+//				activeComp = newComp;
+//				System.out.print("I am here!!");
+//				break;
+//			case 3:
+//				newComp = tsAuftraggeber.init(true);
+//				this.replaceComponent(activeComp, newComp);
+//				break;
+//			default:
+//				Notification.show("Ok this doesn't seem work at all.. Amazing!");
+//				System.out.println("uffffff");
+//				System.out.println(tsNumber);
+//		}
+//	}
 
 }
